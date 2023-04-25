@@ -17,6 +17,7 @@ mix.styles([
     'resources/vendor/css/config.css',
     'resources/vendor/css/jquery-jvectormap.css',
     'resources/vendor/css/ionicons.min.css',
+    'resources/vendor/css/dataTables.bootstrap.min.css',
     'resources/vendor/css/font-awesome.min.css',
     'resources/vendor/css/bootstrap.min.css',
 ], 'public/css/plantilla.css')

@@ -16,4 +16,12 @@
     transition: all 0.2s ease;
 }
 
+.btnWidth{
+    width: 12% !important;
+}
+
+.el-select{
+    width: 100% !important;
+}
+
 
