@@ -17,10 +17,10 @@ class UsersController extends Controller
         $cCorreo    = $request->cCorreo;
         $cEstado    = $request->cEstado;
 
-        $cNombre    = ($cNombre == NULL) ? ($cNombre = null) : $cNombre;
-        $cUsuario   = ($cUsuario == NULL) ? ($cUsuario = null) : $cUsuario;
-        $cCorreo    = ($cCorreo == NULL) ? ($cCorreo = null) : $cCorreo;
-        $cEstado    = ($cEstado == NULL) ? ($cEstado = null) : $cEstado;
+        $cNombre    = ($cNombre == NULL) ? ($cNombre      = '') : $cNombre;
+        $cUsuario   = ($cUsuario == NULL) ? ($cUsuario    = '') : $cUsuario;
+        $cCorreo    = ($cCorreo == NULL) ? ($cCorreo      = '') : $cCorreo;
+        $cEstado    = ($cEstado == NULL) ? ($cEstado      = '') : $cEstado;
 
         $rpta = DB::select('call sp_Usuario_getListUsuarios(?,?,?,?)',[$cNombre,$cUsuario,$cCorreo,$cEstado]);
 

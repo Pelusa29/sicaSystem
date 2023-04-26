@@ -85,78 +85,86 @@
                                         <div class="box-header with-border">
                                             <h3 class="box-title">Resultados</h3>
                                         </div>
-                                        <div class="box-body table-responsive">
-                                            <!--<table class="table table-hover table-head-fixed text-nowrap projects">-->
-                                            <table class="table table-bordered table-striped dataTable table-head-fixed text-nowrap projects" role="grid">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Fotografía</th>
-                                                        <th>Nombre</th>
-                                                        <th>Correo</th>
-                                                        <th>Usuario</th>
-                                                        <th>Estado</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr v-for="(item,index) in listUsuarios" :key="index">
-                                                        <td>
-                                                            <img src="" alt="as">
-                                                        </td>
-                                                        <td v-text="item.fullname"></td>
-                                                        <td v-text="item.email"></td>
-                                                        <td v-text="item.username"></td>
-                                                        <td>
-                                                            <template v-if="item.state == 'A'">
-                                                                <span class="badge bg-green" v-text="item.state_alias"></span>
-                                                            </template>
-                                                            <template v-else>
-                                                                <span class="badge bg-red" v-text="item.state_alias"></span>
-                                                            </template>
-                                                        </td>
-                                                        <td>
-                                                            <router-link class="btn btn-primary btn-sm" :to="'/'">
-                                                                <i class="fa fa-folder"></i> Ver
-                                                            </router-link>
+                                        <template v-if="listarUsuariosPaginated.length">
+                                            <div class="box-body table-responsive">
+                                                <table class="table table-bordered table-striped dataTable table-head-fixed text-nowrap projects" role="grid">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Fotografía</th>
+                                                            <th>Nombre</th>
+                                                            <th>Correo</th>
+                                                            <th>Usuario</th>
+                                                            <th>Estado</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="(item, index) in listarUsuariosPaginated" :key="index">
+                                                            <td>
+                                                                <li class="user-block">
+                                                                    <img src="/img/avatar.png" :alt="item.username" class="profile-avatar-img img-fluid img-circle">
+                                                                </li>
+                                                            </td>
+                                                            <td v-text="item.fullname"></td>
+                                                            <td v-text="item.email"></td>
+                                                            <td v-text="item.username"></td>
+                                                            <td>
+                                                                <template v-if="item.state == 'A'">
+                                                                    <span class="badge bg-green" v-text="item.state_alias"></span>
+                                                                </template>
+                                                                <template v-else>
+                                                                    <span class="badge bg-red" v-text="item.state_alias"></span>
+                                                                </template>
+                                                            </td>
+                                                            <td>
+                                                                <router-link class="btn btn-primary btn-sm" :to="'/'">
+                                                                    <i class="fa fa-folder"></i> Ver
+                                                                </router-link>
 
-                                                            <router-link class="btn btn-info btn-sm" :to="'/'">
-                                                                <i class="fa fa-pencil"></i> Editar
-                                                            </router-link>
-                                                            <router-link class="btn btn-success btn-sm" :to="'/'">
-                                                                <i class="fa fa-key"></i> Permiso
-                                                            </router-link>
-                                                            <router-link class="btn btn-danger btn-sm" :to="'/'">
-                                                                <i class="fa fa-trash"></i> Desactivar
-                                                            </router-link>
-                                                            <router-link class="btn btn-success btn-sm" :to="'/'">
-                                                                <i class="fa fa-check-circle"></i> Activar
-                                                            </router-link>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="box-footer clearfix">
-                                            <div class="row">
-                                                <div class="col-sm-5">
-                                                </div>
-                                                <div class="col-sm-7">
-                                                    <div class="dataTables_paginate paging_simple_numbers pull-right">
-                                                        <ul class="pagination">
-                                                            <li class="paginate_button previous">
-                                                                <a href="#" aria-controls="example1">Previous</a>
-                                                            </li>
-                                                            <li class="paginate_button active">
-                                                                <a href="#" aria-controls="example1">1</a>
-                                                            </li>
-                                                            <li class="paginate_button next">
-                                                                <a href="#" aria-controls="example1">Next</a>
-                                                            </li>
-                                                        </ul>
+                                                                <router-link class="btn btn-info btn-sm" :to="'/'">
+                                                                    <i class="fa fa-pencil"></i> Editar
+                                                                </router-link>
+                                                                <router-link class="btn btn-success btn-sm" :to="'/'">
+                                                                    <i class="fa fa-key"></i> Permiso
+                                                                </router-link>
+                                                                <router-link class="btn btn-danger btn-sm" :to="'/'">
+                                                                    <i class="fa fa-trash"></i> Desactivar
+                                                                </router-link>
+                                                                <router-link class="btn btn-success btn-sm" :to="'/'">
+                                                                    <i class="fa fa-check-circle"></i> Activar
+                                                                </router-link>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="box-footer clearfix">
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                    </div>
+                                                    <div class="col-sm-7">
+                                                        <div class="dataTables_paginate paging_simple_numbers pull-right">
+                                                            <ul class="pagination">
+                                                                <li class="paginate_button previous" v-if="pageNumber > 0">
+                                                                    <a href="#" aria-controls="example1" @click.prevent="prevPage">Previous</a>
+                                                                </li>
+                                                                <li :class="[page == pageNumber ? 'paginate_button active' : '']" v-for="(page, index) in pagesList" :key="index">
+                                                                    <a href="#" aria-controls="example1" @click.prevent="selectedPage(page)">{{ page + 1 }}</a>
+                                                                </li>
+                                                                <li class="paginate_button next" v-if="pageNumber < pageCount - 1">
+                                                                    <a href="#" aria-controls="example1" @click.prevent="nextPage">Next</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </template>
+                                        <template v-else>
+                                            <div class="callout callout-info">
+                                                <h5>No se encontraron regisrtos</h5>
+                                            </div>
+                                        </template>
                                     </div>
                                 </div>
                             </div>
@@ -181,7 +189,39 @@ export default {
             listEstados: [
                 { value: 'A', label: 'Activo' },
                 { value: 'I', label: 'Inactivo' }
-            ]
+            ],
+            pageNumber: 0,
+            perPage:5
+        }
+    },
+    computed: {
+        // Obtener el número de páginas
+        pageCount() {
+            let a = this.listUsuarios.length,
+                b = this.perPage;
+
+            return Math.ceil(a / b);
+        },
+        //Obtener registro paginados
+        listarUsuariosPaginated() {
+            let inicio  = this.pageNumber * this.perPage,
+                fin = inicio + this.perPage;
+            return this.listUsuarios.slice(inicio, fin);
+        },
+        pagesList() {
+            let a = this.listUsuarios.length,
+                b = this.perPage;
+
+            let pageCount = Math.ceil(a / b);
+            let count = 0,
+                pagesArray = [];
+
+                while (count < pageCount) {
+                    pagesArray.push(count);
+                    count++;
+                }
+
+            return pagesArray;
         }
     },
     methods: {
@@ -210,6 +250,15 @@ export default {
             }).finally(() => {
                 console.log('finally');
             });
+        },
+        nextPage() {
+            this.pageNumber++;
+        },
+        prevPage() {
+            this.pageNumber--;
+        },
+        selectedPage(page) {
+            this.pageNumber = page;
         }
     }
 }
