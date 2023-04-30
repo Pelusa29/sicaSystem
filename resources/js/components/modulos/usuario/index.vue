@@ -11,10 +11,12 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-tools">
-                                <router-link class="btn btn-info btn-sm" :to="'/'">
-                                    <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Usuario
-                                </router-link>
+                            <div class="box-header">
+                                <div class="col-md-2 row">
+                                     <router-link class="btn btn-block btn-info" :to="'/usuario/crear'">
+                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Usuario
+                                    </router-link>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -31,7 +33,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Nombre</label>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control" v-model="fillBsqUsuario.cNombre">
+                                                                <input type="text" class="form-control" v-model="fillBsqUsuario.cNombre" @keyup.enter="getListUsuarios">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -39,7 +41,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Usuario</label>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control" v-model="fillBsqUsuario.cUsuaro">
+                                                                <input type="text" class="form-control" v-model="fillBsqUsuario.cUsuaro" @keyup.enter="getListUsuarios">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -47,7 +49,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Correo Electronico</label>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control" v-model="fillBsqUsuario.cCorreo">
+                                                                <input type="text" class="form-control" v-model="fillBsqUsuario.cCorreo" @keyup.enter="getListUsuarios">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -75,7 +77,7 @@
                                         <div class="box-footer">
                                             <div class="row">
                                                 <div class="col text-center">
-                                                    <button class="btn btn-flat btn-info btnWidth" @click.prevent="getListUsuarios()">Buscar</button>
+                                                    <button class="btn btn-flat btn-info btnWidth" @click.prevent="getListUsuarios()" v-loading.fullscreen.lock="fullScreenLoading">Buscar</button>
                                                     <button class="btn btn-flat btn-default btnWidth" @click.prevent="limpiarCriteriosBsq()">Linmpiar</button>
                                                 </div>
                                             </div>
@@ -117,11 +119,15 @@
                                                                 </template>
                                                             </td>
                                                             <td>
-                                                                <router-link class="btn btn-primary btn-sm" :to="'/'">
+                                                                <!-- <router-link class="btn btn-primary btn-sm" :to="'/'">
                                                                     <i class="fa fa-folder"></i> Ver
-                                                                </router-link>
-
-                                                                <router-link class="btn btn-info btn-sm" :to="'/'">
+                                                                </router-link> -->
+                                                                <button @click="$router.push('/')" class="btn btn-primary btn-sm"><i class="fa fa-folder"></i> Ver</button>
+                                                                <button @click="$router.push('/')" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Editar</button>
+                                                                <button @click="$router.push('/')" class="btn btn-success btn-sm"><i class="fa fa-key"></i> Permiso</button>
+                                                                <button @click="$router.push('/')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Desactivar</button>
+                                                                <button @click="$router.push('/')" class="btn btn-success btn-sm"> <i class="fa fa-check-circle"></i> Activar</button>
+                                                                <!-- <router-link class="btn btn-info btn-sm" :to="'/'">
                                                                     <i class="fa fa-pencil"></i> Editar
                                                                 </router-link>
                                                                 <router-link class="btn btn-success btn-sm" :to="'/'">
@@ -132,7 +138,7 @@
                                                                 </router-link>
                                                                 <router-link class="btn btn-success btn-sm" :to="'/'">
                                                                     <i class="fa fa-check-circle"></i> Activar
-                                                                </router-link>
+                                                                </router-link> -->
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -190,6 +196,7 @@ export default {
                 { value: 'A', label: 'Activo' },
                 { value: 'I', label: 'Inactivo' }
             ],
+            fullScreenLoading: false,
             pageNumber: 0,
             perPage:5
         }
@@ -235,6 +242,7 @@ export default {
             this.listUsuarios = [];
         },
         getListUsuarios() {
+            this.fullScreenLoading = true;
             var url = '/administracion/usuario/getListUsuarios';
             axios.get(url, {
                 params: {
@@ -244,7 +252,9 @@ export default {
                     'cEstado': this.fillBsqUsuario.cEstado
                 }
             }).then((response) => {
+                this.inicializarPaginacion();
                 this.listUsuarios = response.data;
+                this.fullScreenLoading = false;
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {
@@ -259,6 +269,9 @@ export default {
         },
         selectedPage(page) {
             this.pageNumber = page;
+        },
+        inicializarPaginacion() {
+            this.pageNumber = 0;
         }
     }
 }

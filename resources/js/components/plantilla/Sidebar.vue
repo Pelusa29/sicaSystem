@@ -17,14 +17,14 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="active treeview menu-open">
-                    <router-link class="nav-link active" :to="'/'">
+                    <router-link class="nav-link" :to="'/'">
                         <i class="fa fa-dashboard"></i><span>Dashboard</span>
                     </router-link>
                 </li>
                 <li class="header">OPERACIONES</li>
                 <li>
-                    <router-link class="nav-link" :to="'/pedido'">
-                        <i class="fa fa-cart-plus"></i><span>Pedidos</span>
+                    <router-link class="nav-link" :to="'/servicio'">
+                        <i class="fa fa-car"></i><span>Servicios</span>
                     </router-link>
                 </li>
                 <li>
@@ -33,24 +33,43 @@
                         <span>Clientes</span>
                     </router-link>
                 </li>
-                <li class="header">CONFIGURACIÓN</li>
+                <li class="header">CATALAGOS GERNERALES</li>
                 <li>
-                    <router-link class="nav-link" :to="'/categoria'">
+                    <router-link class="nav-link" :to="'/tipounidades'">
                         <i class="fa fa-sitemap"></i>
-                        <span>Categorias</span>
+                        <span>Tip. Unidades</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link class="nav-link" :to="'/tipodocumento'">
+                        <i class="fa fa-sitemap"></i>
+                        <span>Tipo Documentos</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link class="nav-link" :to="'/tiposervicio'">
+                        <i class="fa fa-sitemap"></i>
+                        <span>Tip. Servicio</span>
                     </router-link>
                 </li>
                 <li>
                     <router-link class="nav-link" :to="'/producto'">
-                        <i class="fa fa-apple"></i>
-                        <span>Productos</span>
+                        <i class="fa fa-money"></i>
+                        <span>Proviciones</span>
                     </router-link>
                 </li>
-                <li class="header">ADMINISTRACIÓN</li>
+                <li class="header">ADMINISTRACIÓN (RH)</li>
                 <li>
                     <router-link class="nav-link" :to="'/usuario'">
                         <i class="fa fa-users"></i>
                         <span>Usuarios</span>
+                    </router-link>
+                </li>
+                <li class="header">CONFIGURACIÓN</li>
+                <li>
+                    <router-link class="nav-link" style="text-decoration: none;" :to="'/exportar'">
+                        <i class="fa fa-file-excel-o"></i>
+                        <span>Actualizar Catalagos</span>
                     </router-link>
                 </li>
                 <li>
@@ -67,7 +86,7 @@
                 </li>
                 <li class="header"><span>REPORTES</span></li>
                 <li>
-                    <router-link class="nav-link" :to="'/pedido'">
+                    <router-link class="nav-link" :to="'/reporte'">
                         <i class="fa fa-file"></i>
                         <span>Pedidos</span>
                     </router-link>
