@@ -17,10 +17,10 @@
                             <div class="box-body box-profile">
                                <!--  <img class="profile-user-img img-responsive img-circle" src="/img/avatar.png" alt="Profile"> -->
                                 <template v-if="!fillVerUsuario.cRutaArchivo">
-                                        <img class="profile-user-img img-responsive img-circle" src="/img/avatar.png" alt="Profile">
+                                        <img class="profile-user-img img-responsive img-max-height img-circle" src="/img/avatar.png" alt="Profile">
                                 </template>
                                 <template v-else>
-                                        <img :src="fillVerUsuario.cRutaArchivo" :alt="cNombreCompleto" class="profile-user-img img-responsive img-circle">
+                                        <img :src="fillVerUsuario.cRutaArchivo" :alt="cNombreCompleto" class="profile-user-img img-responsive img-max-height img-circle">
                                 </template>
                                 <h3 class="profile-username text-center">{{ cNombreCompleto }}</h3>
                                 <p class="text-muted text-center">Proveedor</p>
@@ -293,4 +293,7 @@ export default {
 </script>
 
 <style>
+ .img-max-height{
+    max-height: 100px !important;
+ }
 </style>
