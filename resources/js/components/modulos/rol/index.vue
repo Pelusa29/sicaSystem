@@ -13,7 +13,7 @@
                     <div class="card-header">
                         <div class="box-header">
                             <div class="col-md-2 row">
-                                <router-link class="btn btn-block btn-info" :to="'/usuario/crear'">
+                                <router-link class="btn btn-block btn-info" :to="'/rol/crear'">
                                     <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Rol
                                 </router-link>
                             </div>
