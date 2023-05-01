@@ -126,7 +126,7 @@
                                                                 </template>
                                                             </td>
                                                             <td>
-                                                                <button @click="$router.push('/')" class="btn btn-flat btn-primary btn-sm"><i class="fa fa-folder"></i> Ver</button>
+                                                                <button @click="$router.push({ name: 'usuario.ver', params: { id: item.id } })" class="btn btn-flat btn-primary btn-sm"><i class="fa fa-eye"></i> Ver</button>
                                                                 <template v-if="item.state == 'A'">
                                                                     <button @click="$router.push({name:'usuario.editar',params:{id:item.id}})" class="btn btn-flat btn-info btn-sm"><i class="fa fa-pencil"></i> Editar</button>
                                                                     <button @click="$router.push('/')" class="btn btn-flat btn-success btn-sm"><i class="fa fa-key"></i> Permiso</button>
