@@ -33,6 +33,8 @@ export default new Router({
         },
 
         { path: '/rol', component: require('./components/modulos/rol/index.vue').default },
+        { path: '/rol/crear', component: require('./components/modulos/rol/create.vue').default },
+
         { path: '/permiso', component: require('./components/modulos/permiso/index.vue').default },
         { path: '/reporte', component: require('./components/modulos/reporte/index.vue').default }
     ],
