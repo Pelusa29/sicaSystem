@@ -103,11 +103,18 @@
                                                     <tbody>
                                                         <tr v-for="(item, index) in listarUsuariosPaginated" :key="index">
                                                             <td>
-                                                                <li class="user-block">
-                                                                    <img src="/img/avatar.png" :alt="item.username" class="profile-avatar-img img-fluid img-circle">
-                                                                </li>
+                                                                <template v-if="!item.profile_image">
+                                                                    <li class="user-block">
+                                                                        <img src="/img/avatar.png" :alt="item.username" class="profile-avatar-img img-fluid img-circle">
+                                                                    </li>
+                                                                </template>
+                                                                <template v-else>
+                                                                    <li class="user-block">
+                                                                        <img :src="item.profile_image" :alt="item.username" class="profile-avatar-img img-fluid img-circle">
+                                                                    </li>
+                                                                </template>
                                                             </td>
-                                                            <td v-text="item.fullname"></td>
+                                                            <td v-text="item.firstname"></td>
                                                             <td v-text="item.email"></td>
                                                             <td v-text="item.username"></td>
                                                             <td>
@@ -119,26 +126,15 @@
                                                                 </template>
                                                             </td>
                                                             <td>
-                                                                <!-- <router-link class="btn btn-primary btn-sm" :to="'/'">
-                                                                    <i class="fa fa-folder"></i> Ver
-                                                                </router-link> -->
-                                                                <button @click="$router.push('/')" class="btn btn-primary btn-sm"><i class="fa fa-folder"></i> Ver</button>
-                                                                <button @click="$router.push('/')" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Editar</button>
-                                                                <button @click="$router.push('/')" class="btn btn-success btn-sm"><i class="fa fa-key"></i> Permiso</button>
-                                                                <button @click="$router.push('/')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Desactivar</button>
-                                                                <button @click="$router.push('/')" class="btn btn-success btn-sm"> <i class="fa fa-check-circle"></i> Activar</button>
-                                                                <!-- <router-link class="btn btn-info btn-sm" :to="'/'">
-                                                                    <i class="fa fa-pencil"></i> Editar
-                                                                </router-link>
-                                                                <router-link class="btn btn-success btn-sm" :to="'/'">
-                                                                    <i class="fa fa-key"></i> Permiso
-                                                                </router-link>
-                                                                <router-link class="btn btn-danger btn-sm" :to="'/'">
-                                                                    <i class="fa fa-trash"></i> Desactivar
-                                                                </router-link>
-                                                                <router-link class="btn btn-success btn-sm" :to="'/'">
-                                                                    <i class="fa fa-check-circle"></i> Activar
-                                                                </router-link> -->
+                                                                <button @click="$router.push('/')" class="btn btn-flat btn-primary btn-sm"><i class="fa fa-folder"></i> Ver</button>
+                                                                <template v-if="item.state == 'A'">
+                                                                    <button @click="$router.push({name:'usuario.editar',params:{id:item.id}})" class="btn btn-flat btn-info btn-sm"><i class="fa fa-pencil"></i> Editar</button>
+                                                                    <button @click="$router.push('/')" class="btn btn-flat btn-success btn-sm"><i class="fa fa-key"></i> Permiso</button>
+                                                                    <button @click="$router.push('/')" class="btn btn-flat btn-danger btn-sm"><i class="fa fa-trash"></i> Desactivar</button>
+                                                                </template>
+                                                                <template v-else>
+                                                                    <button @click="$router.push('/')" class="btn btn-flat btn-success btn-sm"> <i class="fa fa-check-circle"></i> Activar</button>
+                                                                </template>
                                                             </td>
                                                         </tr>
                                                     </tbody>

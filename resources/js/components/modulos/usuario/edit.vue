@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-3 row">
                     <section class="content-header">
-                        <h1 class="m-0 text-dark text-perfil">Crear Usuario</h1>
+                        <h1 class="m-0 text-dark text-perfil">Editar Usuario</h1>
                     </section>
                 </div>
             </div>
@@ -32,14 +32,10 @@
                             </div>
                         </div>
                     </div>
-                    <!--/columna izquierda-->
-                    <!-- columna derecha-->
                     <div class="col-md-9">
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#config" data-toggle="tab" aria-expanded="true">Configuración</a></li>
-                               <!--  <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Documentos</a></li>
-                                <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">Configruacón</a></li> -->
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="config">
@@ -53,8 +49,8 @@
                                                                 <label class="col-md-3 col-form-label">Primer Nombre</label>
                                                                 <div class="col-md-9">
                                                                     <input type="text" class="form-control"
-                                                                        v-model="fillCrearUsuario.cPrimerNombre"
-                                                                        @keyup.enter="setRegistrarUsuario">
+                                                                        v-model="fillEditarUsuario.cPrimerNombre"
+                                                                        @keyup.enter="setEditarUsuario">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -63,8 +59,8 @@
                                                                 <label class="col-md-3 col-form-label">Seugndo Nombre</label>
                                                                 <div class="col-md-9">
                                                                     <input type="text" class="form-control"
-                                                                        v-model="fillCrearUsuario.cSegundoNombre"
-                                                                        @keyup.enter="setRegistrarUsuario">
+                                                                        v-model="fillEditarUsuario.cSegundoNombre"
+                                                                        @keyup.enter="setEditarUsuario">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -73,8 +69,8 @@
                                                                 <label class="col-md-3 col-form-label">Apellido</label>
                                                                 <div class="col-md-9">
                                                                     <input type="text" class="form-control"
-                                                                        v-model="fillCrearUsuario.cApellido"
-                                                                        @keyup.enter="setRegistrarUsuario">
+                                                                        v-model="fillEditarUsuario.cApellido"
+                                                                        @keyup.enter="setEditarUsuario">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -83,8 +79,8 @@
                                                                 <label class="col-md-3 col-form-label">Usuario</label>
                                                                 <div class="col-md-9">
                                                                     <input type="text" class="form-control"
-                                                                        v-model="fillCrearUsuario.cUsuario"
-                                                                        @keyup.enter="setRegistrarUsuario">
+                                                                        v-model="fillEditarUsuario.cUsuario"
+                                                                        @keyup.enter="setEditarUsuario">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -93,8 +89,8 @@
                                                                 <label class="col-md-3 col-form-label">Correo Electronico</label>
                                                                 <div class="col-md-9">
                                                                     <input type="text" class="form-control"
-                                                                        v-model="fillCrearUsuario.cCorreo"
-                                                                        @keyup.enter="setRegistrarUsuario">
+                                                                        v-model="fillEditarUsuario.cCorreo"
+                                                                        @keyup.enter="setEditarUsuario">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -102,8 +98,8 @@
                                                             <div class="form-group row">
                                                                 <label class="col-md-3 col-form-label">Contraseña</label>
                                                                 <div class="col-md-9">
-                                                                    <el-input placeholder="Ingrese una contraseña" v v-model="fillCrearUsuario.cContrasena"
-                                                                            @keyup.enter="setRegistrarUsuario" show-password></el-input>
+                                                                    <el-input placeholder="Ingrese una contraseña" v v-model="fillEditarUsuario.cContrasena"
+                                                                            @keyup.enter="setEditarUsuario" show-password></el-input>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -123,7 +119,7 @@
                                          <div class="card-footer text-center">
                                             <div class="row">
                                                <button class="btn btn-flat btn-info btnWidth"
-                                                    @click.prevent="setRegistrarUsuario()" v-loading.fullscreen.lock="fullScreenLoading">Registrar
+                                                    @click.prevent="setEditarUsuario()" v-loading.fullscreen.lock="fullScreenLoading">Editar
                                                 </button>
                                                     <button class="btn btn-flat btn-default btnWidth"
                                                         @click.prevent="limpiarCriteriosUsuario()">Linmpiar
@@ -162,9 +158,11 @@
 
 <script>
 export default {
+    props:['id'],
     data() {
         return {
-            fillCrearUsuario: {
+            fillEditarUsuario: {
+                nIdUsuario:this.id,
                 cPrimerNombre: '',
                 cSegundoNombre: '',
                 cApellido: '',
@@ -187,39 +185,63 @@ export default {
             mensajeError:[]
         }
     },
-    computed: {
+    mounted() {
+        this.getUsuariobyId();
     },
     methods: {
+        getUsuariobyId() {
+            this.fullScreenLoading = true;
+            var url = '/administracion/usuario/getListUsuarios';
+            axios.get(url, {
+                params: {
+                    'nIdUsuario': this.fillEditarUsuario.nIdUsuario
+                }
+            }).then((response) => {
+                console.log(response);
+                //this.listUsuarios = response.data;
+                this.fillEditarUsuario.cPrimerNombre = response.data[0].firstname;
+                this.fillEditarUsuario.cSegundoNombre = response.data[0].secondname;
+                this.fillEditarUsuario.cApellido = response.data[0].lastname;
+                this.fillEditarUsuario.cUsuario = response.data[0].username;
+                this.fillEditarUsuario.cCorreo = response.data[0].email;
+
+                this.fullScreenLoading = false;
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                console.log('finally');
+            });
+        },
         limpiarCriteriosUsuario() {
-            this.fillCrearUsuario.cPrimerNombre = '';
-            this.fillCrearUsuario.cSegundoNombre = '';
-            this.fillCrearUsuario.cApellido = '';
-            this.fillCrearUsuario.cUsuario = '';
-            this.fillCrearUsuario.cCorreo = '';
-            this.fillCrearUsuario.cContrasena = '';
-            this.fillCrearUsuario.oFotografia = '';
+            this.fillEditarUsuario.cPrimerNombre = '';
+            this.fillEditarUsuario.cSegundoNombre = '';
+            this.fillEditarUsuario.cApellido = '';
+            this.fillEditarUsuario.cUsuario = '';
+            this.fillEditarUsuario.cCorreo = '';
+            this.fillEditarUsuario.cContrasena = '';
+            this.fillEditarUsuario.oFotografia = '';
         },
         abrirModal() {
             this.modalShow = !this.modalShow;
         },
         getFile(e) {
-           this.fillCrearUsuario.oFotografia = e.target.files[0];
+           this.fillEditarUsuario.oFotografia = e.target.files[0];
         },
-        setRegistrarUsuario() {
-            if (this.validarRegistrarUsuario()) {
+        setEditarUsuario() {
+            if (this.validarEditarUsuario()) {
                 this.modalShow = true;
                 return;
             }
             this.fullScreenLoading = true;
 
-            if (!this.fillCrearUsuario.oFotografia || this.fillCrearUsuario.oFotografia == undefined) {
+            if (!this.fillEditarUsuario.oFotografia || this.fillEditarUsuario.oFotografia == undefined) {
                 this.setGuardarUsuario(0);
             } else {
                 this.setGuardarArchivo();
             }
         },
         setGuardarArchivo() {
-            this.form.append('file', this.fillCrearUsuario.oFotografia)
+            this.form.append('file', this.fillEditarUsuario.oFotografia)
             const config = { headers: { 'Content-Type': 'multipart/form-data' } }
 
             var url = '/archivo/setRegistrarArchivo';
@@ -233,44 +255,50 @@ export default {
             });
         },
         setGuardarUsuario(nIdFile) {
-            var url = '/administracion/usuario/setRegistrarUsuario';
+            var url = '/administracion/usuario/setEditarUsuario';
             //post to save
-             axios.post(url, {
-                'cPrimerNombre' : this.fillCrearUsuario.cPrimerNombre,
-                'cSegundoNombre': this.fillCrearUsuario.cSegundoNombre,
-                'cApellido'     : this.fillCrearUsuario.cApellido,
-                'cUsuario'      : this.fillCrearUsuario.cUsuario,
-                'cCorreo'       : this.fillCrearUsuario.cCorreo,
-                'cContrasena'   : this.fillCrearUsuario.cContrasena,
+            axios.post(url, {
+                'nIdUsuario'    : this.fillEditarUsuario.nIdUsuario,
+                'cPrimerNombre' : this.fillEditarUsuario.cPrimerNombre,
+                'cSegundoNombre': this.fillEditarUsuario.cSegundoNombre,
+                'cApellido'     : this.fillEditarUsuario.cApellido,
+                'cUsuario'      : this.fillEditarUsuario.cUsuario,
+                'cCorreo'       : this.fillEditarUsuario.cCorreo,
+                'cContrasena'   : this.fillEditarUsuario.cContrasena,
                 'oFotografia'   : nIdFile
 
              }).then((response) => {
                  this.fullScreenLoading = false;
-                 this.$router.push('/usuario');
+                 /* this.$router.push('/usuario'); */
+                 /*Swal.fire({
+                    position:'top-end',
+                    icon: 'success',
+                    title: 'Your work has been saved',
+                    showConfirmButton: false,
+                    timer:1500
+                 });*/
+                 this.$toasted.success("Success Message")
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {
                 console.log('finally');
             });
         },
-        validarRegistrarUsuario() {
+        validarEditarUsuario() {
             this.error = 0;
             this.mensajeError = [];
 
-            if (!this.fillCrearUsuario.cPrimerNombre) {
+            if (!this.fillEditarUsuario.cPrimerNombre) {
                 this.mensajeError.push("El Primer Nombre es un campo obligatorio");
             }
-            if (!this.fillCrearUsuario.cApellido) {
+            if (!this.fillEditarUsuario.cApellido) {
                 this.mensajeError.push("El Primer Apellido es un campo obligatorio");
             }
-            if (!this.fillCrearUsuario.cUsuario) {
+            if (!this.fillEditarUsuario.cUsuario) {
                 this.mensajeError.push("El Primer Usuario es un campo obligatorio");
             }
-            if (!this.fillCrearUsuario.cCorreo) {
+            if (!this.fillEditarUsuario.cCorreo) {
                 this.mensajeError.push("El Primer Correo es un campo obligatorio");
-            }
-            if (!this.fillCrearUsuario.cContrasena) {
-                this.mensajeError.push("El Primer Contraseña es un campo obligatorio");
             }
 
             if (this.mensajeError.length) {
@@ -284,3 +312,4 @@ export default {
 </script>
 
 <style></style>
+

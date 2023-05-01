@@ -19,6 +19,12 @@ export default new Router({
 
         { path: '/usuario', component: require('./components/modulos/usuario/index.vue').default },
         { path: '/usuario/crear', component: require('./components/modulos/usuario/create.vue').default },
+        {
+            path: '/usuario/:id/editar',
+            name:'usuario.editar',
+            component: require('./components/modulos/usuario/edit.vue').default,
+            props:true
+        },
 
         { path: '/rol', component: require('./components/modulos/rol/index.vue').default },
         { path: '/permiso', component: require('./components/modulos/permiso/index.vue').default },
