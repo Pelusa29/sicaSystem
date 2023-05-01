@@ -86,13 +86,14 @@
                                                         <td><span class="badge bg-red" v-text="item.slug"></span></td>
                                                         <td>
                                                             <button
-                                                                @click="$router.push({ name: 'usuario.ver', params: { id: item.id } })"
+                                                                @click="$router.push({ name: 'rol.ver', params: { id: item.id } })"
                                                                 class="btn btn-flat btn-primary btn-sm"><i
                                                                     class="fa fa-eye"></i> Ver</button>
                                                             <button
-                                                                @click="$router.push({ name: 'usuario.editar', params: { id: item.id } })"
+                                                                @click="$router.push({ name: 'rol.editar', params: { id: item.id } })"
                                                                 class="btn btn-flat btn-info btn-sm"><i
                                                                     class="fa fa-pencil"></i> Editar</button>
+
                                                         </td>
                                                     </tr>
                                                 </tbody>

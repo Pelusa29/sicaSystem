@@ -11,23 +11,26 @@ class RolesController extends Controller
 {
      public function getListRoles(Request $request){
         if(!$request->ajax()) return redirect('');
-
+        $nIdRol     = $request->nIdRol;
         $cNombre    = $request->cNombre;
         $cSlug      = $request->cUrl;
 
+        $nIdRol     = ($nIdRol == NULL) ? ($nIdRol = 0) : $nIdRol;
         $cNombre    = ($cNombre == NULL) ? ($cNombre = '') : $cNombre;
         $cSlug      = ($cSlug == NULL) ? ($cSlug      = '')  : $cSlug;
 
 
-        $rpta = DB::select('call sp_Rol_getListRoles(?,?)',[$cNombre,$cSlug]);
+        $rpta = DB::select('call sp_Rol_getListRoles(?,?,?)',[$nIdRol,$cNombre,$cSlug]);
 
         return $rpta;
     }
 
     public function getListPermisosByRol(Request $request){
         if(!$request->ajax()) return redirect('');
+        $nIdRol     = $request->nIdRol;
+        $nIdRol     = ($nIdRol == NULL) ? ($nIdRol = 0) : $nIdRol;
 
-        $rpta =  DB::select('call sp_Rol_getListPermisosByRol');
+        $rpta =  DB::select('call sp_Rol_getListPermisosByRol(?)',[$nIdRol]);
 
 
         return $rpta;
@@ -72,5 +75,43 @@ class RolesController extends Controller
             print_r($e->getMessage());
         }
 
+    }
+
+    public function setEditarRolPermisos(Request $request){
+        if(!$request->ajax()) return redirect('');
+        $nIdRol     = $request->nIdRol;
+        $cNombre    = $request->cNombre;
+        $cSlug      = $request->cSlug;
+
+        $nIdRol        = ($nIdRol == NULL) ? ($nIdRol = '') : $nIdRol;
+        $cNombre        = ($cNombre == NULL) ? ($cNombre = '') : $cNombre;
+        $cSlug          = ($cSlug == NULL) ? ($cSlug      = '')  : $cSlug;
+
+        //transaction
+        try {
+            DB::beginTransaction();
+
+            $rpta = DB::select('call sp_Rol_setEditarRolPermisos(?,?,?)',[$nIdRol,$cNombre,$cSlug]);
+
+            $listPermisos       = $request->listPermisosFilter;
+            $listPermisosSize   = sizeof($listPermisos);
+            if($listPermisosSize > 0){
+                foreach ($listPermisos as $key => $value) {
+                    if($value['checked'] == true){
+                        DB::select('call sp_Rol_setRegistraRolPermisoSelected(?,?)',
+                        [
+                            $nIdRol,
+                            $value['id']
+                        ]);
+                    }
+                }
+            }
+            //Commit
+            DB::commit();
+        } catch (\Exception $e) {
+            //throw $th;
+            DB::rollback();
+            print_r($e->getMessage());
+        }
     }
 }
