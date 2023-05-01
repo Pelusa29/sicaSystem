@@ -86,7 +86,7 @@
                                                         <td><span class="badge bg-red" v-text="item.slug"></span></td>
                                                         <td>
                                                             <button
-                                                                @click="$router.push({ name: 'rol.ver', params: { id: item.id } })"
+                                                                @click.prevent="abrirModalByOption('rol','ver',item)"
                                                                 class="btn btn-flat btn-primary btn-sm"><i
                                                                     class="fa fa-eye"></i> Ver</button>
                                                             <button
@@ -138,6 +138,95 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade in" id="modal-default" :style="modalShow ? mostrarModal : ocultarModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" @click="abrirModal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title">Modal</h4>
+                    </div>
+                    <div class="modal-body">
+                        <template v-if="modalOption == 1">
+                            <div class="callout callout-danger" style="padding: 5px;" v-for="(item, index) in mensajeError"
+                                :key="index" v-text="item">
+                            </div>
+                        </template>
+                        <template v-if="modalOption == 2">
+                            <!-- Inicia Template -->
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="box box-info box-solid">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Información del Rol</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <form role="form">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-12 col-form-label">Nombre</label>
+                                                            <div class="col-md-12">
+                                                                <span class="form-control" v-text="fillVerRol.cNombre"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-12 col-form-label">Url Amigable</label>
+                                                            <div class="col-md-12">
+                                                                <span class="form-control" v-text="fillVerRol.cUrl"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="box box-info box-solid">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Listado de Permisos</h3>
+                                        </div>
+                                        <template v-if="listPermisos.length">
+                                            <div class="box-body table-responsive">
+                                                <div class="scrollTable">
+                                                    <table
+                                                        class="table table-bordered table-striped dataTable table-head-fixed text-nowrap projects"
+                                                        role="grid">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nombre</th>
+                                                                <th>Url Amigable</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr v-for="(item, index) in listPermisos" :key="index">
+                                                                <td v-text="item.name"></td>
+                                                                <td><span class="badge bg-red" v-text="item.slug"></span></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <template v-else>
+                                            <div class="callout callout-info">
+                                                <h5>No se encontraron regisrtos</h5>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Termina Template -->
+                        </template>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" @click="abrirModal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </template>
 
@@ -149,10 +238,25 @@ export default {
                 cNombre: '',
                 cUrl: ''
             },
+            fillVerRol: {
+                cNombre: '',
+                cUrl: ''
+            },
+            listPermisos:[],
             listRoles: [],
             fullScreenLoading: false,
             pageNumber: 0,
-            perPage: 5
+            perPage: 5,
+            modalShow: false,
+            modalOption: 0,
+            mostrarModal: {
+                display: 'block'
+            },
+            ocultarModal: {
+                display: 'none',
+            },
+            error: 0,
+            mensajeError: []
         }
     },
     computed: {
@@ -190,8 +294,18 @@ export default {
             this.fillBsqRol.cNombre = '';
             this.fillBsqRol.cUrl = '';
         },
+        limpiarModal() {
+            this.fillVerRol.cNombre = '';
+            this.fillVerRol.cUrl    = '';
+            this.listPermisos       = [];
+            this.modalOption        = 0;
+        },
         limpiarBandejaUsuarios() {
             this.listUsuarios = [];
+        },
+        abrirModal() {
+            this.modalShow = !this.modalShow;
+            this.limpiarModal();
         },
         getListRoles() {
             this.fullScreenLoading = true;
@@ -222,9 +336,44 @@ export default {
         },
         inicializarPaginacion() {
             this.pageNumber = 0;
+        },
+        getListPermisosByRol(id) {
+            var ruta = '/administracion/rol/getListPermisosByRol';
+            axios.get(ruta, {
+                params: {
+                    'nIdRol': id
+                }
+            }).then(response => {
+                this.listPermisos = response.data;
+                this.modalShow = true;
+                this.modalOption = 2;
+            })
+        },
+        abrirModalByOption(modulo, accion, data) {
+            switch (modulo) {
+                case "rol":
+                {
+                    switch (accion) {
+                        case "ver":
+                        {
+                            //Informacion del arreglo
+                                this.fillVerRol.cNombre = data.name;
+                                this.fillVerRol.cUrl = data.slug;
+                                //Obtener los permisos de los roles selccionados
+                                this.getListPermisosByRol(data.id);
+                        }
+                        break;
+                        default:
+                            break;
+                    }
+                }
+                break;
+                default:
+                    break;
+            }
         }
     }
 }
 </script>
-
-<style></style>
+<style>
+</style>

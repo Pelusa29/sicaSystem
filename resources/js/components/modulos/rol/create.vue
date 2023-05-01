@@ -71,27 +71,29 @@
                                             </div>
                                             <template v-if="listPermisosFilter.length">
                                                 <div class="box-body table-responsive">
-                                                    <table
-                                                        class="table table-bordered table-striped dataTable table-head-fixed text-nowrap projects"
-                                                        role="grid">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Acciones</th>
-                                                                <th>Nombre</th>
-                                                                <th>Url Amigable</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr v-for="(item, index) in listPermisosFilter" :key="index" @click.prevent="marcarFila(index)">
-                                                                <td>
-                                                                    <!-- checkbox para seleccionar los permisos -->
-                                                                    <el-checkbox v-model="item.checked"></el-checkbox>
-                                                                </td>
-                                                                <td v-text="item.name"></td>
-                                                                <td><span class="badge bg-red" v-text="item.slug"></span></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                    <div class="scrollTable">
+                                                        <table
+                                                            class="table table-bordered table-striped dataTable table-head-fixed text-nowrap projects"
+                                                            role="grid">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Acciones</th>
+                                                                    <th>Nombre</th>
+                                                                    <th>Url Amigable</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr v-for="(item, index) in listPermisosFilter" :key="index" @click.prevent="marcarFila(index)">
+                                                                    <td>
+                                                                        <!-- checkbox para seleccionar los permisos -->
+                                                                        <el-checkbox v-model="item.checked"></el-checkbox>
+                                                                    </td>
+                                                                    <td v-text="item.name"></td>
+                                                                    <td><span class="badge bg-red" v-text="item.slug"></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                                 <div class="box-footer clearfix">
                                                     <div class="row">
