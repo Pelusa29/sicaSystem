@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-3 row">
                     <section class="content-header">
-                        <h1 class="m-0 text-dark text-perfil">Crear Rol</h1>
+                        <h1 class="m-0 text-dark text-perfil">Editar Rol</h1>
                     </section>
                 </div>
             </div>
@@ -14,7 +14,8 @@
                         <div class="card-header">
                             <div class="box-header">
                                 <div class="col-sm-2 row">
-                                   <button @click="$router.push('/rol')" class="btn btn-block btn-info"><i class="fa fa-arrow-circle-left"></i>&nbsp;&nbsp;Regresar</button>
+                                    <button @click="$router.push('/rol')" class="btn btn-block btn-info"><i
+                                            class="fa fa-arrow-circle-left"></i>&nbsp;&nbsp;Regresar</button>
                                 </div>
                             </div>
                         </div>
@@ -24,7 +25,7 @@
                                     <div class="col-md-5">
                                         <div class="box box-info box-solid">
                                             <div class="box-header with-border">
-                                                <h3 class="box-title">Formulario Registrar Rol</h3>
+                                                <h3 class="box-title">Formulario Editar Rol</h3>
                                             </div>
                                             <div class="box-body">
                                                 <form role="form">
@@ -34,8 +35,8 @@
                                                                 <label class="col-md-3 col-form-label">Nombre</label>
                                                                 <div class="col-md-9">
                                                                     <input type="text" class="form-control"
-                                                                        v-model="fillCrearRol.cNombre"
-                                                                        @keyup.enter="setRegistraRolPermisos">
+                                                                        v-model="fillEditarRol.cNombre"
+                                                                        @keyup.enter="setEditarRolPermisos">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -44,8 +45,8 @@
                                                                 <label class="col-md-3 col-form-label">Url Amigable</label>
                                                                 <div class="col-md-9">
                                                                     <input type="text" class="form-control"
-                                                                        v-model="fillCrearRol.cUrl"
-                                                                        @keyup.enter="setRegistraRolPermisos">
+                                                                        v-model="fillEditarRol.cUrl"
+                                                                        @keyup.enter="setEditarRolPermisos">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -56,7 +57,8 @@
                                                 <div class="row">
                                                     <div class="col text-center">
                                                         <button class="btn btn-flat btn-info btnWidth"
-                                                            @click.prevent="setRegistraRolPermisos()" v-loading.fullscreen.lock="fullScreenLoading">Registrar</button>
+                                                            @click.prevent="setEditarRolPermisos()"
+                                                            v-loading.fullscreen.lock="fullScreenLoading">Editar</button>
                                                         <button class="btn btn-flat btn-default btnWidth"
                                                             @click.prevent="limpiarCriteriosBsq()">Linmpiar</button>
                                                     </div>
@@ -82,13 +84,15 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr v-for="(item, index) in listPermisosFilter" :key="index" @click.prevent="marcarFila(index)">
+                                                            <tr v-for="(item, index) in listPermisosFilter" :key="index"
+                                                                @click.prevent="marcarFila(index)">
                                                                 <td>
                                                                     <!-- checkbox para seleccionar los permisos -->
                                                                     <el-checkbox v-model="item.checked"></el-checkbox>
                                                                 </td>
                                                                 <td v-text="item.name"></td>
-                                                                <td><span class="badge bg-red" v-text="item.slug"></span></td>
+                                                                <td><span class="badge bg-red" v-text="item.slug"></span>
+                                                                </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -159,14 +163,16 @@
 
 <script>
 export default {
+    props: ['id'],
     data() {
         return {
-            fillCrearRol: {
+            fillEditarRol: {
+                nIdRol:this.id,
                 cNombre: '',
                 cUrl: ''
             },
-            listPermisosFilter:[],
-            listPermisos:[],
+            listPermisosFilter: [],
+            listPermisos: [],
             fullScreenLoading: false,
             modalShow: false,
             mostrarModal: {
@@ -182,12 +188,13 @@ export default {
     computed: {
     },
     mounted() {
+        this.getListRoles();
         this.getListPermisosByRol();
     },
     methods: {
         limpiarCriteriosRol() {
-            this.fillCrearRol.cNombre = '';
-            this.fillCrearRol.cUrl = '';
+            this.fillEditarRol.cNombre = '';
+            this.fillEditarRol.cUrl = '';
         },
         marcarFila(idFila) {
             this.listPermisosFilter[idFila].checked = !this.listPermisosFilter[idFila].checked;
@@ -196,16 +203,38 @@ export default {
             let me = this;
             me.listPermisos.map(function (x, y) {
                 me.listPermisosFilter.push({
-                    'id'        : x.id,
-                    'name'      : x.name,
-                    'slug'      : x.slug,
-                    'checked'   : false
+                    'id': x.id,
+                    'name': x.name,
+                    'slug': x.slug,
+                    'checked': (x.checked == 1) ? true : false
                 })
             })
         },
+        getListRoles() {
+            this.fullScreenLoading = true;
+            var url = '/administracion/rol/getListRoles';
+            axios.get(url, {
+                params: {
+                    'nIdRol': this.fillEditarRol.nIdRol
+                }
+            }).then((response) => {
+                /* this.inicializarPaginacion(); */
+                this.fillEditarRol.cNombre = response.data[0].name;
+                this.fillEditarRol.cUrl = response.data[0].slug;
+                this.fullScreenLoading = false;
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                console.log('finally');
+            });
+        },
         getListPermisosByRol() {
             var ruta = '/administracion/rol/getListPermisosByRol';
-            axios.get(ruta).then(response => {
+            axios.get(ruta, {
+                params: {
+                    'nIdRol': this.fillEditarRol.nIdRol
+                }
+            }).then(response => {
                 this.listPermisos = response.data;
                 this.filterPermisosByRol();
             })
@@ -214,34 +243,34 @@ export default {
             this.modalShow = !this.modalShow;
         },
         limpiarCriteriosBsq() {
-            this.fillCrearRol.cNombre = '';
-            this.fillCrearRol.cUrl = '';
+            this.fillEditarRol.cNombre = '';
+            this.fillEditarRol.cUrl = '';
         },
-        setRegistraRolPermisos() {
-            if (this.validarRegistrarRolPermisos()) {
+        setEditarRolPermisos() {
+            if (this.validarEditarRolPermisos()) {
                 this.modalShow = true;
                 return;
             }
 
             this.fullScreenLoading = true;
-            var url = '/administracion/rol/setRegistraRolPermisos';
+            var url = '/administracion/rol/setEditarRolPermisos';
             //post to save
             axios.post(url, {
-                'cNombre'           : this.fillCrearRol.cNombre,
-                'cSlug'             : this.fillCrearRol.cUrl,
+                'nIdRol': this.fillEditarRol.nIdRol,
+                'cNombre': this.fillEditarRol.cNombre,
+                'cSlug': this.fillEditarRol.cUrl,
                 'listPermisosFilter': this.listPermisosFilter
 
             }).then((response) => {
                 this.fullScreenLoading = false;
                 Swal.fire({
                     title: 'Rol',
-                    text: "Rol creado correctamente!",
+                    text: "Rol Actualizado correctamente!",
                     type: "warning",
                     showDenyButton: false,
                     confirmButtonText: 'Ok'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        console.log(result);
                         this.$router.push('/rol');
                     }
                 });
@@ -252,14 +281,14 @@ export default {
                 console.log('finally');
             });
         },
-        validarRegistrarRolPermisos() {
+        validarEditarRolPermisos() {
             this.error = 0;
             this.mensajeError = [];
 
-            if (!this.fillCrearRol.cNombre) {
+            if (!this.fillEditarRol.cNombre) {
                 this.mensajeError.push("El Nombre es un campo obligatorio");
             }
-            if (!this.fillCrearRol.cUrl) {
+            if (!this.fillEditarRol.cUrl) {
                 this.mensajeError.push("La Url Amigable es un campo obligatorio");
             }
 
