@@ -13,11 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+##Usuario
 Route::get('/administracion/usuario/getListUsuarios','Administracion\UsersController@getListUsuarios');
 Route::post('/administracion/usuario/setRegistrarUsuario','Administracion\UsersController@setRegistrarUsuario');
 Route::post('/administracion/usuario/setEditarUsuario','Administracion\UsersController@setEditarUsuario');
 Route::post('/administracion/usuario/setCambiaEstadoUsuario','Administracion\UsersController@setCambiaEstadoUsuario');
 
+##Rol
+Route::get('/administracion/rol/getListRoles','Administracion\RolesController@getListRoles');
+
+##Files
 Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');
 
 Route::get('/{optional?}', function () {
