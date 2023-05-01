@@ -16,8 +16,10 @@ window.Vue.use(ElementUI)
 
 import Swal from 'sweetalert2'
 window.Swal = Swal;
-import toasted from 'vue-toasted';
-window.Vue.use(toasted)
+import VueToastr from "vue-toastr";
+window.Vue.use(VueToastr)
+/* import toasted from 'vue-toasted';
+window.Vue.use(toasted) */
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

@@ -130,10 +130,10 @@
                                                                 <template v-if="item.state == 'A'">
                                                                     <button @click="$router.push({name:'usuario.editar',params:{id:item.id}})" class="btn btn-flat btn-info btn-sm"><i class="fa fa-pencil"></i> Editar</button>
                                                                     <button @click="$router.push('/')" class="btn btn-flat btn-success btn-sm"><i class="fa fa-key"></i> Permiso</button>
-                                                                    <button @click="$router.push('/')" class="btn btn-flat btn-danger btn-sm"><i class="fa fa-trash"></i> Desactivar</button>
+                                                                    <button class="btn btn-flat btn-danger btn-sm" @click.prevent="setCambiarEstadoUsuario(1,item.id)"><i class="fa fa-trash"></i> Desactivar</button>
                                                                 </template>
                                                                 <template v-else>
-                                                                    <button @click="$router.push('/')" class="btn btn-flat btn-success btn-sm"> <i class="fa fa-check-circle"></i> Activar</button>
+                                                                    <button class="btn btn-flat btn-success btn-sm" @click.prevent="setCambiarEstadoUsuario(2, item.id)"><i class="fa fa-check-circle"></i> Activar</button>
                                                                 </template>
                                                             </td>
                                                         </tr>
@@ -268,6 +268,40 @@ export default {
         },
         inicializarPaginacion() {
             this.pageNumber = 0;
+        },
+        setCambiarEstadoUsuario(op, id) {
+            Swal.fire({
+                title: '¿Esta seguro de ' + ((op == 1) ? 'desactivar' : 'activar') + ' el usuario?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: ((op == 1) ? 'Si, desactivar' : 'Si, activar')
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    /* Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    ) */
+                    this.fullScreenLoading = true;
+                    var url = '/administracion/usuario/setCambiaEstadoUsuario';
+                    axios.post(url, {
+                        'nIdUsuario': id,
+                        'cEstado': (op == 1) ? 'I':'A'
+                    }).then(response => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Se '+ ((op == 1) ? 'desactivo':'activo') + 'el usuario',
+                            showConfirmButton: false,
+                            timer:1200
+                        })
+                        this.getListUsuarios();
+                    }).catch(error => {
+                        console.log(error);
+                    });
+                }
+            })
         }
     }
 }

@@ -270,14 +270,13 @@ export default {
              }).then((response) => {
                  this.fullScreenLoading = false;
                  /* this.$router.push('/usuario'); */
-                 /*Swal.fire({
+                 Swal.fire({
                     position:'top-end',
                     icon: 'success',
-                    title: 'Your work has been saved',
+                    title: 'Usuario actualizado',
                     showConfirmButton: false,
                     timer:1500
-                 });*/
-                 this.$toasted.success("Success Message")
+                 });
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {

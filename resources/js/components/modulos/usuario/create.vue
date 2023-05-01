@@ -246,7 +246,18 @@ export default {
 
              }).then((response) => {
                  this.fullScreenLoading = false;
-                 this.$router.push('/usuario');
+                 Swal.fire({
+                     title: 'Usuario',
+                     text: "Usuario creado correctamente!",
+                     type:"warning",
+                     showDenyButton: false,
+                     confirmButtonText: 'Ok'
+                 }).then((result) => {
+                     if (result.isConfirmed) {
+                         this.$router.push('/usuario');
+                     }
+                 });
+
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {
