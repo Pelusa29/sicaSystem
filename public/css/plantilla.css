@@ -26,7 +26,8 @@
 }
 
 .btnWidth{
-    width: 12% !important;
+    /* width: 12% !important; */
+    width: 20rem;
 }
 
 .el-select{
@@ -35,6 +36,21 @@
 
 .user-block {
     list-style: none;
+}
+
+.linkeado{
+    background-color: #007bff !important;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.text-perfil{
+    font-size: 30px;
+}
+
+a:focus,
+a:hover {
+    text-decoration: none !important;
 }
 
 

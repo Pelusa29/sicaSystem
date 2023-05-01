@@ -13,6 +13,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 
 window.Vue.use(ElementUI)
+
+import Swal from 'sweetalert2'
+window.Swal = Swal;
+import toasted from 'vue-toasted';
+window.Vue.use(toasted)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -34,5 +39,6 @@ Vue.component('App', require('./components/App.vue').default);
 import router from './routes'
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    link:false
 });
