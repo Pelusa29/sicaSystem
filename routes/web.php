@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/administracion/usuario/getListUsuarios','Administracion\UsersController@getListUsuarios');
 Route::post('/administracion/usuario/setRegistrarUsuario','Administracion\UsersController@setRegistrarUsuario');
-Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');
 Route::post('/administracion/usuario/setEditarUsuario','Administracion\UsersController@setEditarUsuario');
+Route::post('/administracion/usuario/setCambiaEstadoUsuario','Administracion\UsersController@setCambiaEstadoUsuario');
+
+Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');
 
 Route::get('/{optional?}', function () {
     return view('app');
