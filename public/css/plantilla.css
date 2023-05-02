@@ -52,7 +52,10 @@ a:focus,
 a:hover {
     text-decoration: none !important;
 }
-
+.scrollTable {
+    max-height: 350px !important;
+    overflow: auto !important;
+}
 
 
 .jvectormap-label {
