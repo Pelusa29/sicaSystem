@@ -61,7 +61,7 @@ class UsersController extends Controller
             $oFotografia
         ]);
 
-        return $rpta;
+        return $rpta[0]->nIdUsuario;
     }
 
     public function setEditarUsuario(Request $request){
@@ -120,6 +120,24 @@ class UsersController extends Controller
             $cEstado
         ]);
 
+    }
+
+    public function setEditarRolByUsuario(Request $request){
+         if(!$request->ajax()) return redirect('');
+
+        $nIdUsuario         = $request->nIdUsuario;
+        $nIdRol             = $request->nIdRol;
+
+
+        $nIdUsuario     = ($nIdUsuario == NUll) ? ($nIdUsuario = ''): $nIdUsuario;
+        $nIdRol         = ($nIdRol == NUll) ? ($nIdRol = ''): $nIdRol;
+
+        //Store
+        $rpta = DB::select('call sp_Usuario_setEditarRolByUsuario(?,?)',
+        [
+            $nIdUsuario,
+            $nIdRol
+        ]);
     }
 
 }
