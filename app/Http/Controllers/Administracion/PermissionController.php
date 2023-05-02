@@ -24,4 +24,19 @@ class PermissionController extends Controller
 
         return $rpta;
     }
+
+    public function setRegistraPermiso(Request $request){
+
+        if(!$request->ajax()) return redirect('');
+
+        $cNombre    = $request->cNombre;
+        $cSlug      = $request->cSlug;
+
+
+        $cNombre    = ($cNombre == NULL) ? ($cNombre = '') : $cNombre;
+        $cSlug      = ($cSlug == NULL) ? ($cSlug      = '')  : $cSlug;
+
+
+        DB::select('call sp_Permiso_setRegistraPermiso(?,?)',[$cNombre,$cSlug]);
+    }
 }

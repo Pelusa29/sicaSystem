@@ -42,6 +42,8 @@ export default new Router({
         },
 
         { path: '/permiso', component: require('./components/modulos/permiso/index.vue').default },
+        { path: '/permiso/crear', component: require('./components/modulos/permiso/create.vue').default },
+
         { path: '/reporte', component: require('./components/modulos/reporte/index.vue').default }
     ],
     mode: 'history',

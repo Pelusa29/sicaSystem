@@ -13,7 +13,7 @@
                     <div class="card-header">
                         <div class="box-header">
                             <div class="col-md-2 row">
-                                <router-link class="btn btn-block btn-info" :to="'/rol/crear'">
+                                <router-link class="btn btn-block btn-info" :to="'/permiso/crear'">
                                     <i class="fa fa-plus"></i>&nbsp;&nbsp;Nuevo Permiso
                                 </router-link>
                             </div>
