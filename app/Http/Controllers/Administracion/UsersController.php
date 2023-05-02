@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use Laravel\Ui\Presets\React;
 
 class UsersController extends Controller
 {
@@ -123,13 +123,13 @@ class UsersController extends Controller
     }
 
     public function setEditarRolByUsuario(Request $request){
-         if(!$request->ajax()) return redirect('');
+        if(!$request->ajax()) return redirect('');
 
         $nIdUsuario         = $request->nIdUsuario;
         $nIdRol             = $request->nIdRol;
 
 
-        $nIdUsuario     = ($nIdUsuario == NUll) ? ($nIdUsuario = ''): $nIdUsuario;
+        $nIdUsuario     = ($nIdUsuario == NUll) ? ($nIdUsuario = 0): $nIdUsuario;
         $nIdRol         = ($nIdRol == NUll) ? ($nIdRol = ''): $nIdRol;
 
         //Store
@@ -138,6 +138,87 @@ class UsersController extends Controller
             $nIdUsuario,
             $nIdRol
         ]);
+    }
+
+    public function getRolByUsuario(Request $request){
+        if(!$request->ajax()) return redirect('');
+
+        $nIdUsuario         = $request->nIdUsuario;
+
+        $nIdUsuario     = ($nIdUsuario == NUll) ? ($nIdUsuario = 0): $nIdUsuario;
+        //Store
+        $rpta = DB::select('call sp_Usuario_getRolByUsuario(?)',
+        [
+            $nIdUsuario
+        ]);
+
+        return $rpta;
+    }
+
+    public function getListPermisosByRolAsignado(Request $request){
+        if(!$request->ajax()) return redirect('');
+
+        $nIdUsuario         = $request->nIdUsuario;
+
+        $nIdUsuario     = ($nIdUsuario == NUll) ? ($nIdUsuario = 0): $nIdUsuario;
+        //Store
+        $rpta = DB::select('call sp_Usuario_getListPermisosByRolAsignado(?)',
+        [
+           $nIdUsuario
+        ]);
+
+        return $rpta;
+    }
+
+    public function getListPermisosByUsuario(Request $request){
+        if(!$request->ajax()) return redirect('');
+
+        $nIdUsuario         = $request->nIdUsuario;
+
+        $nIdUsuario     = ($nIdUsuario == NUll) ? ($nIdUsuario = 0): $nIdUsuario;
+        //Store
+        $rpta = DB::select('call sp_Usuario_getListPermisosByUsuario(?)',
+        [
+           $nIdUsuario
+        ]);
+
+        return $rpta;
+    }
+
+    public function setRegistraPermisosByUsuario(Request $request){
+        if(!$request->ajax()) return redirect('');
+
+        $nIdUsuario     = $request->nIdUsuario;
+
+        $nIdUsuario     = ($nIdUsuario == NUll) ? ($nIdUsuario = 0): $nIdUsuario;
+
+        //transaction
+        try {
+            DB::beginTransaction();
+
+            DB::select('call sp_Usuario_setEliminarPermisosByUsuario(?)',[$nIdUsuario]);
+
+            $listPermisos       = $request->listPermisosFilter;
+            $listPermisosSize   = sizeof($listPermisos);
+            if($listPermisosSize > 0){
+                foreach ($listPermisos as $key => $value) {
+                    if($value['checked'] == true){
+                        DB::select('call sp_Usuario_setRegistraPermisosByUsuario(?,?)',
+                        [
+                            $nIdUsuario,
+                            $value['id']
+                        ]);
+                    }
+                }
+            }
+            //Commit
+            DB::commit();
+        } catch (\Exception $e) {
+            //throw $th;
+            DB::rollback();
+            print_r($e->getMessage());
+        }
+
     }
 
 }

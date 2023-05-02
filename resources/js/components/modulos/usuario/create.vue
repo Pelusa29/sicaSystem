@@ -109,7 +109,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group row">
-                                                                <label class="col-md-3 col-form-label">Estado</label>
+                                                                <label class="col-md-3 col-form-label">Rol</label>
                                                                 <div class="col-md-9">
                                                                     <el-select
                                                                     v-model="fillCrearUsuario.nIdRol"
@@ -331,6 +331,10 @@ export default {
             }
             if (!this.fillCrearUsuario.cContrasena) {
                 this.mensajeError.push("El Primer Contraseña es un campo obligatorio");
+            }
+
+            if (!this.fillCrearUsuario.nIdRol) {
+                this.mensajeError.push("El Rol es un campo obligatorio");
             }
 
             if (this.mensajeError.length) {

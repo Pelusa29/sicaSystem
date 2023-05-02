@@ -129,7 +129,7 @@
                                                                 <button @click="$router.push({ name: 'usuario.ver', params: { id: item.id } })" class="btn btn-flat btn-primary btn-sm"><i class="fa fa-eye"></i> Ver</button>
                                                                 <template v-if="item.state == 'A'">
                                                                     <button @click="$router.push({name:'usuario.editar',params:{id:item.id}})" class="btn btn-flat btn-info btn-sm"><i class="fa fa-pencil"></i> Editar</button>
-                                                                    <button @click="$router.push('/')" class="btn btn-flat btn-success btn-sm"><i class="fa fa-key"></i> Permiso</button>
+                                                                    <button @click="$router.push({ name: 'usuario.permiso', params: { id: item.id } })" class="btn btn-flat btn-success btn-sm"><i class="fa fa-key"></i> Permiso</button>
                                                                     <button class="btn btn-flat btn-danger btn-sm" @click.prevent="setCambiarEstadoUsuario(1,item.id)"><i class="fa fa-trash"></i> Desactivar</button>
                                                                 </template>
                                                                 <template v-else>
