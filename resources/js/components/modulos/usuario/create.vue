@@ -109,6 +109,24 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group row">
+                                                                <label class="col-md-3 col-form-label">Estado</label>
+                                                                <div class="col-md-9">
+                                                                    <el-select
+                                                                    v-model="fillCrearUsuario.nIdRol"
+                                                                    placeholder="Seleccione un Rol"
+                                                                    clearable>
+                                                                        <el-option
+                                                                        v-for="item in listRoles"
+                                                                        :key="item.id"
+                                                                        :label="item.name"
+                                                                        :value="item.id">
+                                                                        </el-option>
+                                                                    </el-select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
                                                                 <label class="col-md-3 col-form-label">Fotorgafía</label>
                                                                 <div class="col-md-9">
                                                                     <input type="file" class="form-control" @change="getFile">
@@ -171,8 +189,10 @@ export default {
                 cUsuario: '',
                 cCorreo: '',
                 cContrasena: '',
-                oFotografia:''
+                oFotografia: '',
+                nIdRol:''
             },
+            listRoles:[],
             form: new FormData,
             fullScreenLoading:false,
             modalShow: false,
@@ -189,7 +209,22 @@ export default {
     },
     computed: {
     },
+    mounted() {
+        this.getListRoles();
+    },
     methods: {
+        getListRoles() {
+            this.fullScreenLoading = true;
+            var url = '/administracion/rol/getListRoles';
+            axios.get(url).then((response) => {
+                this.listRoles = response.data;
+                this.fullScreenLoading = false;
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                console.log('finally');
+            });
+        },
         limpiarCriteriosUsuario() {
             this.fillCrearUsuario.cPrimerNombre = '';
             this.fillCrearUsuario.cSegundoNombre = '';
@@ -245,24 +280,38 @@ export default {
                 'oFotografia'   : nIdFile
 
              }).then((response) => {
-                 this.fullScreenLoading = false;
-                 Swal.fire({
-                     title: 'Usuario',
-                     text: "Usuario creado correctamente!",
-                     type:"warning",
-                     showDenyButton: false,
-                     confirmButtonText: 'Ok'
-                 }).then((result) => {
-                     if (result.isConfirmed) {
-                         this.$router.push('/usuario');
-                     }
-                 });
-
+                this.setEditarRolByUsuario(response.data);
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {
                 console.log('finally');
             });
+        },
+        setEditarRolByUsuario(nIdUsuario) {
+                 var url = '/administracion/usuario/setEditarRolByUsuario';
+                axios.post(url, {
+                    'nIdUsuario': nIdUsuario,
+                    'nIdRol': this.fillCrearUsuario.nIdRol
+                }).then((response) => {
+                    //
+                    this.fullScreenLoading = false;
+                    Swal.fire({
+                        title: 'Usuario',
+                        text: "Usuario creado correctamente!",
+                        type: "warning",
+                        showDenyButton: false,
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.$router.push('/usuario');
+                        }
+                    });
+
+                }).catch((error) => {
+                    console.log(error);
+                }).finally(() => {
+                    console.log('finally');
+                });
         },
         validarRegistrarUsuario() {
             this.error = 0;

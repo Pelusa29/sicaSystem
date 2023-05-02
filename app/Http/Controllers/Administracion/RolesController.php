@@ -42,8 +42,6 @@ class RolesController extends Controller
         $cNombre    = $request->cNombre;
         $cSlug      = $request->cSlug;
 
-        var_dump($request->listPermisosFilter);
-
         $cNombre    = ($cNombre == NULL) ? ($cNombre = '') : $cNombre;
         $cSlug      = ($cSlug == NULL) ? ($cSlug      = '')  : $cSlug;
 

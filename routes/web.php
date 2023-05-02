@@ -18,12 +18,18 @@ Route::get('/administracion/usuario/getListUsuarios','Administracion\UsersContro
 Route::post('/administracion/usuario/setRegistrarUsuario','Administracion\UsersController@setRegistrarUsuario');
 Route::post('/administracion/usuario/setEditarUsuario','Administracion\UsersController@setEditarUsuario');
 Route::post('/administracion/usuario/setCambiaEstadoUsuario','Administracion\UsersController@setCambiaEstadoUsuario');
+Route::post('/administracion/usuario/setEditarRolByUsuario','Administracion\UsersController@setEditarRolByUsuario');
 
 ##Rol
 Route::get('/administracion/rol/getListRoles','Administracion\RolesController@getListRoles');
 Route::get('/administracion/rol/getListPermisosByRol','Administracion\RolesController@getListPermisosByRol');
 Route::post('/administracion/rol/setRegistraRolPermisos','Administracion\RolesController@setRegistraRolPermisos');
 Route::post('/administracion/rol/setEditarRolPermisos','Administracion\RolesController@setEditarRolPermisos');
+
+##Permisos
+Route::get('/administracion/permiso/getListPermisos','Administracion\PermissionController@getListPermisos');
+Route::post('/administracion/permiso/setRegistraPermiso','Administracion\PermissionController@setRegistraPermiso');
+Route::post('/administracion/permiso/setEditarPermiso','Administracion\PermissionController@setEditarPermiso');
 
 ##Files
 Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');
