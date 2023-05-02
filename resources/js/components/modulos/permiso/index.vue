@@ -84,7 +84,7 @@
                                                         <td><span class="badge bg-red" v-text="item.slug"></span></td>
                                                         <td>
                                                             <button
-                                                                @click="$router.push({ name: 'rol.editar', params: { id: item.id } })"
+                                                                @click="$router.push({ name: 'permiso.editar', params: { id: item.id } })"
                                                                 class="btn btn-flat btn-info btn-sm"><i
                                                                     class="fa fa-pencil"></i> Editar</button>
                                                         </td>
