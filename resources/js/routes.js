@@ -31,6 +31,12 @@ export default new Router({
             component: require('./components/modulos/usuario/view.vue').default,
             props:true
         },
+        {
+            path: '/usuario/:id/permiso',
+            name:'usuario.permiso',
+            component: require('./components/modulos/usuario/permission.vue').default,
+            props:true
+        },
 
         { path: '/rol', component: require('./components/modulos/rol/index.vue').default },
         { path: '/rol/crear', component: require('./components/modulos/rol/create.vue').default },
