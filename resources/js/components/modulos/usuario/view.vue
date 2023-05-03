@@ -23,7 +23,7 @@
                                         <img :src="fillVerUsuario.cRutaArchivo" :alt="cNombreCompleto" class="profile-user-img img-responsive img-max-height img-circle">
                                 </template>
                                 <h3 class="profile-username text-center">{{ cNombreCompleto }}</h3>
-                                <p class="text-muted text-center">Proveedor</p>
+                                    <p class="text-muted text-center">{{ fillVerUsuario.cNombreRol }}</p>
                                 <hr>
                                 <div class="box-header with-border"></div>
                                 <div class="col-sm-12">
@@ -161,7 +161,8 @@ export default {
                 cUsuario: '',
                 cCorreo: '',
                 cContrasena: '',
-                oFotografia: ''
+                oFotografia: '',
+                cNombreRol:''
             },
             form: new FormData,
             fullScreenLoading: false,
@@ -179,6 +180,7 @@ export default {
     },
     mounted() {
         this.getUsuariobyId();
+        this.getRolByUsuario();
     },
     computed: {
         cNombreCompleto() {
@@ -211,6 +213,22 @@ export default {
             this.fillVerUsuario.cUsuario = data.username;
             this.fillVerUsuario.cCorreo = data.email;
             this.fillVerUsuario.cRutaArchivo = data.profile_image;
+        },
+         getRolByUsuario() {
+            var url = '/administracion/usuario/getRolByUsuario';
+            axios.get(url, {
+                params: {
+                    'nIdUsuario': this.fillEditarUsuario.nIdUsuario
+                }
+            }).then((response) => {
+                /* console.info(response.data); */
+                this.fillVerUsuario.cNombreRol = (response.data.length == 0) ? '' : response.data[0].name;
+                this.fullScreenLoading = false;
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                console.log('finally');
+            });
         },
         getUsuarioForm(data) {
             this.fillEditarUsuario.cPrimerNombre = data.firstname;
@@ -250,6 +268,7 @@ export default {
                 'oFotografia': nIdFile
 
             }).then((response) => {
+                this.getRefrescarUsuarioAutenticado();
                 this.fullScreenLoading = false;
                 /* this.$router.push('/usuario'); */
                 Swal.fire({
@@ -263,6 +282,12 @@ export default {
                 console.log(error);
             }).finally(() => {
                 console.log('finally');
+            });
+        },
+        getRefrescarUsuarioAutenticado() {
+            var url = '/authenticate/getRefrescarUsuarioAutenticado';
+            axios.get(url).then(response => {
+                console.log(response);
             });
         },
         validarEditarUsuario() {

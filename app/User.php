@@ -36,4 +36,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $appends = ['fullname'];
+    //Mutadores
+    public function getFullNameAttribute()
+    {
+        return strtoupper($this->firstname) . ' ' . strtoupper($this->lastname);
+    }
+
+    public function file()
+    {
+        return $this->belongsTo(File::class, 'file_id');
+    }
 }

@@ -1,8 +1,8 @@
 <template lang="">
     <div>
-        <Navbar :ruta="ruta"></Navbar>
+        <Navbar :ruta="ruta" :usuario="usuario"></Navbar>
         <!-- Left side column. contains the logo and sidebar -->
-        <Sidebar :ruta="ruta"></Sidebar>
+        <Sidebar :ruta="ruta" :usuario="usuario"></Sidebar>
         <!-- Content Wrapper. Contains page content -->
         <!--<Content :ruta="ruta"></Content>-->
         <div class="content-wrapper">
@@ -19,7 +19,7 @@ import Navbar from "./plantilla/Navbar"
 import Sidebar from "./plantilla/Sidebar"
 import Footer from "./plantilla/Footer"
     export default {
-        'props': ['ruta'],
+        'props': ['ruta','usuario'],
         'components': {Navbar,Sidebar, Footer}
     }
 </script>
