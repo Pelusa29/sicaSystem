@@ -2,31 +2,30 @@ import Vue from "vue";
 import Router from "vue-router";
 
 Vue.use(Router)
-
-export default new Router({
+const isuserLoggedIn = false;
+const router =  new Router({
     routes: [
         {
             path: '/login',
-            name:'login',
+            name: 'login',
             component: require('./components/modulos/autenticate/login.vue').default
         },
-        //{ path: '/', component: require('./components/plantilla/Content.vue').default }
         {
             path: '/',
             meta: {
                 requiresAuth: true
             },
-            name:'dashboard.index',
+            name: 'dashboard.index',
             component: require('./components/modulos/dashboard/index.vue').default
         },
         {
             path: '/servicio',
-            name:'servicio.index',
+            name: 'servicio.index',
             component: require('./components/modulos/servicio/index.vue').default
         },
         {
             path: '/cliente',
-            name:'cliente.index',
+            name: 'cliente.index',
             component: require('./components/modulos/cliente/index.vue').default
         },
         {
@@ -36,97 +35,113 @@ export default new Router({
         },
         {
             path: '/producto',
-            name:'producto.index',
+            name: 'producto.index',
             component: require('./components/modulos/producto/index.vue').default
         },
 
         //catalagos generales
         {
             path: '/tipounidades',
-            name:'tipounidades.index',
+            name: 'tipounidades.index',
             component: require('./components/modulos/catunidad/index.vue').default
         },
         {
             path: '/tipodocumento',
-            name:'tipodocumento.index',
+            name: 'tipodocumento.index',
             component: require('./components/modulos/catdocumento/index.vue').default
         },
         {
             path: '/tiposervicio',
-            name:'tiposervicio.index',
+            name: 'tiposervicio.index',
             component: require('./components/modulos/catservicio/index.vue').default
         },
 
         {
             path: '/usuario',
-            meta:{requiresAuth:true},
-            name:'usuario.index',
+            meta: {
+                needsAuth: true
+            },
+            name: 'usuario.index',
             component: require('./components/modulos/usuario/index.vue').default
         },
         {
             path: '/usuario/crear',
-            name:'usuario.crear',
+            name: 'usuario.crear',
             component: require('./components/modulos/usuario/create.vue').default
         },
         {
             path: '/usuario/:id/editar',
-            name:'usuario.editar',
+            name: 'usuario.editar',
             component: require('./components/modulos/usuario/edit.vue').default,
-            props:true
+            props: true
         },
         {
             path: '/usuario/:id/ver',
-            name:'usuario.ver',
+            name: 'usuario.ver',
             component: require('./components/modulos/usuario/view.vue').default,
-            props:true
+            props: true
         },
         {
             path: '/usuario/:id/permiso',
-            name:'usuario.permiso',
+            name: 'usuario.permiso',
             component: require('./components/modulos/usuario/permission.vue').default,
-            props:true
+            props: true
         },
 
         {
             path: '/rol',
-            name:'rol.index',
+            name: 'rol.index',
             component: require('./components/modulos/rol/index.vue').default
         },
         {
             path: '/rol/crear',
-            name:'rol.crear',
+            name: 'rol.crear',
             component: require('./components/modulos/rol/create.vue').default
         },
         {
             path: '/rol/:id/editar',
-            name:'rol.editar',
+            name: 'rol.editar',
             component: require('./components/modulos/rol/edit.vue').default,
-            props:true
+            props: true
         },
 
         {
             path: '/permiso',
-            name:'permiso.index',
+            name: 'permiso.index',
             component: require('./components/modulos/permiso/index.vue').default
         },
         {
             path: '/permiso/crear',
-            name:'permiso.crear',
+            name: 'permiso.crear',
             component: require('./components/modulos/permiso/create.vue').default
         },
         {
             path: '/permiso/:id/editar',
-            name:'permiso.editar',
+            name: 'permiso.editar',
             component: require('./components/modulos/permiso/edit.vue').default,
-            props:true
+            props: true
         },
 
         {
             path: '/reporte',
-            name:'reporte.index',
+            name: 'reporte.index',
             component: require('./components/modulos/reporte/index.vue').default
         }
     ],
     mode: 'history',
-    linkActiveClass:'linkeado'
-})
+    linkActiveClass: 'linkeado'
+});
+
+/* router.beforeEach((to, from, next) => {
+    if (to.meta.needsAuth) {
+        if (isuserLoggedIn) {
+            next('');
+        } else {
+            next('/login');
+        }
+    } else {
+        next();
+    }
+}) */
+export default router;
+

@@ -179,6 +179,8 @@
 
 <script>
 export default {
+    beforeRouteEnter(to) {
+    },
     data() {
         return {
             fillBsqUsuario: {
