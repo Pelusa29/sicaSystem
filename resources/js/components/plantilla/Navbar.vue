@@ -12,7 +12,7 @@
             <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                <span class="sr-only">Toggle asas</span>
+                <span class="sr-only"></span>
             </a>
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
@@ -216,41 +216,30 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="#" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                            <template v-if="!usuario.file_id">
+                                <img :src="ruta +'/img/avatar.png'" class="img-circle" :alt="usuario.firstname">
+                            </template>
+                            <template v-else>
+                                <img :src="usuario.file.path" class="img-circle" style="height:2rem !important;width: 2rem !important;object-fit: cover;" :alt="usuario.firstname">
+                            </template>
+                            <span class="hidden-xs">{{usuario.fullname}}</span>
                         </a>
                         <ul class="dropdown-menu">
-                        <!-- User image -->
                         <li class="user-header">
-                            <img src="#" class="img-circle" alt="User Image">
-
-                            <p>
-                            Alexander Pierce - Web Developer
-                            <small>Member since Nov. 2012</small>
-                            </p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="row">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
-                            </div>
-                            <!-- /.row -->
+                            <template v-if="!usuario.file_id">
+                                <img src="#" class="img-circle" alt="User Image">
+                            </template>
+                            <template v-else>
+                                <img :src="usuario.file.path" class="img-circle" :alt="usuario.firstname">
+                            </template>
+                            <p>{{usuario.email}}</p>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
                             <div class="pull-right">
-                            <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="#" class="btn btn-flat btn-danger btn-sm" @click.prevent="logout" v-loading.fullscreen.lock="fullscreenLoading">
+                                    <i class="fa fa-sign-out"></i> Cerrar Sesión
+                                </a>
                             </div>
                         </li>
                         </ul>
@@ -263,7 +252,25 @@
 </template>
 <script>
 export default {
-    props:['ruta']
+    props: ['ruta','usuario'],
+    data() {
+        return {
+            fullscreenLoading: false,
+        }
+    },
+    methods: {
+        logout() {
+            this.fullscreenLoading = true;
+            var url = '/authenticate/logout';
+            axios.post(url).then(response => {
+                if (response.data.code == 204) {
+                    this.$router.push({ name: 'login' })
+                    location.reload();
+                    this.fullscreenLoading = false;
+                }
+            });
+        }
+    }
 }
 </script>
 <style lang="">

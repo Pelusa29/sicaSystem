@@ -10,7 +10,6 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
 mix.styles([
     'resources/vendor/css/skin-blue.min.css',
     'resources/vendor/css/AdminLTE.min.css',
@@ -35,3 +34,4 @@ mix.styles([
     .js(['resources/js/app.js'], 'public/js/app.js')
     .copy('resources/vendor/font-awesome/fonts', 'public/fonts')
     .copy('resources/vendor/img','public/img');
+

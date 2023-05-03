@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+##Authenticate
+Route::post('/authenticate/login','Auth\LoginController@login');
+Route::post('/authenticate/logout','Auth\LoginController@logout');
+
+Route::get('/authenticate/getRefrescarUsuarioAutenticado', function(){
+    return Auth::user()->load('file');
+});
 
 ##Usuario
 Route::get('/administracion/usuario/getListUsuarios','Administracion\UsersController@getListUsuarios');

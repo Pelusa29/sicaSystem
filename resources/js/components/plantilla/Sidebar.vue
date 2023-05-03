@@ -6,11 +6,16 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                <img :src="ruta +'/img/avatar.png'" class="img-circle" alt="User Image">
+                    <template v-if="!usuario.file_id">
+                         <img :src="ruta +'/img/avatar.png'" class="img-circle" :alt="usuario.firstname">
+                    </template>
+                    <template v-else>
+                        <img :src="usuario.file.path" class="img-circle" style="height:5rem !important;width: 12rem !important;;object-fit: cover;" :alt="usuario.firstname">
+                    </template>
                 </div>
                 <div class="pull-left info">
-                <p>Ernesto Roman</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <p>{{usuario.fullname}}</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
             <!-- /.search form -->
@@ -99,7 +104,7 @@
 </template>
 <script>
 export default {
-    props:['ruta']
+    props: ['ruta','usuario']
 }
 </script>
 <style lang="">

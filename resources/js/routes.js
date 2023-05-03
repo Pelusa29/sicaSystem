@@ -5,20 +5,69 @@ Vue.use(Router)
 
 export default new Router({
     routes: [
+        {
+            path: '/login',
+            name:'login',
+            component: require('./components/modulos/autenticate/login.vue').default
+        },
         //{ path: '/', component: require('./components/plantilla/Content.vue').default }
-        { path: '/', component: require('./components/modulos/dashboard/index.vue').default },
-        { path: '/servicio', component: require('./components/modulos/servicio/index.vue').default },
-        { path: '/cliente', component: require('./components/modulos/cliente/index.vue').default },
-        { path: '/categoria', component: require('./components/modulos/categoria/index.vue').default },
-        { path: '/producto', component: require('./components/modulos/producto/index.vue').default },
+        {
+            path: '/',
+            meta: {
+                requiresAuth: true
+            },
+            name:'dashboard.index',
+            component: require('./components/modulos/dashboard/index.vue').default
+        },
+        {
+            path: '/servicio',
+            name:'servicio.index',
+            component: require('./components/modulos/servicio/index.vue').default
+        },
+        {
+            path: '/cliente',
+            name:'cliente.index',
+            component: require('./components/modulos/cliente/index.vue').default
+        },
+        {
+            path: '/categoria',
+            name: 'categoria.index',
+            component: require('./components/modulos/categoria/index.vue').default
+        },
+        {
+            path: '/producto',
+            name:'producto.index',
+            component: require('./components/modulos/producto/index.vue').default
+        },
 
         //catalagos generales
-        { path: '/tipounidades', component: require('./components/modulos/catunidad/index.vue').default },
-        { path: '/tipodocumento', component: require('./components/modulos/catdocumento/index.vue').default },
-        { path: '/tiposervicio', component: require('./components/modulos/catservicio/index.vue').default },
+        {
+            path: '/tipounidades',
+            name:'tipounidades.index',
+            component: require('./components/modulos/catunidad/index.vue').default
+        },
+        {
+            path: '/tipodocumento',
+            name:'tipodocumento.index',
+            component: require('./components/modulos/catdocumento/index.vue').default
+        },
+        {
+            path: '/tiposervicio',
+            name:'tiposervicio.index',
+            component: require('./components/modulos/catservicio/index.vue').default
+        },
 
-        { path: '/usuario', component: require('./components/modulos/usuario/index.vue').default },
-        { path: '/usuario/crear', component: require('./components/modulos/usuario/create.vue').default },
+        {
+            path: '/usuario',
+            meta:{requiresAuth:true},
+            name:'usuario.index',
+            component: require('./components/modulos/usuario/index.vue').default
+        },
+        {
+            path: '/usuario/crear',
+            name:'usuario.crear',
+            component: require('./components/modulos/usuario/create.vue').default
+        },
         {
             path: '/usuario/:id/editar',
             name:'usuario.editar',
@@ -38,8 +87,16 @@ export default new Router({
             props:true
         },
 
-        { path: '/rol', component: require('./components/modulos/rol/index.vue').default },
-        { path: '/rol/crear', component: require('./components/modulos/rol/create.vue').default },
+        {
+            path: '/rol',
+            name:'rol.index',
+            component: require('./components/modulos/rol/index.vue').default
+        },
+        {
+            path: '/rol/crear',
+            name:'rol.crear',
+            component: require('./components/modulos/rol/create.vue').default
+        },
         {
             path: '/rol/:id/editar',
             name:'rol.editar',
@@ -47,8 +104,16 @@ export default new Router({
             props:true
         },
 
-        { path: '/permiso', component: require('./components/modulos/permiso/index.vue').default },
-        { path: '/permiso/crear', component: require('./components/modulos/permiso/create.vue').default },
+        {
+            path: '/permiso',
+            name:'permiso.index',
+            component: require('./components/modulos/permiso/index.vue').default
+        },
+        {
+            path: '/permiso/crear',
+            name:'permiso.crear',
+            component: require('./components/modulos/permiso/create.vue').default
+        },
         {
             path: '/permiso/:id/editar',
             name:'permiso.editar',
@@ -56,8 +121,11 @@ export default new Router({
             props:true
         },
 
-
-        { path: '/reporte', component: require('./components/modulos/reporte/index.vue').default }
+        {
+            path: '/reporte',
+            name:'reporte.index',
+            component: require('./components/modulos/reporte/index.vue').default
+        }
     ],
     mode: 'history',
     linkActiveClass:'linkeado'
