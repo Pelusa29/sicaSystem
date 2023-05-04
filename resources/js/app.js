@@ -8,11 +8,12 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
+import locale from 'element-ui/lib/locale/lang/en'
 
-
-window.Vue.use(ElementUI)
+window.Vue.use(ElementUI, {locale})
 
 import Swal from 'sweetalert2'
 window.Swal = Swal;
