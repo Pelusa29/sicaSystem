@@ -45,6 +45,12 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::post('/administracion/permiso/setRegistraPermiso','Administracion\PermissionController@setRegistraPermiso');
     Route::post('/administracion/permiso/setEditarPermiso','Administracion\PermissionController@setEditarPermiso');
 
+    ##Tipo Unidades
+    Route::get('/configuracion/catunidades/getListTipoUnidades','Configuracion\TruckController@getListTipoUnidades');
+    Route::post('/configuracion/catunidades/setRegistraTipoUnidad','Configuracion\TruckController@setRegistraTipoUnidad');
+    Route::get('/configuracion/catunidades/getTipoUnidad','Configuracion\TruckController@getTipoUnidad');
+    Route::post('/configuracion/catunidades/setEditarTipoUnidad','Configuracion\TruckController@setEditarTipoUnidad');
+
     ##Files
     Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');
 });

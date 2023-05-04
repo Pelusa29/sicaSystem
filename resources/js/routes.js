@@ -46,6 +46,18 @@ const router =  new Router({
             component: require('./components/modulos/catunidad/index.vue').default
         },
         {
+            path: '/tipounidades/crear',
+            name: 'tipounidades.crear',
+            component: require('./components/modulos/catunidad/create.vue').default
+        },
+        {
+            path: '/tipounidades/:id/editar',
+            name: 'tipounidades.editar',
+            component: require('./components/modulos/catunidad/edit.vue').default,
+            props: true
+        },
+        //
+        {
             path: '/tipodocumento',
             name: 'tipodocumento.index',
             component: require('./components/modulos/catdocumento/index.vue').default
@@ -131,17 +143,5 @@ const router =  new Router({
     mode: 'history',
     linkActiveClass: 'linkeado'
 });
-
-/* router.beforeEach((to, from, next) => {
-    if (to.meta.needsAuth) {
-        if (isuserLoggedIn) {
-            next('');
-        } else {
-            next('/login');
-        }
-    } else {
-        next();
-    }
-}) */
 export default router;
 
