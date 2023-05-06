@@ -24,4 +24,25 @@ class FilesController extends Controller
 
         return $rpta;
     }
+
+     public function setAdjuntarDocumento(Request $request){
+        $file = $request->file;
+        $tipoDocumento = $request->tipoDocumento;
+        $nIdUnidad = $request->nIdUnidad;
+
+        $bandera = Str::random(10);
+        $filename = $file->getClientOriginalName();
+        $fileserver = $bandera .'_'. $filename;
+
+        Storage::putFileAs('public/users',$file,$fileserver);
+
+        $rpta = DB::select('call sp_Unidad_setAdjuntarDocumento(?,?,?,?)',[
+            $nIdUnidad,
+            $tipoDocumento,
+            asset('storage/users/'.$fileserver),
+            $fileserver
+        ]);
+
+        return $rpta;
+    }
 }

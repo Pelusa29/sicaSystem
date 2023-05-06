@@ -20,7 +20,7 @@ import Sidebar from "./plantilla/Sidebar"
 import Footer from "./plantilla/Footer"
     export default {
         'props': ['ruta','usuario'],
-        'components': {Navbar,Sidebar, Footer}
+        'components': {Navbar,Sidebar,Footer}
     }
 </script>
 <style lang="">

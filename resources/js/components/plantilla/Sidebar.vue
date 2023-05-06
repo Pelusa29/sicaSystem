@@ -40,9 +40,21 @@
                 </li>
                 <li class="header">CATALAGOS GERNERALES</li>
                 <li>
+                    <router-link class="nav-link" :to="'/unidad'">
+                        <i class="fa fa-car"></i>
+                        <span>Unidades General</span>
+                    </router-link>
+                </li>
+                <li>
                     <router-link class="nav-link" :to="'/tipounidades'">
-                        <i class="fa fa-sitemap"></i>
+                        <i class="fa fa-car"></i>
                         <span>Tip. Unidades</span>
+                    </router-link>
+                </li>
+                 <li>
+                    <router-link class="nav-link" :to="'/placa'">
+                        <i class="fa fa-car"></i>
+                        <span>Placas</span>
                     </router-link>
                 </li>
                 <li>
