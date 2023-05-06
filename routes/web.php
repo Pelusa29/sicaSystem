@@ -15,9 +15,12 @@ use Illuminate\Support\Facades\Auth;
 
 ##Authenticate
 Route::post('/authenticate/login','Auth\LoginController@login');
+Route::post('/authenticate/logout','Auth\LoginController@logout');
 ##Auth
+Route::middleware('auth')->get('/getUsuarioAutenticado',function(){
+    return true;
+});
 Route::group(['middleware'=> ['auth']], function(){
-    Route::post('/authenticate/logout','Auth\LoginController@logout');
 
     Route::get('/authenticate/getRefrescarUsuarioAutenticado', function(){
         return Auth::user()->load('file');
@@ -45,16 +48,32 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::post('/administracion/permiso/setRegistraPermiso','Administracion\PermissionController@setRegistraPermiso');
     Route::post('/administracion/permiso/setEditarPermiso','Administracion\PermissionController@setEditarPermiso');
 
+    ##Unidades
+    Route::get('/configuracion/unidad/getListUnidades','Configuracion\UnidadController@getListUnidades');
+    Route::get('/configuracion/unidad/getListadoTipoUnidades','Configuracion\UnidadController@getListadoTipoUnidades');
+    Route::post('/configuracion/unidad/setRegistraUnidad','Configuracion\UnidadController@setRegistraUnidad');
+    Route::get('/configuracion/unidad/getUnidadById','Configuracion\UnidadController@getUnidadById');
+    Route::post('/configuracion/unidad/setEditarUnidad','Configuracion\UnidadController@setEditarUnidad');
+    Route::post('/archivo/setAdjuntarDocumento','FilesController@setAdjuntarDocumento');
+    Route::get('/configuracion/unidad/getListDocumentos','Configuracion\UnidadController@getListDocumentos');
+
     ##Tipo Unidades
     Route::get('/configuracion/catunidades/getListTipoUnidades','Configuracion\TruckController@getListTipoUnidades');
     Route::post('/configuracion/catunidades/setRegistraTipoUnidad','Configuracion\TruckController@setRegistraTipoUnidad');
     Route::get('/configuracion/catunidades/getTipoUnidad','Configuracion\TruckController@getTipoUnidad');
     Route::post('/configuracion/catunidades/setEditarTipoUnidad','Configuracion\TruckController@setEditarTipoUnidad');
 
+    ##Placas
+    Route::get('/configuracion/placa/getListPlacas','Configuracion\PlacaController@getListPlacas');
+    Route::get('/configuracion/placa/getListaUnidades','Configuracion\PlacaController@getListaUnidades');
+
     ##Files
     Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');
+
 });
+
 Route::get('/{optional?}', function () {
-    return view('app');
-})->name('basepath')
-->where('optional','.*');
+        return view('app');
+    })->name('basepath')
+    ->where('optional','.*');
+

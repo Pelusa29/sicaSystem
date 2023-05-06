@@ -1,5 +1,5 @@
 <template>
-    <div class="login-box">
+    <div class="login-page">
          <transition name="slide-fade" mode="out-in">
             <router-view></router-view>
         </transition>
