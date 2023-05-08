@@ -59,6 +59,7 @@ Route::group(['middleware'=> ['auth']], function(){
 
     ##Tipo Unidades
     Route::get('/configuracion/catunidades/getListTipoUnidades','Configuracion\TruckController@getListTipoUnidades');
+    Route::get('/configuracion/catunidades/getTipoGirosList','Configuracion\TruckController@getTipoGirosList');
     Route::post('/configuracion/catunidades/setRegistraTipoUnidad','Configuracion\TruckController@setRegistraTipoUnidad');
     Route::get('/configuracion/catunidades/getTipoUnidad','Configuracion\TruckController@getTipoUnidad');
     Route::post('/configuracion/catunidades/setEditarTipoUnidad','Configuracion\TruckController@setEditarTipoUnidad');
@@ -66,6 +67,13 @@ Route::group(['middleware'=> ['auth']], function(){
     ##Placas
     Route::get('/configuracion/placa/getListPlacas','Configuracion\PlacaController@getListPlacas');
     Route::get('/configuracion/placa/getListaUnidades','Configuracion\PlacaController@getListaUnidades');
+    Route::post('/configuracion/placa/setRegistraPlaca','Configuracion\PlacaController@setRegistraPlaca');
+    Route::get('/configuracion/placa/getPlacaById','Configuracion\PlacaController@getPlacaById');
+
+    ##Inventarios
+    Route::get('/configuracion/catinventario/getListInventario','Configuracion\InventoryController@getListInventario');
+    Route::get('/configuracion/catinventario/getTipoInventario','Configuracion\InventoryController@getTipoInventario');
+    Route::post('/configuracion/catinventario/setRegistraInventario','Configuracion\InventoryController@setRegistraInventario');
 
     ##Files
     Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');

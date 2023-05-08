@@ -11,10 +11,23 @@ const router =  new Router({
             component: require('./components/modulos/autenticate/login.vue').default
         },
         {
+            path: '/dashboard',
+            name: 'dashboard.index',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/dashboard/index.vue').default
+        },
+        {
             path: '/',
             name: 'dashboard.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -27,7 +40,7 @@ const router =  new Router({
             path: '/servicio',
             name: 'servicio.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -40,7 +53,7 @@ const router =  new Router({
             path: '/cliente',
             name: 'cliente.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -53,7 +66,7 @@ const router =  new Router({
             path: '/categoria',
             name: 'categoria.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -66,7 +79,7 @@ const router =  new Router({
             path: '/producto',
             name: 'producto.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -81,7 +94,7 @@ const router =  new Router({
             path: '/unidad',
             name: 'unidad.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -94,7 +107,7 @@ const router =  new Router({
             path: '/unidad/crear',
             name: 'unidad.crear',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -107,7 +120,7 @@ const router =  new Router({
             path: '/unidad/:id/editar',
             name: 'unidad.editar',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -121,7 +134,7 @@ const router =  new Router({
             path: '/unidad/:id/listadoc',
             name: 'unidad.listadoc',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -138,7 +151,7 @@ const router =  new Router({
             path: '/tipounidades',
             name: 'tipounidades.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -151,7 +164,7 @@ const router =  new Router({
             path: '/tipounidades/crear',
             name: 'tipounidades.crear',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -164,7 +177,7 @@ const router =  new Router({
             path: '/tipounidades/:id/editar',
             name: 'tipounidades.editar',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -176,23 +189,51 @@ const router =  new Router({
         },
         //
         {
-            path: '/tipodocumento',
-            name: 'tipodocumento.index',
+            path: '/catrefaccion',
+            name: 'catrefaccion.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
                         return next({name:'login'});
                 })
             },
-            component: require('./components/modulos/catdocumento/index.vue').default
+            component: require('./components/modulos/catrefaccion/index.vue').default
         },
+        {
+            path: '/catrefaccion/crear',
+            name: 'catrefaccion.crear',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/catrefaccion/create.vue').default
+        },
+        /* {
+            path: '/refaccion/:id/editar',
+            name: 'refaccion.editar',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/catrefaccion/edit.vue').default,
+            props: true
+        }, */
+        //###
         {
             path: '/tiposervicio',
             name: 'tiposervicio.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -205,7 +246,7 @@ const router =  new Router({
             path: '/placa',
             name: 'placa.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -218,7 +259,7 @@ const router =  new Router({
             path: '/placa/crear',
             name: 'placa.crear',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -227,13 +268,27 @@ const router =  new Router({
             },
             component: require('./components/modulos/placa/create.vue').default
         },
+        {
+            path: '/placa/:id/editar',
+            name: 'placa.editar',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/placa/edit.vue').default,
+            props: true
+        },
         //
 
         {
             path: '/usuario',
             name: 'usuario.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -246,7 +301,7 @@ const router =  new Router({
             path: '/usuario/crear',
             name: 'usuario.crear',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -259,7 +314,7 @@ const router =  new Router({
             path: '/usuario/:id/editar',
             name: 'usuario.editar',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -273,7 +328,7 @@ const router =  new Router({
             path: '/usuario/:id/ver',
             name: 'usuario.ver',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -287,7 +342,7 @@ const router =  new Router({
             path: '/usuario/:id/permiso',
             name: 'usuario.permiso',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -302,7 +357,7 @@ const router =  new Router({
             path: '/rol',
             name: 'rol.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -315,7 +370,7 @@ const router =  new Router({
             path: '/rol/crear',
             name: 'rol.crear',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -328,7 +383,7 @@ const router =  new Router({
             path: '/rol/:id/editar',
             name: 'rol.editar',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -343,7 +398,7 @@ const router =  new Router({
             path: '/permiso',
             name: 'permiso.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -356,7 +411,7 @@ const router =  new Router({
             path: '/permiso/crear',
             name: 'permiso.crear',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -369,7 +424,7 @@ const router =  new Router({
             path: '/permiso/:id/editar',
             name: 'permiso.editar',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {
@@ -384,7 +439,7 @@ const router =  new Router({
             path: '/reporte',
             name: 'reporte.index',
             beforeEnter: (to, form, next) => {
-                axios.get('/getUsuarioAutenticado').then((response) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
                     next();
                 })
                     .catch(() => {

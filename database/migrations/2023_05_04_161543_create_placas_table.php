@@ -17,6 +17,7 @@ class CreatePlacasTable extends Migration
             $table->id();
             $table->bigInteger('unidad_id')->unsigned()->nullable();
             $table->string('tipoPlaca',50)->nullable();
+            $table->string('noPlaca',50)->nullable();
             $table->string('nombrePagoPlaca',50)->nullable();
             $table->string('nombreConcesionPlaca',50)->nullable();
             $table->date('fechaPagoRentaPlaca')->nullable();

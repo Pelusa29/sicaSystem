@@ -41,7 +41,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Tipo de Unidad</label>
+                                                            <label class="col-md-3 col-form-label">Tipo de Transmisión</label>
                                                             <div class="col-md-9">
                                                                 <el-select v-model="fillEditarTipoUnidad.cTipoUnidad"
                                                                     placeholder="Seleccione un Tipo de Unidad" clearable>
@@ -61,6 +61,24 @@
                                                                     v-model.number="fillEditarTipoUnidad.cRentaDiaria"
                                                                     type="number" clearable>
                                                                 </el-input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Tipo de Giro/unidad</label>
+                                                            <div class="col-md-9">
+                                                                <el-select
+                                                                    v-model="fillEditarTipoUnidad.cTipoGiro"
+                                                                    placeholder="Seleccione un Tipo de Giro"
+                                                                    clearable>
+                                                                    <el-option
+                                                                        v-for="item in listTipogiros"
+                                                                        :key="item.id"
+                                                                        :label="item.descripcion"
+                                                                        :value="item.id">
+                                                                    </el-option>
+                                                                </el-select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -118,12 +136,14 @@ export default {
                 nIdTipoUnidad: this.id,
                 cDescripcion: '',
                 cTipoUnidad: '',
-                cRentaDiaria: ''
+                cRentaDiaria: '',
+                cTipoGiro: ''
             },
             listTiposU: [
                 { value: 'Manual', label: 'Manual' },
                 { value: 'Automatica', label: 'Automatica' }
             ],
+            listTipogiros: [],
             fullScreenLoading: false,
             modalShow: false,
             mostrarModal: {
@@ -140,8 +160,22 @@ export default {
     },
     mounted() {
         this.getTipoUnidad();
+        this.getTipGiros();
     },
     methods: {
+        getTipGiros() {
+            this.fullScreenLoading = true;
+            let urltipo = '/configuracion/catunidades/getTipoGirosList';
+            axios.get(urltipo).then((response) => {
+                this.listTipogiros = response.data;
+                this.fullScreenLoading = false;
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                console.log('finally');
+            });
+
+        },
         getTipoUnidad() {
             this.fullScreenLoading = true;
             var url = '/configuracion/catunidades/getTipoUnidad';
@@ -153,7 +187,8 @@ export default {
                 /* console.log(response); */
                 this.fillEditarTipoUnidad.cDescripcion  = response.data[0].descripcionTipoUnidad;
                 this.fillEditarTipoUnidad.cTipoUnidad   = response.data[0].transmisionTipoUnidad;
-                this.fillEditarTipoUnidad.cRentaDiaria  = response.data[0].totalRentaTipoUnidad;
+                this.fillEditarTipoUnidad.cRentaDiaria = response.data[0].totalRentaTipoUnidad;
+                this.fillEditarTipoUnidad.cTipoGiro = response.data[0].tipogiro_id;
                 /* this.fillEditarRol.cNombre = response.data[0].name;
                 this.fillEditarRol.cUrl = response.data[0].slug; */
                 this.fullScreenLoading = false;
@@ -189,10 +224,11 @@ export default {
             var url = '/configuracion/catunidades/setEditarTipoUnidad';
             //post to save
             axios.post(url, {
-                'nIdTipoUnidad':this.fillEditarTipoUnidad.nIdTipoUnidad,
-                'cDescripcion': this.fillEditarTipoUnidad.cDescripcion,
-                'cTipounidad': this.fillEditarTipoUnidad.cTipoUnidad,
-                'cRentadiaria': this.fillEditarTipoUnidad.cRentaDiaria
+                'nIdTipoUnidad' :this.fillEditarTipoUnidad.nIdTipoUnidad,
+                'cDescripcion'  : this.fillEditarTipoUnidad.cDescripcion,
+                'cTipounidad'   : this.fillEditarTipoUnidad.cTipoUnidad,
+                'cRentadiaria'  : this.fillEditarTipoUnidad.cRentaDiaria,
+                'cTipogiro'     :this.fillEditarTipoUnidad.cTipoGiro
             }).then((response) => {
                 this.fullScreenLoading = false;
                 Swal.fire({
@@ -226,6 +262,9 @@ export default {
             }
             if (!this.fillEditarTipoUnidad.cRentaDiaria) {
                 this.mensajeError.push("El campo Renta es un campo obligatorio");
+            }
+            if (!this.fillEditarTipoUnidad.cTipoGiro) {
+                this.mensajeError.push("El Tipo de Giro es un campo obligatorio");
             }
 
             if (this.mensajeError.length) {

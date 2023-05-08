@@ -28,8 +28,14 @@
                 </li>
                 <li class="header">OPERACIONES</li>
                 <li>
+                    <router-link class="nav-link" :to="'/unidad'">
+                        <i class="fa fa-car"></i>
+                        <span>Unidades</span>
+                    </router-link>
+                </li>
+                <li>
                     <router-link class="nav-link" :to="'/servicio'">
-                        <i class="fa fa-car"></i><span>Servicios</span>
+                        <i class="fa fa-car"></i><span> Servicios</span>
                     </router-link>
                 </li>
                 <li>
@@ -40,33 +46,21 @@
                 </li>
                 <li class="header">CATALAGOS GERNERALES</li>
                 <li>
-                    <router-link class="nav-link" :to="'/unidad'">
-                        <i class="fa fa-car"></i>
-                        <span>Unidades General</span>
-                    </router-link>
-                </li>
-                <li>
                     <router-link class="nav-link" :to="'/tipounidades'">
                         <i class="fa fa-car"></i>
                         <span>Tip. Unidades</span>
                     </router-link>
                 </li>
-                 <li>
+                <li>
                     <router-link class="nav-link" :to="'/placa'">
                         <i class="fa fa-car"></i>
                         <span>Placas</span>
                     </router-link>
                 </li>
                 <li>
-                    <router-link class="nav-link" :to="'/tipodocumento'">
-                        <i class="fa fa-sitemap"></i>
-                        <span>Tipo Documentos</span>
-                    </router-link>
-                </li>
-                <li>
                     <router-link class="nav-link" :to="'/tiposervicio'">
                         <i class="fa fa-sitemap"></i>
-                        <span>Tip. Servicio</span>
+                        <span>Herramientas</span>
                     </router-link>
                 </li>
                 <li>
@@ -75,14 +69,27 @@
                         <span>Proviciones</span>
                     </router-link>
                 </li>
+                <li class="header">INVENTARIOS</li>
+                <li>
+                    <router-link class="nav-link" :to="'/catrefaccion'">
+                        <i class="fa fa-sitemap"></i>
+                        <span>General</span>
+                    </router-link>
+                </li>
                 <li class="header">ADMINISTRACIÓN (RH)</li>
                 <li>
+                    <router-link class="nav-link" :to="'/employ'">
+                        <i class="fa fa-users"></i>
+                        <span>Empleados</span>
+                    </router-link>
+                </li>
+                <li class="header">CONFIGURACIÓN</li>
+                 <li>
                     <router-link class="nav-link" :to="'/usuario'">
                         <i class="fa fa-users"></i>
                         <span>Usuarios</span>
                     </router-link>
                 </li>
-                <li class="header">CONFIGURACIÓN</li>
                 <li>
                     <router-link class="nav-link" style="text-decoration: none;" :to="'/exportar'">
                         <i class="fa fa-file-excel-o"></i>

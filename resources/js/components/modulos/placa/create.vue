@@ -31,94 +31,21 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Número de Placa</label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" class="form-control"
+                                                                    v-model="fillCrearPlaca.cNumeroPlaca"
+                                                                    @keyup.enter="setRegistraPlaca">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Tipo Placa</label>
                                                             <div class="col-md-9">
                                                                 <input type="text" class="form-control"
                                                                     v-model="fillCrearPlaca.cTipoPlaca"
                                                                     @keyup.enter="setRegistraPlaca">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Nombre de Quien Paga</label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control"
-                                                                        v-model="fillCrearPlaca.cNombrePagoPlaca"
-                                                                        @keyup.enter="setRegistraPlaca">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Nombre Concesión</label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control"
-                                                                        v-model="fillCrearPlaca.cNombreConcesionPlaca"
-                                                                        @keyup.enter="setRegistraPlaca">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                     <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Tipo Unidad</label>
-                                                            <div class="col-md-9">
-                                                               <!-- <el-select
-                                                                    v-model="fillCrearPlaca.cOpUnidad"
-                                                                    placeholder="Seleccione un Unidad"
-                                                                    clearable>
-                                                                        <el-option
-                                                                            v-for="item in listTipoUnidades"
-                                                                            :key="item.value"
-                                                                            :label="item.label"
-                                                                            :value="item.value">
-                                                                        </el-option>
-                                                                </el-select> -->
-                                                                <el-select v-model="fillCrearPlaca.cOpUnidad" filterable placeholder="Seleccione un Unidad">
-                                                                    <el-option
-                                                                        v-for="item in listTipoUnidades"
-                                                                            :key="item.value"
-                                                                            :label="item.label"
-                                                                            :value="item.value">
-                                                                    </el-option>
-                                                                </el-select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Fecha Pago Renta</label>
-                                                            <div class="col-md-9">
-                                                                <el-date-picker style="width: 100%;"
-                                                                    v-model="fillCrearPlaca.cFechaPagoRenta" type="date"
-                                                                    placeholder="Seleccionar Fecha de Pago" format="dd-MM-yyyy"
-                                                                    value-format="yyyy-MM-dd">
-                                                                </el-date-picker>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Importe Renta</label>
-                                                            <div class="col-md-9">
-                                                                <el-input placeholder="$" @keypress="isNumber($event)"
-                                                                    v-model.number="fillCrearPlaca.cRentaDiaria"
-                                                                    type="number" clearable>
-                                                                </el-input>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Observaciones</label>
-                                                            <div class="col-md-9">
-                                                                <el-input
-                                                                    type="textarea"
-                                                                    :autosize="{ minRows: 2, maxRows: 4 }"
-                                                                    placeholder="Please input"
-                                                                    v-model="fillCrearPlaca.cObservaciones"
-                                                                    @keyup.enter="setRegistraPlaca">
-                                                                </el-input>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -151,7 +78,7 @@
                         <button type="button" class="close" @click="abrirModal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
-                        <h4 class="modal-title">Modal</h4>
+                        <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
                         <div class="callout callout-danger" style="padding: 5px;" v-for="(item, index) in mensajeError"
@@ -172,14 +99,10 @@ export default {
     data() {
         return {
             fillCrearPlaca: {
-                cNombreConcesionPlaca: '',
-                cTipoPlaca: '',
-                cFechaPagoRenta: '',
-                cNombrePagoPlaca: '',
-                cOpUnidad: '',
-                cObservaciones:''
+                cNumeroPlaca:'',
+                cTipoPlaca: ''
             },
-            listTipoUnidades: [],
+            /* listTipoUnidades: [], */
             fullScreenLoading: false,
             modalShow: false,
             mostrarModal: {
@@ -195,7 +118,7 @@ export default {
     computed: {
     },
     mounted() {
-        this.getListaUnidades();
+        //this.getListaUnidades();
     },
     methods: {
         onlyNumber($event) {
@@ -209,9 +132,8 @@ export default {
             this.modalShow = !this.modalShow;
         },
         limpiarCriteriosBsq() {
-            this.fillCrearPlaca.cDescripcion = '';
-            this.fillCrearPlaca.cTipoUnidad = '';
-            this.fillCrearPlaca.cRentaDiaria = '';
+            this.fillCrearPlaca.cNumeroPlaca = '';
+            this.fillCrearPlaca.cTipoPlaca = '';
         },
         setRegistraPlaca() {
             if (this.validarRegistrarTipoUnidad()) {
@@ -223,22 +145,31 @@ export default {
             var url = '/configuracion/placa/setRegistraPlaca';
             //post to save
             axios.post(url, {
-                'cDescripcion': this.fillCrearPlaca.cDescripcion,
-                'cTipounidad': this.fillCrearPlaca.cTipoUnidad,
-                'cRentadiaria': this.fillCrearPlaca.cRentaDiaria
+                'cNumeroPlaca': this.fillCrearPlaca.cNumeroPlaca,
+                'cTipoPlaca': this.fillCrearPlaca.cTipoPlaca
             }).then((response) => {
                 this.fullScreenLoading = false;
-                Swal.fire({
-                    icon:"Success",
-                    text: "Registro de Placa Correctamente!",
-                    type: "warning",
-                    showDenyButton: false,
-                    confirmButtonText: 'Ok'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.$router.push('/placa');
-                    }
-                });
+                if (response.data != 1) {
+                    Swal.fire({
+                        icon: "success",
+                        text: "Registro de Placa Correctamente!",
+                        type: "Success",
+                        showDenyButton: false,
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.$router.push('/placa');
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        text: "Placa existente, favor de regisrtar una nueva.",
+                        type: "Error",
+                        showDenyButton: false,
+                        showConfirmButton: true,
+                    });
+                }
 
             }).catch((error) => {
                 console.log(error);
@@ -246,7 +177,7 @@ export default {
                 console.log('finally');
             });
         },
-        getListaUnidades() {
+        /* getListaUnidades() {
             this.fullScreenLoading = true;
             var url = '/configuracion/placa/getListaUnidades';
             axios.get(url).then((response) => {
@@ -257,21 +188,17 @@ export default {
             }).finally(() => {
                 console.log('finally');
             });
-        },
+        }, */
         validarRegistrarTipoUnidad() {
             this.error = 0;
             this.mensajeError = [];
 
-            if (!this.fillCrearPlaca.cDescripcion) {
-                this.mensajeError.push("La Descripción es un campo obligatorio");
+            if (!this.fillCrearPlaca.cTipoPlaca) {
+                this.mensajeError.push("El Tipo de Placa es un campo obligatorio");
             }
-            if (!this.fillCrearPlaca.cTipoUnidad) {
-                this.mensajeError.push("El Tipo de Unidad es un campo obligatorio");
+            if (!this.fillCrearPlaca.cNumeroPlaca) {
+                this.mensajeError.push("El Número de Placa es un campo obligatorio");
             }
-            if (!this.fillCrearPlaca.cRentaDiaria) {
-                this.mensajeError.push("El campo Renta es un campo obligatorio");
-            }
-
             if (this.mensajeError.length) {
                 this.error = 1;
             }

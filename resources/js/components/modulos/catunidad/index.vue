@@ -41,11 +41,20 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Transmisión</label>
+                                                            <label class="col-md-3 col-form-label">Tipo de Transmisión</label>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control"
+                                                                <el-select
                                                                     v-model="fillBsqTipoUnidad.cTransmision"
-                                                                    @keyup.enter="getListTipoUnidades">
+                                                                    placeholder="Seleccione un Tipo de Unidad"
+                                                                    @keyup.enter="getListTipoUnidades"
+                                                                    clearable>
+                                                                    <el-option
+                                                                        v-for="item in listTiposU"
+                                                                        :key="item.value"
+                                                                        :label="item.label"
+                                                                        :value="item.value">
+                                                                    </el-option>
+                                                                </el-select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -161,6 +170,10 @@ export default {
                 cTransmision: '',
                 cFecha: ''
             },
+            listTiposU: [
+                { value: 'Manual', label: 'Manual' },
+                { value: 'Automatica', label: 'Automatica' }
+            ],
             listTipoUnidades: [],
             fullScreenLoading: false,
             pageNumber: 0,
