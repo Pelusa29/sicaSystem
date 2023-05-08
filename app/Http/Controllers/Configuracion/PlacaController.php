@@ -11,25 +11,43 @@ class PlacaController extends Controller
     //
     public function getListPlacas(Request $request){
         if(!$request->ajax()) return redirect('');
-        $cNombreConcesionPlaca      = $request->cNombreConcesionPlaca;
-        $cNombrePagoPlaca           = $request->cNombrePagoPlaca;
-        $cFechaPagoRenta            = $request->cFechaPagoRenta;
+        $cNumeroPlaca               = $request->cNumeroPlaca;
         $cTipoPlaca                 = $request->cTipoPlaca;
 
-        $cNombreConcesionPlaca   = ($cNombreConcesionPlaca == NULL) ? ($cNombreConcesionPlaca  = '') : $cNombreConcesionPlaca;
-        $cNombrePagoPlaca   = ($cNombrePagoPlaca == NULL) ? ($cNombrePagoPlaca  = '') : $cNombrePagoPlaca;
-        $cFechaPagoRenta         = ($cFechaPagoRenta == NULL) ? ($cFechaPagoRenta    = NULL)  : $cFechaPagoRenta;
-        $cTipoPlaca         = ($cTipoPlaca == NULL) ? ($cTipoPlaca    = '')  : $cTipoPlaca;
+        $cNumeroPlaca           = ($cNumeroPlaca == NULL) ? ($cNumeroPlaca = '') : $cNumeroPlaca;
+        $cTipoPlaca             = ($cTipoPlaca == NULL) ? ($cTipoPlaca    = '')  : $cTipoPlaca;
 
-
-        $rpta = DB::select('call sp_Placa_getListPlacas(?,?,?,?)',[$cNombreConcesionPlaca,$cNombrePagoPlaca,$cFechaPagoRenta,$cTipoPlaca]);
+        $rpta = DB::select('call sp_Placa_getListPlacas(?,?)',[$cNumeroPlaca,$cTipoPlaca]);
 
         return $rpta;
     }
 
-    public function getListaUnidades(Request $request){
+    public function setRegistraPlaca(Request $request){
+        $cNumeroPlaca   = $request->cNumeroPlaca;
+        $cTipoPlaca     = $request->cTipoPlaca;
+
+        $cNumeroPlaca   = ($cNumeroPlaca == NULL) ? ($cNumeroPlaca = '') : $cNumeroPlaca;
+        $cTipoPlaca     = ($cTipoPlaca == NULL) ? ($cTipoPlaca  = '') : $cTipoPlaca;
+
+
+        $rpt = DB::select('call sp_Placa_setRegistraPlaca(?,?)',[$cNumeroPlaca,$cTipoPlaca]);
+
+       return $rpt[0]->nExiste;
+    }
+
+    public function getPlacaById(Request $request){
+        $nIdPlaca = $request->nIdPlaca;
+
+        $nIdPlaca     = ($nIdPlaca == NULL) ? ($nIdPlaca = 0) : $nIdPlaca;
+
+        $rpta =  DB::select('call sp_Placa_getPlacaById(?)',[$nIdPlaca]);
+
+
+        return $rpta;
+    }
+
+    /* public function getListaUnidades(Request $request){
         $rpta = DB::select('call sp_Placa_getListaUnidades()');
-
         return $rpta;
-    }
+    } */
 }

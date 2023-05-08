@@ -41,18 +41,18 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Tipo de Unidad</label>
+                                                            <label class="col-md-3 col-form-label">Tipo de Transmisión</label>
                                                             <div class="col-md-9">
-                                                                    <el-select
+                                                                <el-select
                                                                     v-model="fillCrearTipoUnidad.cTipoUnidad"
-                                                                    placeholder="Seleccione un Tipo de Unidad"
+                                                                    placeholder="Seleccione un Tipo de Transmisión"
                                                                     clearable>
-                                                                        <el-option
-                                                                            v-for="item in listTiposU"
-                                                                            :key="item.value"
-                                                                            :label="item.label"
-                                                                            :value="item.value">
-                                                                        </el-option>
+                                                                    <el-option
+                                                                        v-for="item in listTiposU"
+                                                                        :key="item.value"
+                                                                        :label="item.label"
+                                                                        :value="item.value">
+                                                                    </el-option>
                                                                 </el-select>
                                                             </div>
                                                         </div>
@@ -68,6 +68,24 @@
                                                                         type="number"
                                                                         clearable>
                                                                     </el-input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Tipo de Giro/unidad</label>
+                                                            <div class="col-md-9">
+                                                                <el-select
+                                                                    v-model="fillCrearTipoUnidad.cTipoGiro"
+                                                                    placeholder="Seleccione un Tipo de Giro"
+                                                                    clearable>
+                                                                    <el-option
+                                                                        v-for="item in listTipogiros"
+                                                                        :key="item.id"
+                                                                        :label="item.descripcion"
+                                                                        :value="item.id">
+                                                                    </el-option>
+                                                                </el-select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -123,12 +141,14 @@ export default {
             fillCrearTipoUnidad: {
                 cDescripcion: '',
                 cTipoUnidad: '',
-                cRentaDiaria:''
+                cRentaDiaria: '',
+                cTipoGiro:''
             },
             listTiposU: [
                 { value: 'Manual', label: 'Manual' },
                 { value: 'Automatica', label: 'Automatica' }
             ],
+            listTipogiros:[],
             fullScreenLoading: false,
             modalShow: false,
             mostrarModal: {
@@ -141,9 +161,23 @@ export default {
             mensajeError: []
         }
     },
-    computed:{
+    mounted() {
+        this.getTipGiros();
     },
     methods: {
+        getTipGiros() {
+            this.fullScreenLoading = true;
+            let urltipo = '/configuracion/catunidades/getTipoGirosList';
+            axios.get(urltipo).then((response) => {
+                this.listTipogiros = response.data;
+                this.fullScreenLoading = false;
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                console.log('finally');
+            });
+
+        },
         onlyNumber($event) {
             //console.log($event.keyCode); //keyCodes value
             let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
@@ -157,6 +191,7 @@ export default {
         limpiarCriteriosBsq() {
             this.fillCrearTipoUnidad.cDescripcion = '';
             this.fillCrearTipoUnidad.cTipoUnidad = '';
+            this.fillCrearTipoUnidad.cTipoGiro = '';
             this.fillCrearTipoUnidad.cRentaDiaria = '';
         },
         setRegistraTipoUnidad() {
@@ -171,10 +206,12 @@ export default {
             axios.post(url, {
                 'cDescripcion': this.fillCrearTipoUnidad.cDescripcion,
                 'cTipounidad': this.fillCrearTipoUnidad.cTipoUnidad,
-                'cRentadiaria' : this.fillCrearTipoUnidad.cRentaDiaria
+                'cRentadiaria': this.fillCrearTipoUnidad.cRentaDiaria,
+                'cTipogiro': this.fillCrearTipoUnidad.cTipoGiro
             }).then((response) => {
                 this.fullScreenLoading = false;
                 Swal.fire({
+                    icon:"success",
                     title: "Tipo Unidad",
                     text: "Tipo de Unidad registrado correctamente!",
                     type: "warning",
@@ -204,6 +241,9 @@ export default {
             }
             if (!this.fillCrearTipoUnidad.cRentaDiaria) {
                 this.mensajeError.push("El campo Renta es un campo obligatorio");
+            }
+            if (!this.fillCrearTipoUnidad.cTipoGiro) {
+                this.mensajeError.push("El Tipo de Giro es un campo obligatorio");
             }
 
             if (this.mensajeError.length) {

@@ -24,17 +24,25 @@ class TruckController extends Controller
         return $rpta;
     }
 
+    public function getTipoGirosList(Request $request){
+        $rpta = DB::select('call sp_TipoGiro_getListTipoGiros()');
+
+        return $rpta;
+    }
+
     public function setRegistraTipoUnidad(Request $request){
         if(!$request->ajax()) return redirect('');
         $cDescripcion   = $request->cDescripcion;
         $cTtipounidad   = $request->cTipounidad;
         $cRentadiara    = $request->cRentadiaria;
+        $cTipogiro      = $request->cTipogiro;
 
         $cDescripcion   = ($cDescripcion == NULL) ? ($cDescripcion = '') : $cDescripcion;
         $cTtipounidad   = ($cTtipounidad == NULL) ? ($cTtipounidad      = '')  : $cTtipounidad;
         $cRentadiara    = ($cRentadiara == NULL) ? ($cRentadiara    = NULL)  : $cRentadiara;
+        $cTipogiro      = ($cTipogiro == NULL) ? ($cTipogiro = 0): $cTipogiro;
 
-        $rpta = DB::select('call sp_TipoUnidad_setRegistraTipoUnidad(?,?,?)',[$cDescripcion,$cTtipounidad,$cRentadiara]);
+        $rpta = DB::select('call sp_TipoUnidad_setRegistraTipoUnidad(?,?,?,?)',[$cDescripcion,$cTtipounidad,$cRentadiara, $cTipogiro]);
     }
 
     public function getTipoUnidad(Request $request){
@@ -55,12 +63,14 @@ class TruckController extends Controller
         $cDescripcion       = $request->cDescripcion;
         $cTipounidad        = $request->cTipounidad;
         $cRentadiaria       = $request->cRentadiaria;
+        $cTipogiro          = $request->cTipogiro;
 
         $nIdTipoUnidad          = ($nIdTipoUnidad == NULL) ? ($nIdTipoUnidad = 0) : $nIdTipoUnidad;
         $cDescripcion           = ($cDescripcion == NULL) ? ($cDescripcion = '') : $cDescripcion;
         $cTipounidad            = ($cTipounidad == NULL) ? ($cTipounidad  = '')  : $cTipounidad;
         $cRentadiaria           = ($cRentadiaria == NULL) ? ($cRentadiaria      = 0)  : $cRentadiaria;
+        $cTipogiro              = ($cTipogiro == NULL) ? ($cTipogiro = 0): $cTipogiro;
 
-        DB::select('call sp_TipoUnidad_setEditarTipoUnidad(?,?,?,?)',[$nIdTipoUnidad,$cDescripcion,$cTipounidad,$cRentadiaria]);
+        DB::select('call sp_TipoUnidad_setEditarTipoUnidad(?,?,?,?,?)',[$nIdTipoUnidad,$cDescripcion,$cTipounidad,$cRentadiaria,$cTipogiro]);
     }
 }

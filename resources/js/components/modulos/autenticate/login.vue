@@ -90,7 +90,7 @@ export default {
             return this.error;
         },
         loginSuccess() {
-            this.$router.push({ name: 'dashboard.index' });
+            this.$router.push({ name: 'dashboard' });
             location.reload();
         }
     }

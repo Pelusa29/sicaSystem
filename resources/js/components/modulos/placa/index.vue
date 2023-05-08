@@ -28,6 +28,16 @@
                                     </div>
                                     <div class="box-body">
                                         <form role="form">
+                                             <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-md-3 col-form-label">Número Placa</label>
+                                                    <div class="col-md-9">
+                                                        <input type="text" class="form-control"
+                                                            v-model="fillBsqPlaca.cNumeroPlaca"
+                                                            @keyup.enter="getListPlacas">
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
@@ -39,7 +49,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <!-- <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Nombre Pago Placa</label>
                                                         <div class="col-md-9">
@@ -58,8 +68,8 @@
                                                                 @keyup.enter="getListPlacas">
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-md-6">
+                                                </div> -->
+                                                <!-- <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Fecha Pago Renta</label>
                                                         <div class="col-md-9">
@@ -70,7 +80,7 @@
                                                             </el-date-picker>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </form>
                                     </div>
@@ -97,22 +107,18 @@
                                                 role="grid">
                                                 <thead>
                                                     <tr>
-                                                        <th>Descripción</th>
-                                                        <th>Transmisión</th>
-                                                        <th>Renta</th>
-                                                        <th>Fecha</th>
+                                                        <th>Número Placa</th>
+                                                        <th>Tipo Placa</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr v-for="(item, index) in listarPlacasPaginated" :key="index">
-                                                        <td v-text="item.descripcionTipoUnidad"></td>
-                                                        <td v-text="item.transmisionTipoUnidad"></td>
-                                                        <td v-text="item.totalRentaTipoUnidad"></td>
-                                                        <td v-text="item.fechaRenta"></td>
+                                                        <td v-text="item.noPlaca"></td>
+                                                        <td v-text="item.tipoPlaca"></td>
                                                         <td>
                                                             <button
-                                                                @click="$router.push({ name: 'tipounidades.editar', params: { id: item.id } })"
+                                                                @click="$router.push({ name: 'placa.editar', params: { id: item.id } })"
                                                                 class="btn btn-flat btn-info btn-sm"><i
                                                                     class="fa fa-pencil"></i> Editar</button>
                                                         </td>
@@ -167,10 +173,8 @@ export default {
     data() {
         return {
             fillBsqPlaca: {
-                cNombreConcesionPlaca: '',
-                cNombrePagoPlaca: '',
-                cFechaPagoRenta: '',
-                cTipoPlaca:''
+                cNumeroPlaca: '',
+                cTipoPlaca: ''
             },
             listPlacas: [],
             fullScreenLoading: false,
@@ -209,9 +213,7 @@ export default {
     },
     methods: {
         limpiarCriteriosBsq() {
-            this.fillBsqPlaca.cNombreConcesionPlaca = '';
-            this.fillBsqPlaca.cNombrePagoPlaca = '';
-            this.fillBsqPlaca.cFechaPagoRenta = '';
+            this.fillBsqPlaca.cNumeroPlaca = '';
             this.fillBsqPlaca.cTipoPlaca = '';
         },
         getListPlacas() {
@@ -219,10 +221,8 @@ export default {
             var url = '/configuracion/placa/getListPlacas';
             axios.get(url, {
                 params: {
-                    'cNombreConcesionPlaca': this.fillBsqPlaca.cNombreConcesionPlaca,
-                    'cNombrePagoPlaca': this.fillBsqPlaca.cNombrePagoPlaca,
-                    'cFechaPagoRenta': this.fillBsqPlaca.cFechaPagoRenta,
-                    'cTipoPlaca':this.fillBsqPlaca.cTipoPlaca
+                    'cNumeroPlaca': this.fillBsqPlaca.cNumeroPlaca,
+                    'cTipoPlaca': this.fillBsqPlaca.cTipoPlaca
                 }
             }).then((response) => {
                 this.inicializarPaginacion();
