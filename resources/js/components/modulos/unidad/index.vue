@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Catalago de Unidades</h1>
+                        <h1 class="m-0 text-dark">Asignación de Unidades</h1>
                     </div>
                 </div>
             </div>
@@ -14,7 +14,7 @@
                         <div class="box-header">
                             <div class="col-md-2 row">
                                 <router-link class="btn btn-block btn-info" :to="'/unidad/crear'">
-                                    <i class="fa fa-plus"></i>&nbsp;&nbsp;Nueva Unidad
+                                    <i class="fa fa-plus"></i>&nbsp;&nbsp;Asignar Nueva Unidad
                                 </router-link>
                             </div>
                         </div>

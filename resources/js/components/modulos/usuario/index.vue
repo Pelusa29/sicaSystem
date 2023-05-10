@@ -181,7 +181,6 @@
 export default {
     beforeEnter() {
         if (!usuario.firstname) {
-            console.log(infooo);
                this.$router.push({ name: 'login' })
         }
     },

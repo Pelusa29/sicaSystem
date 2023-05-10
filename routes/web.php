@@ -57,6 +57,10 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::post('/archivo/setAdjuntarDocumento','FilesController@setAdjuntarDocumento');
     Route::get('/configuracion/unidad/getListDocumentos','Configuracion\UnidadController@getListDocumentos');
 
+    ##Seguros
+    Route::get('/configuracion/seguro/getListSeguros','Configuracion\SeguroController@getListSeguros');
+    Route::post('/configuracion/seguro/setRegistraSeguro','Configuracion\SeguroController@setRegistraSeguro');
+
     ##Tipo Unidades
     Route::get('/configuracion/catunidades/getListTipoUnidades','Configuracion\TruckController@getListTipoUnidades');
     Route::get('/configuracion/catunidades/getTipoGirosList','Configuracion\TruckController@getTipoGirosList');
@@ -69,11 +73,16 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::get('/configuracion/placa/getListaUnidades','Configuracion\PlacaController@getListaUnidades');
     Route::post('/configuracion/placa/setRegistraPlaca','Configuracion\PlacaController@setRegistraPlaca');
     Route::get('/configuracion/placa/getPlacaById','Configuracion\PlacaController@getPlacaById');
+    Route::get('/configuracion/placa/getListadoPlacas','Configuracion\PlacaController@getListadoPlacas');
 
     ##Inventarios
     Route::get('/configuracion/catinventario/getListInventario','Configuracion\InventoryController@getListInventario');
     Route::get('/configuracion/catinventario/getTipoInventario','Configuracion\InventoryController@getTipoInventario');
     Route::post('/configuracion/catinventario/setRegistraInventario','Configuracion\InventoryController@setRegistraInventario');
+
+    ##Employs
+    Route::get('/administracion/employ/getListEmpleados','Administracion\EmployController@getListEmpleados');
+    Route::post('/administracion/employ/setRegistrarEmpleado','Administracion\EmployController@setRegistrarEmpleado');
 
     ##Files
     Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');
