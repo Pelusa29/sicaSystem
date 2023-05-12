@@ -264,8 +264,8 @@ export default {
             var url = '/authenticate/logout';
             axios.post(url).then(response => {
                 if (response.data.code == 204) {
-                    this.$router.push({ name: 'login' })
                     location.reload();
+                    this.$router.push({ name: 'login' })
                     this.fullscreenLoading = false;
                 }
             });

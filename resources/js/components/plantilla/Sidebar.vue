@@ -34,8 +34,15 @@
                     </router-link>
                 </li>
                 <li>
+                    <router-link class="nav-link" :to="'/seguro'">
+                        <i class="fa fa-cab"></i>
+                        <span>Seguros</span>
+                    </router-link>
+                </li>
+                <li>
                     <router-link class="nav-link" :to="'/servicio'">
-                        <i class="fa fa-car"></i><span> Servicios</span>
+                        <i class="fa fa-car"></i>
+                        <span> Servicios</span>
                     </router-link>
                 </li>
                 <li>
@@ -81,6 +88,12 @@
                     <router-link class="nav-link" :to="'/employ'">
                         <i class="fa fa-users"></i>
                         <span>Empleados</span>
+                    </router-link>
+                </li>
+                 <li>
+                    <router-link class="nav-link" :to="'/conductor'">
+                        <i class="fa fa-users"></i>
+                        <span>Conductores</span>
                     </router-link>
                 </li>
                 <li class="header">CONFIGURACIÓN</li>

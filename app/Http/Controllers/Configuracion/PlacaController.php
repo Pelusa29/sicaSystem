@@ -46,8 +46,8 @@ class PlacaController extends Controller
         return $rpta;
     }
 
-    /* public function getListaUnidades(Request $request){
-        $rpta = DB::select('call sp_Placa_getListaUnidades()');
+    public function getListadoPlacas(){
+        $rpta = DB::select('call sp_Placa_getListadoPlacas()');
         return $rpta;
-    } */
+    }
 }

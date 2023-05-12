@@ -57,6 +57,11 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::post('/archivo/setAdjuntarDocumento','FilesController@setAdjuntarDocumento');
     Route::get('/configuracion/unidad/getListDocumentos','Configuracion\UnidadController@getListDocumentos');
 
+    ##Seguros
+    Route::get('/configuracion/seguro/getListSeguros','Configuracion\SeguroController@getListSeguros');
+    Route::post('/configuracion/seguro/setRegistraSeguro','Configuracion\SeguroController@setRegistraSeguro');
+    Route::get('/configuracion/seguro/getSeguroById','Configuracion\SeguroController@getSeguroById');
+
     ##Tipo Unidades
     Route::get('/configuracion/catunidades/getListTipoUnidades','Configuracion\TruckController@getListTipoUnidades');
     Route::get('/configuracion/catunidades/getTipoGirosList','Configuracion\TruckController@getTipoGirosList');
@@ -69,11 +74,23 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::get('/configuracion/placa/getListaUnidades','Configuracion\PlacaController@getListaUnidades');
     Route::post('/configuracion/placa/setRegistraPlaca','Configuracion\PlacaController@setRegistraPlaca');
     Route::get('/configuracion/placa/getPlacaById','Configuracion\PlacaController@getPlacaById');
+    Route::get('/configuracion/placa/getListadoPlacas','Configuracion\PlacaController@getListadoPlacas');
 
     ##Inventarios
     Route::get('/configuracion/catinventario/getListInventario','Configuracion\InventoryController@getListInventario');
     Route::get('/configuracion/catinventario/getTipoInventario','Configuracion\InventoryController@getTipoInventario');
     Route::post('/configuracion/catinventario/setRegistraInventario','Configuracion\InventoryController@setRegistraInventario');
+
+    ##Employs
+    Route::get('/administracion/employ/getListEmpleados','Administracion\EmployController@getListEmpleados');
+    Route::post('/administracion/employ/setRegistrarEmpleado','Administracion\EmployController@setRegistrarEmpleado');
+
+    ##Conductores
+    Route::get('/administracion/conductor/getListConductores','Administracion\ConductorController@getListConductores');
+    Route::post('/administracion/conductor/setRegistrarConductor','Administracion\ConductorController@setRegistrarConductor');
+    Route::post('/administracion/conductor/setCambiaEstadoConductor','Administracion\ConductorController@setCambiaEstadoConductor');
+    Route::get('/administracion/conductor/getConductorById','Administracion\ConductorController@getConductorById');
+    Route::post('/administracion/conductor/setEditarConductor','Administracion\ConductorController@setEditarConductor');
 
     ##Files
     Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');

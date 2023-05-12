@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-3 row">
                     <section class="content-header">
-                        <h1 class="m-0 text-dark text-perfil">Nueva Unidad</h1>
+                        <h1 class="m-0 text-dark text-perfil">Nueva Asignación de Unidad</h1>
                     </section>
                 </div>
             </div>
@@ -24,24 +24,22 @@
                                 <div class="row">
                                     <div class="box box-info box-solid">
                                         <div class="box-header with-border">
-                                            <h3 class="box-title">Registro de Unidad</h3>
+                                            <h3 class="box-title">Asignar de Unidad</h3>
                                         </div>
                                         <div class="box-body">
                                             <form role="form">
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Unidad</label>
+                                                            <label class="col-md-3 col-form-label">Unidad:</label>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control"
-                                                                    v-model="fillCrearUnidad.cUnidad"
-                                                                    @keyup.enter="setRegistraUnidad">
+                                                                <el-input placeholder="Unidad" v-model="fillCrearUnidad.cUnidad" @keyup.enter="setRegistraUnidad"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Tipo Unidad</label>
+                                                            <label class="col-md-3 col-form-label">Tipo Unidad:</label>
                                                             <div class="col-md-9">
                                                                 <el-select v-model="fillCrearUnidad.cOpUnidad" filterable
                                                                     placeholder="Seleccione un Unidad">
@@ -53,29 +51,27 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Marca</label>
+                                                            <label class="col-md-3 col-form-label">Marca:</label>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control"
-                                                                    v-model="fillCrearUnidad.cMarca"
-                                                                    @keyup.enter="setRegistraUnidad">
+                                                                <el-input v-model="fillCrearUnidad.cMarca" @keyup.enter="setRegistraUnidad" placeholder="Marca"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Modelo</label>
+                                                            <label class="col-md-3 col-form-label">Modelo:</label>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control"
-                                                                    v-model="fillCrearUnidad.cModelo"
-                                                                    @keyup.enter="setRegistraUnidad">
+                                                                <el-input placeholder="Modelo" v-model="fillCrearUnidad.cModelo" @keyup.enter="setRegistraUnidad"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Fecha Vencimiento Seguro</label>
+                                                            <label class="col-md-3 col-form-label">Vencimiento:</label>
                                                             <div class="col-md-9">
                                                                 <el-date-picker style="width: 100%;"
                                                                     v-model="fillCrearUnidad.cFechaVencimientoSeguro" type="date"
@@ -85,38 +81,58 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Costo Seguro</label>
                                                             <div class="col-md-9">
-                                                                <el-input placeholder="$" @keypress="isNumber($event)"
+                                                                <el-input placeholder="Costo($)" @keypress="onlyNumber($event)"
                                                                     v-model.number="fillCrearUnidad.cCostoSeguro"
                                                                     type="number" clearable>
                                                                 </el-input>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Valor Actual Unidad</label>
                                                             <div class="col-md-9">
-                                                                <el-input placeholder="$" @keypress="isNumber($event)"
+                                                                <el-input placeholder="Valor Actual Unidad ($)" @keypress="onlyNumber($event)"
                                                                     v-model.number="fillCrearUnidad.cValorUnidad"
                                                                     type="number" clearable>
                                                                 </el-input>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                     <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Tipo Combustible</label>
                                                             <div class="col-md-9">
-                                                                 <el-select
+                                                                    <el-select
                                                                     v-model="fillCrearUnidad.cTipoCombustible"
                                                                     placeholder="Seleccione Combustible"
                                                                     clearable>
                                                                         <el-option
                                                                             v-for="item in listCombustible"
+                                                                            :key="item.value"
+                                                                            :label="item.label"
+                                                                            :value="item.value">
+                                                                        </el-option>
+                                                                </el-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Listado de Placas:</label>
+                                                            <div class="col-md-9">
+                                                                    <el-select
+                                                                    v-model="fillCrearUnidad.cnIdPlaca"
+                                                                    placeholder="Seleccione Una Placa"
+                                                                    filterable>
+                                                                        <el-option
+                                                                            v-for="item in listPlacas"
                                                                             :key="item.value"
                                                                             :label="item.label"
                                                                             :value="item.value">
@@ -182,13 +198,15 @@ export default {
                 cFechaVencimientoSeguro: '',
                 cCostoSeguro: '',
                 cValorUnidad:'',
-                cTipoCombustible: ''
+                cTipoCombustible: '',
+                cnIdPlaca:''
             },
             listTipoUnidades: [],
             listCombustible: [
                 { value: 'Diesel', label: 'Diesel' },
                 { value: 'Gasolina', label: 'Gasolina' }
             ],
+            listPlacas:[],
             fullScreenLoading: false,
             modalShow: false,
             mostrarModal: {
@@ -276,10 +294,24 @@ export default {
             });
         },
         getListadoTipoUnidades() {
+
             this.fullScreenLoading = true;
             var url = '/configuracion/unidad/getListadoTipoUnidades';
             axios.get(url).then((response) => {
                 this.listTipoUnidades = response.data;
+                this.fullScreenLoading = false;
+                this.getListadoPlacas();
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                console.log('finally');
+            });
+        },
+        getListadoPlacas() {
+             this.fullScreenLoading = true;
+            var url = '/configuracion/placa/getListadoPlacas';
+            axios.get(url).then((response) => {
+                this.listPlacas = response.data;
                 this.fullScreenLoading = false;
             }).catch((error) => {
                 console.log(error);

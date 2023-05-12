@@ -49,6 +49,34 @@ const router =  new Router({
             },
             component: require('./components/modulos/servicio/index.vue').default
         },
+        // Employs
+        {
+            path: '/employ',
+            name: 'employ.index',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/employ/index.vue').default
+        },
+        {
+            path: '/employ/crear',
+            name: 'employ.crear',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/employ/create.vue').default
+        },
+        //
         {
             path: '/cliente',
             name: 'cliente.index',
@@ -144,9 +172,93 @@ const router =  new Router({
             component: require('./components/modulos/unidad/listdoc.vue').default,
             props: true
         },
-
-
-
+        //seguros
+        {
+            path: '/seguro',
+            name: 'seguro.index',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/seguro/index.vue').default,
+            props: true
+        },
+        {
+            path: '/seguro/crear',
+            name: 'seguro.crear',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/seguro/create.vue').default,
+            props: true
+        },
+        {
+            path: '/seguro/:id/editar',
+            name: 'seguro.editar',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/seguro/edit.vue').default,
+            props: true
+        },
+        //conductores
+         {
+            path: '/conductor',
+            name: 'conductor.index',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/conductor/index.vue').default,
+            props: true
+        },
+        {
+            path: '/conductor/crear',
+            name: 'conductor.crear',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/conductor/create.vue').default,
+            props: true
+        },
+        {
+            path: '/conductor/:id/editar',
+            name: 'conductor.editar',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/conductor/edit.vue').default,
+            props: true
+        },
+        //
         {
             path: '/tipounidades',
             name: 'tipounidades.index',
