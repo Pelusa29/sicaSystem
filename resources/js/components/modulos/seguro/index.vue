@@ -105,10 +105,6 @@
                                                                 @click="$router.push({ name: 'seguro.editar', params: { id: item.id } })"
                                                                 class="btn btn-flat btn-info btn-sm"><i
                                                                     class="fa fa-pencil"></i> Editar</button>
-                                                            <!-- <button
-                                                                @click="$router.push({ name: 'seguro.listadoc', params: { id: item.id } })"
-                                                                class="btn btn-flat btn-warning btn-sm"><i
-                                                                    class="fa fa-list-ol"></i> Adjuntar Documento</button> -->
                                                         </td>
                                                     </tr>
                                                 </tbody>

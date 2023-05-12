@@ -60,6 +60,7 @@ Route::group(['middleware'=> ['auth']], function(){
     ##Seguros
     Route::get('/configuracion/seguro/getListSeguros','Configuracion\SeguroController@getListSeguros');
     Route::post('/configuracion/seguro/setRegistraSeguro','Configuracion\SeguroController@setRegistraSeguro');
+    Route::get('/configuracion/seguro/getSeguroById','Configuracion\SeguroController@getSeguroById');
 
     ##Tipo Unidades
     Route::get('/configuracion/catunidades/getListTipoUnidades','Configuracion\TruckController@getListTipoUnidades');
@@ -83,6 +84,13 @@ Route::group(['middleware'=> ['auth']], function(){
     ##Employs
     Route::get('/administracion/employ/getListEmpleados','Administracion\EmployController@getListEmpleados');
     Route::post('/administracion/employ/setRegistrarEmpleado','Administracion\EmployController@setRegistrarEmpleado');
+
+    ##Conductores
+    Route::get('/administracion/conductor/getListConductores','Administracion\ConductorController@getListConductores');
+    Route::post('/administracion/conductor/setRegistrarConductor','Administracion\ConductorController@setRegistrarConductor');
+    Route::post('/administracion/conductor/setCambiaEstadoConductor','Administracion\ConductorController@setCambiaEstadoConductor');
+    Route::get('/administracion/conductor/getConductorById','Administracion\ConductorController@getConductorById');
+    Route::post('/administracion/conductor/setEditarConductor','Administracion\ConductorController@setEditarConductor');
 
     ##Files
     Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');

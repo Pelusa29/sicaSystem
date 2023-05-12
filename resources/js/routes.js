@@ -201,7 +201,63 @@ const router =  new Router({
             component: require('./components/modulos/seguro/create.vue').default,
             props: true
         },
-
+        {
+            path: '/seguro/:id/editar',
+            name: 'seguro.editar',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/seguro/edit.vue').default,
+            props: true
+        },
+        //conductores
+         {
+            path: '/conductor',
+            name: 'conductor.index',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/conductor/index.vue').default,
+            props: true
+        },
+        {
+            path: '/conductor/crear',
+            name: 'conductor.crear',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/conductor/create.vue').default,
+            props: true
+        },
+        {
+            path: '/conductor/:id/editar',
+            name: 'conductor.editar',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/conductor/edit.vue').default,
+            props: true
+        },
         //
         {
             path: '/tipounidades',

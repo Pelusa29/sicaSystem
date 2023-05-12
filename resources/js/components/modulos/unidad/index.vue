@@ -33,9 +33,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Unidad</label>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control"
-                                                                v-model="fillBsqUnidad.cUnidad"
-                                                                @keyup.enter="getListUnidades">
+                                                            <el-input placeholder="Unidad" v-model="fillBsqUnidad.cUnidad" @keyup.enter="getListUnidades"></el-input>
                                                         </div>
                                                     </div>
                                                 </div>

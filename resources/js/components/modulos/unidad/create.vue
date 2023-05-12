@@ -33,9 +33,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Unidad:</label>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control"
-                                                                    v-model="fillCrearUnidad.cUnidad"
-                                                                    @keyup.enter="setRegistraUnidad" placeholder="Unidad">
+                                                                <el-input placeholder="Unidad" v-model="fillCrearUnidad.cUnidad" @keyup.enter="setRegistraUnidad"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -57,9 +55,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Marca:</label>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control"
-                                                                    v-model="fillCrearUnidad.cMarca"
-                                                                    @keyup.enter="setRegistraUnidad" placeholder="Marca">
+                                                                <el-input v-model="fillCrearUnidad.cMarca" @keyup.enter="setRegistraUnidad" placeholder="Marca"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -69,9 +65,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Modelo:</label>
                                                             <div class="col-md-9">
-                                                                <input type="text" placeholder="Modelo" class="form-control"
-                                                                    v-model="fillCrearUnidad.cModelo"
-                                                                    @keyup.enter="setRegistraUnidad">
+                                                                <el-input placeholder="Modelo" v-model="fillCrearUnidad.cModelo" @keyup.enter="setRegistraUnidad"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>

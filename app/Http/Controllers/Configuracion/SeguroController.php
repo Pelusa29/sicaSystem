@@ -51,4 +51,14 @@ class SeguroController extends Controller
 
         return $rpta;
     }
+
+    public function getSeguroById(Request $request){
+        if(!$request->ajax()) return redirect('');
+        $nIdSeguro     = $request->nIdSeguro;
+        $nIdSeguro     = ($nIdSeguro == NULL) ? ($nIdSeguro = 0) : $nIdSeguro;
+
+        $rpta =  DB::select('call sp_Seguro_getSeguroById(?)',[$nIdSeguro]);
+
+        return $rpta;
+    }
 }
