@@ -36,21 +36,25 @@ class UnidadController extends Controller
         $cOpUnidad                  = $request->cOpUnidad;
         $cMarca                     = $request->cMarca;
         $cModelo                    = $request->cModelo;
-        $cFechaVencimientoSeguro    = $request->cFechaVencimientoSeguro;
-        $cCostoSeguro               = $request->cCostoSeguro;
         $cValorUnidad               = $request->cValorUnidad;
         $cTipoCombustible           = $request->cTipoCombustible;
+        $nIdCliente                 = $request->nIdCliente;
+        $cnIdPlaca                  = $request->cnIdPlaca;
+        $nIdSeguro                  = $request->nIdSeguro;
+        $cNuSerie                   = $request->cNuSerie;
 
         $cUnidad                    = ($cUnidad == NULL) ? ($cUnidad  = '') : $cUnidad;
         $cOpUnidad                  = ($cOpUnidad == NULL) ? ($cOpUnidad  = '') : $cOpUnidad;
         $cMarca                     = ($cMarca == NULL) ? ($cMarca  = NULL) : $cMarca;
         $cModelo                    = ($cModelo == NULL) ? ($cModelo  = '') : $cModelo;
-        $cFechaVencimientoSeguro    = ($cFechaVencimientoSeguro == NULL) ? ($cFechaVencimientoSeguro    = NULL)  : $cFechaVencimientoSeguro;
-        $cCostoSeguro               = ($cCostoSeguro == NULL) ? ($cCostoSeguro  = '') : $cCostoSeguro;
         $cValorUnidad               = ($cValorUnidad == NULL) ? ($cValorUnidad  = '') : $cValorUnidad;
         $cTipoCombustible           = ($cTipoCombustible == NULL) ? ($cTipoCombustible  = '') : $cTipoCombustible;
+        $nIdCliente                 = ($nIdCliente == NULL) ? ($nIdCliente  = '') : $nIdCliente;
+        $cnIdPlaca                  = ($cnIdPlaca == NULL) ? ($cnIdPlaca  = '') : $cnIdPlaca;
+        $nIdSeguro                  = ($nIdSeguro == NULL) ? ($nIdSeguro  = '') : $nIdSeguro;
+        $cNuSerie                   = ($cNuSerie == NULL) ? ($cNuSerie  = '') : $cNuSerie;
 
-        $rpta = DB::select('call sp_Unidad_setRegistraUnidad(?,?,?,?,?,?,?,?)',[$cUnidad,$cOpUnidad,$cMarca,$cModelo,$cFechaVencimientoSeguro,$cCostoSeguro,$cValorUnidad,$cTipoCombustible]);
+        $rpta = DB::select('call sp_Unidad_setRegistraUnidad(?,?,?,?,?,?,?,?,?,?)',[$cUnidad,$cOpUnidad,$cMarca,$cModelo,$cValorUnidad,$cTipoCombustible,$nIdCliente,$cnIdPlaca,$nIdSeguro,$cNuSerie]);
 
         return $rpta;
 
@@ -73,22 +77,28 @@ class UnidadController extends Controller
         $cOpUnidad                  = $request->cOpUnidad;
         $cMarca                     = $request->cMarca;
         $cModelo                    = $request->cModelo;
-        $cFechaVencimientoSeguro    = $request->cFechaVencimientoSeguro;
-        $cCostoSeguro               = $request->cCostoSeguro;
         $cValorUnidad               = $request->cValorUnidad;
         $cTipoCombustible           = $request->cTipoCombustible;
+        $nIdCliente                 = $request->nIdCliente;
+        $cnIdPlaca                  = $request->cnIdPlaca;
+        $nIdSeguro                  = $request->nIdSeguro;
+        $cNuSerie                   = $request->cNuSerie;
 
         $nIdUnidad                  = ($nIdUnidad ==  NULL) ? ($nIdUnidad = 0) : $nIdUnidad;
-        $cUnidad                    = ($cUnidad == NULL) ? ($cUnidad  = '') : $cUnidad;
+
         $cOpUnidad                  = ($cOpUnidad == NULL) ? ($cOpUnidad  = '') : $cOpUnidad;
         $cMarca                     = ($cMarca == NULL) ? ($cMarca  = NULL) : $cMarca;
         $cModelo                    = ($cModelo == NULL) ? ($cModelo  = '') : $cModelo;
-        $cFechaVencimientoSeguro    = ($cFechaVencimientoSeguro == NULL) ? ($cFechaVencimientoSeguro    = NULL)  : $cFechaVencimientoSeguro;
-        $cCostoSeguro               = ($cCostoSeguro == NULL) ? ($cCostoSeguro  = '') : $cCostoSeguro;
         $cValorUnidad               = ($cValorUnidad == NULL) ? ($cValorUnidad  = '') : $cValorUnidad;
         $cTipoCombustible           = ($cTipoCombustible == NULL) ? ($cTipoCombustible  = '') : $cTipoCombustible;
+        $nIdCliente                 = ($nIdCliente == NULL) ? ($nIdCliente  = '') : $nIdCliente;
+        $cnIdPlaca                  = ($cnIdPlaca == NULL) ? ($cnIdPlaca  = '') : $cnIdPlaca;
+        $nIdSeguro                  = ($nIdSeguro == NULL) ? ($nIdSeguro  = '') : $nIdSeguro;
+        $cNuSerie                   = ($cNuSerie == NULL) ? ($cNuSerie  = '') : $cNuSerie;
 
-        $rpta = DB::select('call sp_Unidad_setEditarUnidad(?,?,?,?,?,?,?,?,?)',[$nIdUnidad,$cUnidad,$cOpUnidad,$cMarca,$cModelo,$cFechaVencimientoSeguro,$cCostoSeguro,$cValorUnidad,$cTipoCombustible]);
+        //print_r($nIdUnidad.'-'.$cUnidad.'-'.$cOpUnidad.'-'.$cMarca.'-'.$cModelo.'-'.$cValorUnidad.'-'.$cTipoCombustible.'-'.$nIdCliente.'-'.$cnIdPlaca.'-'.$nIdSeguro.'-'.$cNuSerie);
+        /* print_r($nIdUnidad.'-'.$nIdSeguro); */
+        $rpta = DB::select('call sp_Unidad_setEditarUnidad(?,?,?,?,?,?,?,?,?,?,?)',[$nIdUnidad,$cUnidad,$cOpUnidad,$cMarca,$cModelo,$cValorUnidad,$cTipoCombustible,$nIdCliente,$cnIdPlaca,$nIdSeguro,$cNuSerie]);
 
     }
 

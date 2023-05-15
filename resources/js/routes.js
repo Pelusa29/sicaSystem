@@ -76,7 +76,7 @@ const router =  new Router({
             },
             component: require('./components/modulos/employ/create.vue').default
         },
-        //
+        //cliente
         {
             path: '/cliente',
             name: 'cliente.index',
@@ -90,6 +90,34 @@ const router =  new Router({
             },
             component: require('./components/modulos/cliente/index.vue').default
         },
+        {
+            path: '/cliente/crear',
+            name: 'cliente.crear',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/cliente/create.vue').default
+        },
+        {
+            path: '/cliente/:id/editar',
+            name: 'cliente.editar',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/cliente/edit.vue').default,
+            props:true
+        },
+        //
         {
             path: '/categoria',
             name: 'categoria.index',

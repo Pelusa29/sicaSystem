@@ -27,18 +27,16 @@ class CreateUnidadesTable extends Migration
         Schema::create('unidades', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('truck_id')->unsigned()->nullable();
-            $table->bigInteger('fileunidad_id')->unsigned()->nullable();
             $table->string('unidad',50)->nullable();
             $table->string('marcaUnidad',50)->nullable();
             $table->string('modeloUnidad',50)->nullable();
             $table->date('fechaVencimientoSeguro')->nullable();
-            $table->double('costoSeguro',40,2)->default(10.50);
-            $table->double('valorActualunidad',40,2)->default(10.50);
+            $table->decimal('costoSeguro',15,2)->default(10.50);
+            $table->decimal('valorActualunidad',15,2)->default(10.50);
             $table->enum('tipoCombustible',['Diesel','Gasolina'])->nullable()->default('Gasolina');
             $table->timestamps();
 
             $table->foreign('truck_id')->references('id')->on('trucks');
-            $table->foreign('fileunidad_id')->references('id')->on('fileunidades');
         });
     }
 

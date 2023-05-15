@@ -217,7 +217,7 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <template v-if="!usuario.file_id">
-                                <img :src="ruta +'/img/avatar.png'" class="img-circle" :alt="usuario.firstname">
+                                <img :src="ruta +'/img/avatar.png'" class="img-circle" style="height:2rem !important;width: 2rem !important;object-fit: cover;" :alt="usuario.firstname">
                             </template>
                             <template v-else>
                                 <img :src="usuario.file.path" class="img-circle" style="height:2rem !important;width: 2rem !important;object-fit: cover;" :alt="usuario.firstname">
@@ -225,15 +225,15 @@
                             <span class="hidden-xs">{{usuario.fullname}}</span>
                         </a>
                         <ul class="dropdown-menu">
-                        <li class="user-header">
-                            <template v-if="!usuario.file_id">
-                                <img src="#" class="img-circle" alt="User Image">
-                            </template>
-                            <template v-else>
-                                <img :src="usuario.file.path" class="img-circle" :alt="usuario.firstname">
-                            </template>
-                            <p>{{usuario.email}}</p>
-                        </li>
+                            <li class="user-header">
+                                <template v-if="!usuario.file_id">
+                                    <img :src="ruta +'/img/avatar.png'" class="img-circle" alt="User Image">
+                                </template>
+                                <template v-else>
+                                    <img :src="usuario.file.path" class="img-circle" :alt="usuario.firstname">
+                                </template>
+                                <p>{{usuario.email}}</p>
+                            </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-right">

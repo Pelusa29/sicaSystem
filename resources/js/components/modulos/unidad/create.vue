@@ -38,6 +38,22 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
+                                                        <label class="col-md-3 col-form-label">Cliente:</label>
+                                                        <div class="col-md-9">
+                                                                <el-select
+                                                                v-model="fillCrearUnidad.nIdCliente"
+                                                                placeholder="Seleccione Cliente"
+                                                                filterable clearable>
+                                                                    <el-option
+                                                                        v-for="item in listaClientes"
+                                                                        :key="item.value"
+                                                                        :label="item.label"
+                                                                        :value="item.value">
+                                                                    </el-option>
+                                                            </el-select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Tipo Unidad:</label>
                                                             <div class="col-md-9">
@@ -48,14 +64,6 @@
                                                                         :value="item.value">
                                                                     </el-option>
                                                                 </el-select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Marca:</label>
-                                                            <div class="col-md-9">
-                                                                <el-input v-model="fillCrearUnidad.cMarca" @keyup.enter="setRegistraUnidad" placeholder="Marca"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -71,6 +79,14 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Marca:</label>
+                                                            <div class="col-md-9">
+                                                                <el-input v-model="fillCrearUnidad.cMarca" @keyup.enter="setRegistraUnidad" placeholder="Marca"></el-input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   <!--  <div class="col-md-4">
+                                                        <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Vencimiento:</label>
                                                             <div class="col-md-9">
                                                                 <el-date-picker style="width: 100%;"
@@ -80,8 +96,8 @@
                                                                 </el-date-picker>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4">
+                                                    </div> -->
+                                                    <!-- <div class="col-md-4">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Costo Seguro</label>
                                                             <div class="col-md-9">
@@ -89,6 +105,14 @@
                                                                     v-model.number="fillCrearUnidad.cCostoSeguro"
                                                                     type="number" clearable>
                                                                 </el-input>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="col-md-4">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Número de Serie:</label>
+                                                            <div class="col-md-9">
+                                                                <el-input v-model="fillCrearUnidad.cNuSerie" @keyup.enter="setRegistraUnidad" placeholder="Número Serie"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -105,7 +129,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                        <div class="col-md-4">
+                                                    <div class="col-md-4">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Tipo Combustible</label>
                                                             <div class="col-md-9">
@@ -143,6 +167,30 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                        </div>
+                                        <div class="box-footer">
+                                            <div class="box-header with-border text-center">
+                                                <h4 class="box-title">Elegir Seguro</h4>
+                                            </div>
+                                            <div class="row hidden-md-up">
+                                                <div v-for="(item, index) in listSeguros" :key="index" class="col-md-3">
+                                                    <div class="box box-info box-solid">
+                                                        <div class="box-header with-border text-center">
+                                                            <h4 class="box-title">{{ item.aseguradora }}</h4>
+                                                        </div>
+                                                      <div class="box-body text-center">
+                                                        <h6 class="box-subtitle text-box-subtitle">{{item.cobertura}}</h6>
+                                                        <p class="box-text text-box-description">${{item.pagoSeguro}}</p>
+                                                            <div class="chekboc">
+                                                                <label for="chkSeguro">
+                                                                    <input type="checkbox" v-model="fillCrearUnidad.chkSeguro" :id="'seguro_' + item.id" :value="item.id"/>
+                                                                    Selección
+                                                                </label>
+                                                            </div>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="box-footer">
                                             <div class="row">
@@ -195,17 +243,21 @@ export default {
                 cOpUnidad: '',
                 cMarca: '',
                 cModelo: '',
-                cFechaVencimientoSeguro: '',
                 cCostoSeguro: '',
                 cValorUnidad:'',
                 cTipoCombustible: '',
-                cnIdPlaca:''
+                cnIdPlaca: '',
+                nIdCliente: '',
+                cNuSerie: '',
+                chkSeguro:[]
             },
             listTipoUnidades: [],
+            listSeguros:[],
             listCombustible: [
                 { value: 'Diesel', label: 'Diesel' },
                 { value: 'Gasolina', label: 'Gasolina' }
             ],
+            listaClientes: [],
             listPlacas:[],
             fullScreenLoading: false,
             modalShow: false,
@@ -225,6 +277,15 @@ export default {
         this.getListadoTipoUnidades();
     },
     methods: {
+        /* seleccionando(event,opt) {
+            if (opt == "cliente") {
+                this.fillCrearUnidad.nIdPersona = event;
+                this.fillCrearUnidad.nIdConductor = '';
+            } else {
+                this.fillCrearUnidad.nIdPersona = event;
+                this.fillCrearUnidad.nIdCliente = '';
+            }
+         }, */
         onlyNumber($event) {
             //console.log($event.keyCode); //keyCodes value
             let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
@@ -240,10 +301,12 @@ export default {
             this.fillCrearUnidad.cOpUnidad = '';
             this.fillCrearUnidad.cMarca='';
             this.fillCrearUnidad.cModelo = '';
-            this.fillCrearUnidad.cFechaVencimientoSeguro = '';
-            this.fillCrearUnidad.cCostoSeguro = '';
             this.fillCrearUnidad.cValorUnidad = '';
             this.fillCrearUnidad.cTipoCombustible = '';
+            this.fillCrearUnidad.nIdCliente = '';
+            this.fillCrearUnidad.cnIdPlaca = '';
+            this.fillCrearUnidad.chkSeguro = [];
+            this.fillCrearUnidad.cNuSerie = '';
         },
         setRegistraUnidad() {
             if (this.validarRegistrarUnidad()) {
@@ -259,10 +322,13 @@ export default {
                'cOpUnidad': this.fillCrearUnidad.cOpUnidad,
                'cMarca': this.fillCrearUnidad.cMarca,
                'cModelo': this.fillCrearUnidad.cModelo,
-               'cFechaVencimientoSeguro': this.fillCrearUnidad.cFechaVencimientoSeguro,
-               'cCostoSeguro': this.fillCrearUnidad.cCostoSeguro,
                'cValorUnidad': this.fillCrearUnidad.cValorUnidad,
-               'cTipoCombustible': this.fillCrearUnidad.cTipoCombustible
+               'cTipoCombustible': this.fillCrearUnidad.cTipoCombustible,
+               'cnIdPlaca': this.fillCrearUnidad.cnIdPlaca,
+               'nIdSeguro': this.fillCrearUnidad.chkSeguro[0],
+               'nIdCliente': this.fillCrearUnidad.nIdCliente,
+               'cNuSerie' : this.fillCrearUnidad.cNuSerie
+
             }).then((response) => {
                 this.fullScreenLoading = false;
                 Swal.fire({
@@ -308,10 +374,36 @@ export default {
             });
         },
         getListadoPlacas() {
-             this.fullScreenLoading = true;
+            this.fullScreenLoading = true;
             var url = '/configuracion/placa/getListadoPlacas';
             axios.get(url).then((response) => {
                 this.listPlacas = response.data;
+                this.fullScreenLoading = false;
+                this.getListadoClientes();
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                console.log('finally');
+            });
+        },
+        getListadoClientes() {
+            this.fullScreenLoading = true;
+            var url = '/administracion/cliente/getListadoClientestotal';
+            axios.get(url).then((response) => {
+                this.listaClientes = response.data;
+                this.fullScreenLoading = false;
+                this.getSeguros();
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                console.log('finally');
+            });
+        },
+        getSeguros() {
+            this.fullScreenLoading = true;
+            var url = '/configuracion/seguro/getListadoSeguros';
+            axios.get(url).then((response) => {
+                this.listSeguros = response.data;
                 this.fullScreenLoading = false;
             }).catch((error) => {
                 console.log(error);
@@ -338,20 +430,20 @@ export default {
                this.mensajeError.push("El Modelo es un campo obligatorio");
             }
 
-            if (!this.fillCrearUnidad.cFechaVencimientoSeguro) {
-                this.mensajeError.push("La Fecha de Vencimiento Seguro es un campo obligatorio.");
-            }
-
-            if (!this.fillCrearUnidad.cCostoSeguro) {
-                this.mensajeError.push("El Costo del Seguro es un campo obligatorio.");
-            }
-
             if (!this.fillCrearUnidad.cValorUnidad) {
                 this.mensajeError.push("El Valor de Unidad es un campo obligatorio.");
             }
 
             if (!this.fillCrearUnidad.cTipoCombustible) {
                 this.mensajeError.push("El Tipo de Combustible es un campo obligatorio.");
+            }
+
+            if (!this.fillCrearUnidad.nIdCliente) {
+                this.mensajeError.push("Debe seleccionar al menos un tipo de cliente");
+            }
+
+            if (this.fillCrearUnidad.chkSeguro.length > 1 || this.fillCrearUnidad.chkSeguro.length == 0) {
+                this.mensajeError.push("Debe Seleccionar solo un seguro para la unidad");
             }
 
             if (this.mensajeError.length) {
@@ -364,4 +456,53 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+    .chekboc{
+        position: relative;
+        margin: auto;
+        top:0;
+        bottom:0;
+    }
+    .chekboc input[type="checkbox"]{
+        appearance: none;
+        -webkit-appearance: none;
+        height: 20px;
+        width: 20px;
+        background-color: #d5d5d5;
+        border-radius: 5px;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        outline: none;
+    }
+    .chekboc label{
+        color: #4c4c4c;
+        font-size:18px;
+        font-family: Poppins;
+        cursor: pointer;
+    }
+
+    .chekboc input[type="checkbox"]::after{
+        font-family: Font Awesome 5 free;
+        font-weight: 900;
+        content:  "";
+        font-size: 20px;
+        color: white;
+        display: none;
+    }
+
+    .chekboc input[type="checkbox"]:hover{
+        background-color: #a5a5a5;
+    }
+
+    .chekboc input[type="checkbox"]:checked{
+        background-color: #5bcd3e;
+        width: 20px;
+        height: 20px;
+        border-width: 4px 4px 4px 4px;
+    }
+    .chekboc input[type="checkbox"]:checked::after{
+        display: block;
+    }
+
+</style>

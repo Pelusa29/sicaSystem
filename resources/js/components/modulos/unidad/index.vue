@@ -77,7 +77,7 @@
                                                     <tr>
                                                         <th>Unidad</th>
                                                         <th>Marca</th>
-                                                        <th>Fecha Póliza</th>
+                                                        <th>Placa Asignada</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
@@ -85,7 +85,7 @@
                                                     <tr v-for="(item, index) in listarUnidadesPaginated" :key="index">
                                                         <td v-text="item.unidad"></td>
                                                         <td v-text="item.marcaUnidad"></td>
-                                                        <td v-text="item.fechaVencimiento"></td>
+                                                        <td v-text="item.placa"></td>
                                                         <td>
                                                             <button
                                                                 @click="$router.push({ name: 'unidad.editar', params: { id: item.id } })"

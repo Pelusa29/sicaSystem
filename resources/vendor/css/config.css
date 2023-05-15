@@ -1,3 +1,4 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 .slide-fade-enter{
     transform: translateX(10px);
     opacity: 0;
@@ -46,5 +47,14 @@ a:hover {
 .scrollTable {
     max-height: 350px !important;
     overflow: auto !important;
+}
+
+/*boxes*/
+.text-box-subtitle{
+    font-size: 18px;
+}
+
+.text-box-description{
+    font-size: 14px;
 }
 

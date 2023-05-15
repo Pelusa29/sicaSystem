@@ -61,4 +61,12 @@ class SeguroController extends Controller
 
         return $rpta;
     }
+
+    public function getListadoSeguros(Request $request){
+        if(!$request->ajax()) return redirect('');
+
+        $rpta = DB::select('call sp_Seguro_getListadoSeguros()');
+
+        return $rpta;
+    }
 }
