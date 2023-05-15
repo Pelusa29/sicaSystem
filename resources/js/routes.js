@@ -200,6 +200,20 @@ const router =  new Router({
             component: require('./components/modulos/unidad/listdoc.vue').default,
             props: true
         },
+        {
+            path: '/unidad/:id/ver',
+            name: 'unidad.ver',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/unidad/view.vue').default,
+            props: true
+        },
         //seguros
         {
             path: '/seguro',
