@@ -45,12 +45,6 @@
                         <span> Servicios</span>
                     </router-link>
                 </li>
-                <li>
-                    <router-link class="nav-link" :to="'/cliente'">
-                        <i class="fa fa-users"></i>
-                        <span>Clientes</span>
-                    </router-link>
-                </li>
                 <li class="header">CATALAGOS GERNERALES</li>
                 <li>
                     <router-link class="nav-link" :to="'/tipounidades'">
@@ -94,6 +88,12 @@
                     <router-link class="nav-link" :to="'/conductor'">
                         <i class="fa fa-users"></i>
                         <span>Conductores</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link class="nav-link" :to="'/cliente'">
+                        <i class="fa fa-users"></i>
+                        <span>Clientes</span>
                     </router-link>
                 </li>
                 <li class="header">CONFIGURACIÓN</li>

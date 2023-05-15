@@ -48,19 +48,11 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::post('/administracion/permiso/setRegistraPermiso','Administracion\PermissionController@setRegistraPermiso');
     Route::post('/administracion/permiso/setEditarPermiso','Administracion\PermissionController@setEditarPermiso');
 
-    ##Unidades
-    Route::get('/configuracion/unidad/getListUnidades','Configuracion\UnidadController@getListUnidades');
-    Route::get('/configuracion/unidad/getListadoTipoUnidades','Configuracion\UnidadController@getListadoTipoUnidades');
-    Route::post('/configuracion/unidad/setRegistraUnidad','Configuracion\UnidadController@setRegistraUnidad');
-    Route::get('/configuracion/unidad/getUnidadById','Configuracion\UnidadController@getUnidadById');
-    Route::post('/configuracion/unidad/setEditarUnidad','Configuracion\UnidadController@setEditarUnidad');
-    Route::post('/archivo/setAdjuntarDocumento','FilesController@setAdjuntarDocumento');
-    Route::get('/configuracion/unidad/getListDocumentos','Configuracion\UnidadController@getListDocumentos');
-
     ##Seguros
     Route::get('/configuracion/seguro/getListSeguros','Configuracion\SeguroController@getListSeguros');
     Route::post('/configuracion/seguro/setRegistraSeguro','Configuracion\SeguroController@setRegistraSeguro');
     Route::get('/configuracion/seguro/getSeguroById','Configuracion\SeguroController@getSeguroById');
+    Route::get('/configuracion/seguro/getListadoSeguros','Configuracion\SeguroController@getListadoSeguros');
 
     ##Tipo Unidades
     Route::get('/configuracion/catunidades/getListTipoUnidades','Configuracion\TruckController@getListTipoUnidades');
@@ -91,6 +83,23 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::post('/administracion/conductor/setCambiaEstadoConductor','Administracion\ConductorController@setCambiaEstadoConductor');
     Route::get('/administracion/conductor/getConductorById','Administracion\ConductorController@getConductorById');
     Route::post('/administracion/conductor/setEditarConductor','Administracion\ConductorController@setEditarConductor');
+
+
+    ##Clientes
+    Route::get('/administracion/cliente/getListClientes','Administracion\ClienteController@getListClientes');
+    Route::post('/administracion/cliente/setRegistrarCliente','Administracion\ClienteController@setRegistrarCliente');
+    Route::post('/administracion/cliente/setCambiaEstadoCliente','Administracion\ClienteController@setCambiaEstadoCliente');
+    Route::get('/administracion/cliente/getListadoConductores','Administracion\ClienteController@getListadoConductores');
+    Route::get('/administracion/cliente/getListadoClientestotal','Administracion\ClienteController@getListadoClientestotal');
+
+    ##Unidades
+    Route::get('/configuracion/unidad/getListUnidades','Configuracion\UnidadController@getListUnidades');
+    Route::get('/configuracion/unidad/getListadoTipoUnidades','Configuracion\UnidadController@getListadoTipoUnidades');
+    Route::post('/configuracion/unidad/setRegistraUnidad','Configuracion\UnidadController@setRegistraUnidad');
+    Route::get('/configuracion/unidad/getUnidadById','Configuracion\UnidadController@getUnidadById');
+    Route::post('/configuracion/unidad/setEditarUnidad','Configuracion\UnidadController@setEditarUnidad');
+    Route::post('/archivo/setAdjuntarDocumento','FilesController@setAdjuntarDocumento');
+    Route::get('/configuracion/unidad/getListDocumentos','Configuracion\UnidadController@getListDocumentos');
 
     ##Files
     Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');

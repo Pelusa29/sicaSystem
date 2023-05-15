@@ -103,9 +103,9 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr v-for="(item, index) in listarConductoresPaginated" :key="index">
-                                                        <td v-text="item.nombreConductor"></td>
+                                                        <td v-text="item.nombreCliente"></td>
                                                         <td v-text="item.fechaNacimiento"></td>
-                                                        <td v-text="item.conductorEmergencia"></td>
+                                                        <td v-text="item.nombreEmergencia"></td>
                                                         <td>
                                                             <template v-if="item.state == 'A'">
                                                                 <span class="badge bg-green" v-text="item.state_detail"></span>

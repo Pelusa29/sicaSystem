@@ -14,7 +14,7 @@ class AddCampofaltanteTableunidadesTable extends Migration
     public function up()
     {
         Schema::table('unidades', function (Blueprint $table) {
-            $table->double('valorAdquisicionUnidad',40,2)->default(null)->after('valorActualunidad');
+            $table->decimal('valorAdquisicionUnidad',15,2)->default(null)->after('valorActualunidad');
             $table->string('noserie',100)->nullable()->after('valorAdquisicionUnidad');
         });
     }

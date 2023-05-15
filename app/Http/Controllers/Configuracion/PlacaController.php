@@ -46,8 +46,10 @@ class PlacaController extends Controller
         return $rpta;
     }
 
-    public function getListadoPlacas(){
-        $rpta = DB::select('call sp_Placa_getListadoPlacas()');
+    public function getListadoPlacas(Request $request){
+        $nIdPlaca   = $request->cnIdPlaca;
+        $nIdPlaca   = ($nIdPlaca == NULL) ? ($nIdPlaca = NULL) : $nIdPlaca;
+        $rpta = DB::select('call sp_Placa_getListadoPlacas(?)',[$nIdPlaca]);
         return $rpta;
     }
 }
