@@ -214,6 +214,47 @@ const router =  new Router({
             component: require('./components/modulos/unidad/view.vue').default,
             props: true
         },
+        //contratos taxi
+        {
+            path: '/contratotaxi',
+            name: 'contratotaxi.index',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/contratotaxi/index.vue').default
+        },
+        {
+            path: '/contratotaxi/crear',
+            name: 'contratotaxi.crear',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/contratotaxi/create.vue').default
+        },
+        //contratos diarios
+         {
+            path: '/contratodiario',
+            name: 'contratodiario.index',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/contratodiario/index.vue').default
+        },
         //seguros
         {
             path: '/seguro',

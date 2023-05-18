@@ -91,6 +91,8 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::post('/administracion/cliente/setCambiaEstadoCliente','Administracion\ClienteController@setCambiaEstadoCliente');
     Route::get('/administracion/cliente/getListadoConductores','Administracion\ClienteController@getListadoConductores');
     Route::get('/administracion/cliente/getListadoClientestotal','Administracion\ClienteController@getListadoClientestotal');
+    Route::get('/administracion/cliente/getListadoClientesByTipo','Administracion\ClienteController@getListadoClientesByTipo');
+    Route::get('/administracion/cliente/getSearchInfoByConductor','Administracion\ClienteController@getSearchInfoByConductor');
 
     ##Unidades
     Route::get('/configuracion/unidad/getListUnidades','Configuracion\UnidadController@getListUnidades');
@@ -100,6 +102,12 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::post('/configuracion/unidad/setEditarUnidad','Configuracion\UnidadController@setEditarUnidad');
     Route::post('/archivo/setAdjuntarDocumento','FilesController@setAdjuntarDocumento');
     Route::get('/configuracion/unidad/getListDocumentos','Configuracion\UnidadController@getListDocumentos');
+
+
+    ##Contratos
+    Route::get('/operacion/contrato/getListContratostaxi','Operacion\ContratoController@getListContratostaxi');
+    Route::post('/operacion/contrato/setRegistraContrato','Operacion\ContratoController@setRegistraContrato');
+    Route::post('/operacion/contrato/setRegistraContratotaxi','Operacion\ContratoController@setRegistraContratotaxi');
 
     ##Files
     Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');
