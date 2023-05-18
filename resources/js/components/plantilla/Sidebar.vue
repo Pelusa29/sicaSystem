@@ -45,6 +45,18 @@
                         <span> Servicios</span>
                     </router-link>
                 </li>
+                 <li>
+                    <router-link class="nav-link" :to="'/contratotaxi'">
+                        <i class="fa fa-file-text-o"></i>
+                        <span>Contrato Taxi</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link class="nav-link" :to="'/contratodiario'">
+                        <i class="fa fa-file-text-o"></i>
+                        <span>Contrato Renta Diaria</span>
+                    </router-link>
+                </li>
                 <li class="header">CATALAGOS GERNERALES</li>
                 <li>
                     <router-link class="nav-link" :to="'/tipounidades'">

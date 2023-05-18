@@ -92,6 +92,10 @@
                                                                 class="btn btn-flat btn-info btn-sm"><i
                                                                     class="fa fa-pencil"></i> Editar</button>
                                                             <button
+                                                                    @click="$router.push({ name: 'unidad.ver', params: { id: item.id } })"
+                                                                    class="btn btn-flat btn-success btn-sm"><i
+                                                                        class="fa fa-eye"></i> Detalle</button>
+                                                            <button
                                                                 @click="$router.push({ name: 'unidad.listadoc', params: { id: item.id } })"
                                                                 class="btn btn-flat btn-warning btn-sm"><i
                                                                     class="fa fa-list-ol"></i> Adjuntar Documento</button>

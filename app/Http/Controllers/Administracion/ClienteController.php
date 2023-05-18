@@ -113,14 +113,6 @@ class ClienteController extends Controller
 
     }
 
-    /* public function getListadoConductores(Request $request){
-        if(!$request->ajax()) return redirect('');
-
-         $rpta = DB::select('call sp_Cliente_getListadoConductores()');
-
-         return $rpta;
-    } */
-
     public function getListadoClientestotal(Request $request){
         if(!$request->ajax()) return redirect('');
 
@@ -129,5 +121,23 @@ class ClienteController extends Controller
          return $rpta;
     }
 
+
+     public function getListadoClientesByTipo(Request $request){
+        if(!$request->ajax()) return redirect('');
+
+        $tipoCliente    = $request->tipoCliente;
+        $rpta = DB::select('call sp_Cliente_getListadoClientesByTipo(?)',[$tipoCliente]);
+
+        return $rpta;
+    }
+
+    public function getSearchInfoByConductor(Request $request){
+        if(!$request->ajax()) return redirect('');
+
+        $nIdCliente    = $request->nIdCliente;
+        $rpta = DB::select('call sp_Cliente_getSearchInfoByConductor(?)',[$nIdCliente]);
+
+        return $rpta;
+    }
 
 }

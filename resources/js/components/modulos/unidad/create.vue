@@ -85,29 +85,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                   <!--  <div class="col-md-4">
-                                                        <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Vencimiento:</label>
-                                                            <div class="col-md-9">
-                                                                <el-date-picker style="width: 100%;"
-                                                                    v-model="fillCrearUnidad.cFechaVencimientoSeguro" type="date"
-                                                                    placeholder="Seleccionar Fecha de Vencimiento"
-                                                                    format="dd-MM-yyyy" value-format="yyyy-MM-dd">
-                                                                </el-date-picker>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
-                                                    <!-- <div class="col-md-4">
-                                                        <div class="form-group row">
-                                                            <label class="col-md-3 col-form-label">Costo Seguro</label>
-                                                            <div class="col-md-9">
-                                                                <el-input placeholder="Costo($)" @keypress="onlyNumber($event)"
-                                                                    v-model.number="fillCrearUnidad.cCostoSeguro"
-                                                                    type="number" clearable>
-                                                                </el-input>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
                                                     <div class="col-md-4">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Número de Serie:</label>
