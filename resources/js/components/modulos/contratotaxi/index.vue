@@ -33,14 +33,14 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-3 col-form-label">Conductor</label>
                                                         <div class="col-md-9">
-                                                            <el-input placeholder="Unidad" v-model="fillBsqContrato.cConductor"
+                                                            <el-input placeholder="Nombre Conductor" v-model="fillBsqContrato.cConductor"
                                                                 @keyup.enter="getListContratostaxi"></el-input>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label class="col-md-3 col-form-label">Fecha Vencimiento
+                                                        <label class="col-md-3 col-form-label">Fecha Inicio
                                                             Contrato</label>
                                                         <div class="col-md-9">
                                                             <el-date-picker style="width: 100%;"
@@ -87,7 +87,7 @@
                                                 <tbody>
                                                     <tr v-for="(item, index) in listarContratosPaginated" :key="index">
                                                         <td v-text="item.cliente"></td>
-                                                        <td v-text="item.imporetRenta"></td>
+                                                        <td v-text="item.importeRenta"></td>
                                                         <td v-text="item.fechaInicioContrato"></td>
                                                         <td>
                                                             <template v-if="item.state == 'A'">
@@ -109,9 +109,9 @@
                                                                 class="btn btn-flat btn-success btn-sm"><i
                                                                 class="fa fa-eye"></i> Detalle</button>
                                                             <button
-                                                                @click="$router.push({ name: 'contratotaxi.print', params: { id: item.id } })"
+                                                                @click.prevent="setGenerardocumento(item.id)"
                                                                 class="btn btn-flat btn-info btn-sm"><i
-                                                                class="fa fa-print"></i> Imprimir</button>
+                                                                class="fa fa-file-pdf-o"></i> Imprimir</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -203,6 +203,26 @@ export default {
         }
     },
     methods: {
+        setGenerardocumento(nIdContrato) {
+            this.fullScreenLoading = true;
+            var config = {
+                responseType:'blob'
+            }
+            var url = '/operacion/contrato/setGenerardocumento';
+            axios.post(url, {
+                'nIdContrato': nIdContrato
+            },config).then((response) => {
+                console.log(response);
+                var oMyBlob = new Blob([response.data], { type: 'application/pdf' });
+                var url = URL.createObjectURL(oMyBlob);
+                window.open(url);
+                this.fullScreenLoading = false;
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+                console.log('finally');
+            });
+        },
         limpiarCriteriosBsq() {
             this.fillBsqContrato.cConductor = '';
             this.fillBsqContrato.cFechaInicioContrato = '';

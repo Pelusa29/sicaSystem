@@ -108,6 +108,10 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::get('/operacion/contrato/getListContratostaxi','Operacion\ContratoController@getListContratostaxi');
     Route::post('/operacion/contrato/setRegistraContrato','Operacion\ContratoController@setRegistraContrato');
     Route::post('/operacion/contrato/setRegistraContratotaxi','Operacion\ContratoController@setRegistraContratotaxi');
+    Route::get('/operacion/contrato/setBuscarDataContrato','Operacion\ContratoController@setBuscarDataContrato');
+    Route::post('/operacion/contrato/setEditarContratotaxi','Operacion\ContratoController@setEditarContratotaxi');
+    Route::post('/operacion/contrato/setGenerardocumento','Operacion\ContratoController@setGenerardocumento');
+
 
     ##Files
     Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');
