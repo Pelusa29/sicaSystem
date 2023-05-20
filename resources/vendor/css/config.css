@@ -58,3 +58,11 @@ a:hover {
     font-size: 14px;
 }
 
+.decriptionlabel{
+    font-size: 16px;
+    font-weight: 600;
+    color: #030405;
+    display: block;
+    text-align: center;
+}
+

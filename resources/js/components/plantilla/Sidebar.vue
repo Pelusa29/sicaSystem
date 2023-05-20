@@ -30,7 +30,7 @@
                 <li>
                     <router-link class="nav-link" :to="'/unidad'">
                         <i class="fa fa-car"></i>
-                        <span>Unidades</span>
+                        <span>Asignar Unidades</span>
                     </router-link>
                 </li>
                 <li>

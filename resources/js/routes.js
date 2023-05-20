@@ -241,6 +241,34 @@ const router =  new Router({
             },
             component: require('./components/modulos/contratotaxi/create.vue').default
         },
+        {
+            path: '/contratotaxi/:id/editar',
+            name: 'contratotaxi.editar',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/contratotaxi/edit.vue').default,
+            props:true
+        },
+        {
+            path: '/contratotaxi/:id/ver',
+            name: 'contratotaxi.ver',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/contratotaxi/view.vue').default,
+            props:true
+        },
         //contratos diarios
          {
             path: '/contratodiario',

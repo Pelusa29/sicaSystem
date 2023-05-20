@@ -112,7 +112,7 @@
                                                             <div class="col-md-9">
                                                                 <el-input v-model="fillCrearContrato.cNombreFiador"
                                                                     @keyup.enter="setRegistraContratotaxi"
-                                                                    placeholder="Número Serie"></el-input>
+                                                                    placeholder="Nombre Fiador"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -353,9 +353,24 @@ export default {
                         'nIdCliente': this.fillCrearContrato.nIdCliente
                     }
                 }).then((response) => {
-                    this.fillCrearContrato.cUnidad = response.data[0].unidad;
-                    this.fillCrearContrato.cDireccion = response.data[0].direccion;
-                    this.fullScreenLoading = false;
+                    console.log(response.data.length)
+                    if (response.data.length > 0) {
+                        this.fillCrearContrato.cUnidad = response.data[0].unidad;
+                        this.fillCrearContrato.cDireccion = response.data[0].direccion;
+                        this.fullScreenLoading = false;
+                    } else {
+                        this.fullScreenLoading = false;
+                        Swal.fire({
+                            icon: "info",
+                            text: 'El Condcutor no tiene ninguna unidad asignada, favor de asignar le una',
+                            type: "information",
+                            showDenyButton: false,
+                            confirmButtonText: 'Ok'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
+                    }
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -397,20 +412,8 @@ export default {
             if (!this.fillCrearContrato.cNombreFiador)
                 this.mensajeError.push("Debe ingresar un Nombre de Fiador para el contrato");
 
-            /* if (!this.fillCrearContrato.cCalleFiador)
-                this.mensajeError.push("Debe r solo un seguro para la unidad");
-
-            if (!this.fillCrearContrato.cColonia)
-                this.mensajeError.push("Debe Seleccionar solo un seguro para la unidad");
-
-            if (!this.fillCrearContrato.cCiudadFiador)
-                this.mensajeError.push("Debe Seleccionar solo un seguro para la unidad");
-
-            if (!this.fillCrearContrato.cCp)
-                this.mensajeError.push("Debe Seleccionar solo un seguro para la unidad");
- */
             if (!this.fillCrearContrato.cNombreTestigo)
-                this.mensajeError.push("Debe Seleccionar solo un seguro para la unidad");
+                this.mensajeError.push("Debe Ingresar un Testigo para el contrato");
 
 
             if (this.mensajeError.length) {
