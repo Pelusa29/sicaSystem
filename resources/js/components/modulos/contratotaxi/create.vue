@@ -353,9 +353,24 @@ export default {
                         'nIdCliente': this.fillCrearContrato.nIdCliente
                     }
                 }).then((response) => {
-                    this.fillCrearContrato.cUnidad = response.data[0].unidad;
-                    this.fillCrearContrato.cDireccion = response.data[0].direccion;
-                    this.fullScreenLoading = false;
+                    console.log(response.data.length)
+                    if (response.data.length > 0) {
+                        this.fillCrearContrato.cUnidad = response.data[0].unidad;
+                        this.fillCrearContrato.cDireccion = response.data[0].direccion;
+                        this.fullScreenLoading = false;
+                    } else {
+                        this.fullScreenLoading = false;
+                        Swal.fire({
+                            icon: "info",
+                            text: 'El Condcutor no tiene ninguna unidad asignada, favor de asignar le una',
+                            type: "information",
+                            showDenyButton: false,
+                            confirmButtonText: 'Ok'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            }
+                        });
+                    }
                 }).catch((error) => {
                     console.log(error);
                 });

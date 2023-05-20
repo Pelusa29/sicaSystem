@@ -43,7 +43,7 @@
                                                         <div class="col-md-9">
                                                            <el-date-picker style="width: 100%;"
                                                                 v-model="fillBsqUnidad.cFechaVencimientoSeguro" type="date"
-                                                                placeholder="Seleccionar Fecha de Pago" format="dd-MM-yyyy"
+                                                                placeholder="Fecha Vencimiento Seguro" format="dd-MM-yyyy"
                                                                 value-format="yyyy-MM-dd">
                                                             </el-date-picker>
                                                         </div>
@@ -77,6 +77,8 @@
                                                     <tr>
                                                         <th>Unidad</th>
                                                         <th>Marca</th>
+                                                        <th>Cliente</th>
+                                                        <th>Tipo</th>
                                                         <th>Placa Asignada</th>
                                                         <th>Acciones</th>
                                                     </tr>
@@ -85,6 +87,8 @@
                                                     <tr v-for="(item, index) in listarUnidadesPaginated" :key="index">
                                                         <td v-text="item.unidad"></td>
                                                         <td v-text="item.marcaUnidad"></td>
+                                                        <td v-text="item.nombreCliente"></td>
+                                                        <td v-text="item.tipoCliente"></td>
                                                         <td v-text="item.placa"></td>
                                                         <td>
                                                             <button
