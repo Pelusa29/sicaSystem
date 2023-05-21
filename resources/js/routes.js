@@ -270,7 +270,7 @@ const router =  new Router({
             props:true
         },
         //contratos diarios
-         {
+        {
             path: '/contratodiario',
             name: 'contratodiario.index',
             beforeEnter: (to, form, next) => {
@@ -282,6 +282,33 @@ const router =  new Router({
                 })
             },
             component: require('./components/modulos/contratodiario/index.vue').default
+        },
+        {
+            path: '/contratodiario/crear',
+            name: 'contratodiario.crear',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/contratodiario/create.vue').default
+        },
+        {
+            path: '/contratodiario/:id/editar',
+            name: 'contratodiario.editar',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/contratodiario/edit.vue').default,
+            props:true
         },
         //seguros
         {

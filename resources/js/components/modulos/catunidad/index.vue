@@ -33,9 +33,9 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Descripción</label>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control"
-                                                                    v-model="fillBsqTipoUnidad.cDescripcion"
-                                                                    @keyup.enter="getListTipoUnidades">
+                                                                <el-input  v-model="fillBsqTipoUnidad.cDescripcion"
+                                                                    @keyup.enter="getListTipoUnidades"
+                                                                    placeholder="Descripción"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -100,6 +100,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Descripción</th>
+                                                            <th>Tipo unidad</th>
                                                             <th>Transmisión</th>
                                                             <th>Renta</th>
                                                             <th>Fecha</th>
@@ -109,6 +110,7 @@
                                                     <tbody>
                                                         <tr v-for="(item, index) in listarTipoUnidadesPaginated" :key="index">
                                                             <td v-text="item.descripcionTipoUnidad"></td>
+                                                            <td v-text="item.descripcion_giro"></td>
                                                             <td v-text="item.transmisionTipoUnidad"></td>
                                                             <td v-text="item.totalRentaTipoUnidad"></td>
                                                             <td v-text="item.fechaRenta"></td>

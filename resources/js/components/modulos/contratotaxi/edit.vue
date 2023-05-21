@@ -56,7 +56,7 @@
                                                                 <el-input placeholder="Dirección"
                                                                     v-model="fillVisualizarContrato.cDireccion"
                                                                     @keyup.enter="setEditarContratotaxi"
-                                                                    ></el-input>
+                                                                     :disabled="true"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>
