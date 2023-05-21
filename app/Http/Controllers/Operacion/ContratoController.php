@@ -108,4 +108,68 @@ class ContratoController extends Controller
         ]);
         return $pdf->download('invoice.pdf');
     }
+
+    public function getListContratosdiarios(Request $request){
+        if(!$request->ajax()) return redirect('');
+        $cConductor                 = $request->cConductor;
+        $cFechaInicioContrato       = $request->cFechaInicioContrato;
+        $cFechaFinContrato          = $request->cFechaFinContrato;
+
+
+        $cConductor                 = ($cConductor == NULL) ? ($cConductor = '') : $cConductor;
+        $cFechaInicioContrato       = ($cFechaInicioContrato == NULL) ? ($cFechaInicioContrato = NULL) : $cFechaInicioContrato;
+        $cFechaFinContrato          = ($cFechaFinContrato == NULL) ? ($cFechaFinContrato = NULL) : $cFechaFinContrato;
+
+        $rpta = DB::select('call sp_Contrato_getListContratosdiarios(?,?,?)',[$cConductor,$cFechaInicioContrato,$cFechaFinContrato]);
+
+        return $rpta;
+    }
+
+
+    #Contratos Diarios
+    public function setRegistraContratodiario(Request $request){
+        if(!$request->ajax()) return redirect('');
+        $nIdCliente             = $request->nIdCliente;
+        $cUnidad                = $request->cUnidad;
+        $cDireccion             = $request->cDireccion;
+        $cFechaInicioContrato   = $request->cFechaInicioContrato;
+        $cImporteRenta          = $request->cImporteRenta;
+        $cImporteDeposito       = $request->cImporteDeposito;
+        $cDescripcionequipo     = $request->cDescripcionequipo;
+        $cHoraInicioContrato    = $request->cHoraInicioContrato;
+        $cFechaFinContrato      = $request->cFechaFinContrato;
+        $cHoraFinContrato       = $request->cHoraFinContrato;
+        $cNombreTestigo         = $request->cNombreTestigo;
+        $cNombreTestigoExt      = $request->cNombreTestigoExt;
+
+
+        $nIdCliente                 = ($nIdCliente == NULL) ? ($nIdCliente = 0) : $nIdCliente;
+        $cUnidad                    = ($cUnidad == NULL) ? ($cUnidad = '') : $cUnidad;
+        $cDireccion                 = ($cDireccion == NULL) ? ($cDireccion = '') : $cDireccion;
+        $cFechaInicioContrato       = ($cFechaInicioContrato == NULL) ? ($cFechaInicioContrato = NULL) : $cFechaInicioContrato;
+        $cImporteRenta              = ($cImporteRenta == NULL) ? ($cImporteRenta = '') : $cImporteRenta;
+        $cImporteDeposito           = ($cImporteDeposito == NULL) ? ($cImporteDeposito = '') : $cImporteDeposito;
+        $cDescripcionequipo         = ($cDescripcionequipo == NULL) ? ($cDescripcionequipo = '') : $cDescripcionequipo;
+        $cHoraInicioContrato        = ($cHoraInicioContrato == NULL) ? ($cHoraInicioContrato = '') : $cHoraInicioContrato;
+        $cFechaFinContrato          = ($cFechaFinContrato == NULL) ? ($cFechaFinContrato = '') : $cFechaFinContrato;
+        $cHoraFinContrato           = ($cHoraFinContrato == NULL) ? ($cHoraFinContrato = '') : $cHoraFinContrato;
+        $cNombreTestigo             = ($cNombreTestigo == NULL) ? ($cNombreTestigo = '') : $cNombreTestigo;
+        $cNombreTestigoExt          = ($cNombreTestigoExt == NULL) ? ($cNombreTestigoExt = '') : $cNombreTestigoExt;
+
+
+        DB::select('call sp_Contrato_setRegistraContratodiario(?,?,?,?,?,?,?,?,?,?,?,?)',[
+            $nIdCliente,
+            $cUnidad,
+            $cDireccion,
+            $cFechaInicioContrato,
+            $cImporteRenta,
+            $cImporteDeposito,
+            $cDescripcionequipo,
+            $cHoraInicioContrato,
+            $cFechaFinContrato,
+            $cHoraFinContrato,
+            $cNombreTestigo,
+            $cNombreTestigoExt
+        ]);
+    }
 }

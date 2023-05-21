@@ -109,6 +109,9 @@
                                                     <tr>
                                                         <th>Número Placa</th>
                                                         <th>Tipo Placa</th>
+                                                        <th>Fecha de Pago</th>
+                                                        <th>Importe</th>
+                                                        <th>Observaciones</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
@@ -116,6 +119,9 @@
                                                     <tr v-for="(item, index) in listarPlacasPaginated" :key="index">
                                                         <td v-text="item.noPlaca"></td>
                                                         <td v-text="item.tipoPlaca"></td>
+                                                        <td v-text="item.fechaPago"></td>
+                                                        <td v-text="item.importeRentaPlaca"></td>
+                                                        <td v-text="item.observaciones"></td>
                                                         <td>
                                                             <button
                                                                 @click="$router.push({ name: 'placa.editar', params: { id: item.id } })"

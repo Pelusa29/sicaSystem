@@ -66,3 +66,11 @@ a:hover {
     text-align: center;
 }
 
+.el-textarea__inner {
+        padding: 8px;
+        border: 1px solid #aeaeae;
+        resize: none !important;
+        overflow: hidden;
+        font-size: 16px;
+}
+

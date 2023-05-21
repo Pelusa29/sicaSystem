@@ -67,6 +67,7 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::post('/configuracion/placa/setRegistraPlaca','Configuracion\PlacaController@setRegistraPlaca');
     Route::get('/configuracion/placa/getPlacaById','Configuracion\PlacaController@getPlacaById');
     Route::get('/configuracion/placa/getListadoPlacas','Configuracion\PlacaController@getListadoPlacas');
+    Route::post('/configuracion/placa/setEditarPlaca','Configuracion\PlacaController@setEditarPlaca');
 
     ##Inventarios
     Route::get('/configuracion/catinventario/getListInventario','Configuracion\InventoryController@getListInventario');
@@ -111,6 +112,10 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::get('/operacion/contrato/setBuscarDataContrato','Operacion\ContratoController@setBuscarDataContrato');
     Route::post('/operacion/contrato/setEditarContratotaxi','Operacion\ContratoController@setEditarContratotaxi');
     Route::post('/operacion/contrato/setGenerardocumento','Operacion\ContratoController@setGenerardocumento');
+
+    ##Contratos diarios
+    Route::get('/operacion/contratodiario/getListContratosdiarios','Operacion\ContratoController@getListContratosdiarios');
+    Route::post('/operacion/contratodiario/setRegistraContratodiario','Operacion\ContratoController@setRegistraContratodiario');
 
 
     ##Files

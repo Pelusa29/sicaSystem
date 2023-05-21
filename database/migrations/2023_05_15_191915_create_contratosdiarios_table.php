@@ -20,9 +20,9 @@ class CreateContratosdiariosTable extends Migration
             $table->string('direccionArrendador',100)->nullable();
             $table->string('descripcionEquipo',100)->nullable();
             $table->date('fechaInicioContrato')->nullable();
-            $table->date('horaInicio')->nullable();
-            $table->date('fechaFinCotrato')->nullable();
-            $table->date('horaFin')->nullable();
+            $table->time('horaInicio')->nullable();
+            $table->date('fechaFinContrato')->nullable();
+            $table->time('horaFin')->nullable();
             $table->decimal('importeRenta',15,2)->nullable();
             $table->decimal('importeDeposito',15,2)->nullable();
             $table->string('nombreTestigo',150)->nullable();

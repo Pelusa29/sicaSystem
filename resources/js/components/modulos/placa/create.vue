@@ -29,23 +29,100 @@
                                         <div class="box-body">
                                             <form role="form">
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Número de Placa</label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control"
+                                                            <div class="col-md-8">
+                                                                <el-input
+                                                                    placeholder="Número de Placa"
                                                                     v-model="fillCrearPlaca.cNumeroPlaca"
-                                                                    @keyup.enter="setRegistraPlaca">
+                                                                    @keyup.enter="setRegistraPlaca"
+                                                                    clearable>
+                                                                </el-input>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Tipo Placa</label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control"
+                                                            <div class="col-md-8">
+                                                                <el-input
+                                                                    placeholder="Tipo de Placa"
                                                                     v-model="fillCrearPlaca.cTipoPlaca"
-                                                                    @keyup.enter="setRegistraPlaca">
+                                                                    @keyup.enter="setRegistraPlaca"
+                                                                    clearable>
+                                                                </el-input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Nombre Pago Placa</label>
+                                                            <div class="col-md-8">
+                                                                <el-input
+                                                                    placeholder="nombre Pago Placa"
+                                                                    v-model="fillCrearPlaca.cNombrePagoPlaca"
+                                                                    @keyup.enter="setRegistraPlaca"
+                                                                    clearable>
+                                                                </el-input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Nombre Concesión Placa</label>
+                                                            <div class="col-md-8">
+                                                                <el-input
+                                                                    placeholder="Concesión Placa"
+                                                                    v-model="fillCrearPlaca.cNombreConcesionPlaca"
+                                                                    @keyup.enter="setRegistraPlaca"
+                                                                    clearable>
+                                                                </el-input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Fecha Pago Renta</label>
+                                                            <div class="col-md-8">
+                                                                <el-date-picker style="width: 100%;"
+                                                                    placeholder="Fecha Pago Renta"
+                                                                    v-model="fillCrearPlaca.cFechaPagoRenta"
+                                                                    format="dd-MM-yyyy" value-format="yyyy-MM-dd">
+                                                                </el-date-picker>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Importe Renta</label>
+                                                            <div class="col-md-8">
+                                                                <el-input placeholder="Importe Renta($)"
+                                                                    @keypress="onlyNumber($event)"
+                                                                    v-model.number="fillCrearPlaca.cImporteRenta"
+                                                                    type="number">
+                                                                </el-input>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-3 col-form-label">Observaciones</label>
+                                                            <div class="col-md-8">
+                                                                <div class="textarea">
+                                                                    <el-input
+                                                                        type="textarea"
+                                                                        placeholder="Observaciones"
+                                                                        v-model="fillCrearPlaca.cObservaciones"
+                                                                        maxlength="150"
+                                                                        show-word-limit
+                                                                        >
+                                                                    </el-input>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -100,7 +177,12 @@ export default {
         return {
             fillCrearPlaca: {
                 cNumeroPlaca:'',
-                cTipoPlaca: ''
+                cTipoPlaca: '',
+                cNombrePagoPlaca: '',
+                cNombreConcesionPlaca: '',
+                cFechaPagoRenta: '',
+                cImporteRenta: '',
+                cObservaciones:''
             },
             /* listTipoUnidades: [], */
             fullScreenLoading: false,
@@ -134,6 +216,11 @@ export default {
         limpiarCriteriosBsq() {
             this.fillCrearPlaca.cNumeroPlaca = '';
             this.fillCrearPlaca.cTipoPlaca = '';
+            this.fillCrearPlaca.cNombrePagoPlaca = '';
+            this.fillCrearPlaca.cNombreConcesionPlaca = '';
+            this.fillCrearPlaca.cFechaPagoRenta = '';
+            this.fillCrearPlaca.cImporteRenta = '';
+            this.fillCrearPlaca.cObservaciones ='';
         },
         setRegistraPlaca() {
             if (this.validarRegistrarTipoUnidad()) {
@@ -146,7 +233,12 @@ export default {
             //post to save
             axios.post(url, {
                 'cNumeroPlaca': this.fillCrearPlaca.cNumeroPlaca,
-                'cTipoPlaca': this.fillCrearPlaca.cTipoPlaca
+                'cTipoPlaca': this.fillCrearPlaca.cTipoPlaca,
+                'cNombrePagoPlaca':this.fillCrearPlaca.cNombrePagoPlaca,
+                'cNombreConcesionPlaca':this.fillCrearPlaca.cNombreConcesionPlaca,
+                'cFechaPagoRenta':this.fillCrearPlaca.cFechaPagoRenta,
+                'cImporteRenta':this.fillCrearPlaca.cImporteRenta,
+                'cObservaciones':this.fillCrearPlaca.cObservaciones
             }).then((response) => {
                 this.fullScreenLoading = false;
                 if (response.data != 1) {
@@ -177,18 +269,6 @@ export default {
                 console.log('finally');
             });
         },
-        /* getListaUnidades() {
-            this.fullScreenLoading = true;
-            var url = '/configuracion/placa/getListaUnidades';
-            axios.get(url).then((response) => {
-                this.listTipoUnidades = response.data;
-                this.fullScreenLoading = false;
-            }).catch((error) => {
-                console.log(error);
-            }).finally(() => {
-                console.log('finally');
-            });
-        }, */
         validarRegistrarTipoUnidad() {
             this.error = 0;
             this.mensajeError = [];
@@ -209,4 +289,6 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+
+</style>
