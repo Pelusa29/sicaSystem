@@ -310,6 +310,20 @@ const router =  new Router({
             component: require('./components/modulos/contratodiario/edit.vue').default,
             props:true
         },
+        {
+            path: '/contratodiario/:id/ver',
+            name: 'contratodiario.ver',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/contratodiario/view.vue').default,
+            props:true
+        },
         //seguros
         {
             path: '/seguro',

@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-3 row">
                     <section class="content-header">
-                        <h1 class="m-0 text-dark text-perfil">Nuevo Contrato Renta Diario</h1>
+                        <h1 class="m-0 text-dark text-perfil">Actualizar Contrato Renta Diario</h1>
                     </section>
                 </div>
             </div>
@@ -46,8 +46,8 @@
                                                             <label class="col-md-3 col-form-label">Unidad:</label>
                                                             <div class="col-md-9">
                                                                 <el-input placeholder="Unidad"
-                                                                    v-model="fillCrearContrato.cUnidad"
-                                                                    @keyup.enter="setRegistraContratodiario"
+                                                                    v-model="fillVisualizarContrato.cUnidad"
+                                                                    @keyup.enter="setActualizaContratodiario"
                                                                     :disabled="true"></el-input>
                                                             </div>
                                                         </div>
@@ -57,8 +57,8 @@
                                                             <label class="col-md-3 col-form-label">Dirección:</label>
                                                             <div class="col-md-9">
                                                                 <el-input placeholder="Dirección"
-                                                                    v-model="fillCrearContrato.cDireccion"
-                                                                    @keyup.enter="setRegistraContratodiario"
+                                                                    v-model="fillVisualizarContrato.cDireccion"
+                                                                    @keyup.enter="setActualizaContratodiario"
                                                                     :disabled="true"></el-input>
                                                             </div>
                                                         </div>
@@ -69,8 +69,8 @@
                                                                 Equipos:</label>
                                                             <div class="col-md-9">
                                                                 <el-input placeholder="Descripción Equipo / Accesorios"
-                                                                    v-model="fillCrearContrato.cDescripcionequipo"
-                                                                    @keyup.enter="setRegistraContratodiario"></el-input>
+                                                                    v-model="fillVisualizarContrato.cDescripcionequipo"
+                                                                    @keyup.enter="setActualizaContratodiario"></el-input>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -82,7 +82,7 @@
                                                                 Contrato:</label>
                                                             <div class="col-md-9">
                                                                 <el-date-picker style="width: 100%;"
-                                                                    v-model="fillCrearContrato.cFechaInicioContrato"
+                                                                    v-model="fillVisualizarContrato.cFechaInicioContrato"
                                                                     type="date" placeholder="Seleccionar Fecha de Contrato"
                                                                     format="dd-MM-yyyy" value-format="yyyy-MM-dd">
                                                                 </el-date-picker>
@@ -95,7 +95,7 @@
                                                                 Contrato:</label>
                                                             <div class="col-md-9">
                                                                 <el-time-picker style="width: 100%;"
-                                                                    v-model="fillCrearContrato.cHoraInicioContrato"
+                                                                    v-model="fillVisualizarContrato.cHoraInicioContrato"
                                                                     placeholder="Hora Inicio Contrato" format="HH:mm:ss"
                                                                     value-format="HH:mm:ss"></el-time-picker>
                                                             </div>
@@ -107,7 +107,7 @@
                                                                 Contrato:</label>
                                                             <div class="col-md-9">
                                                                 <el-date-picker style="width: 100%;"
-                                                                    v-model="fillCrearContrato.cFechaTerminoContrato"
+                                                                    v-model="fillVisualizarContrato.cFechaTerminoContrato"
                                                                     type="date"
                                                                     placeholder="Seleccionar Fecha de Término de Contrato"
                                                                     format="dd-MM-yyyy" value-format="yyyy-MM-dd">
@@ -123,7 +123,7 @@
                                                                 Contrato:</label>
                                                             <div class="col-md-9">
                                                                 <el-time-picker style="width: 100%;"
-                                                                    v-model="fillCrearContrato.cHoraFinContrato"
+                                                                    v-model="fillVisualizarContrato.cHoraFinContrato"
                                                                     placeholder="Hora Fin Contrato" format="HH:mm:ss"
                                                                     value-format="HH:mm:ss"></el-time-picker>
                                                             </div>
@@ -135,7 +135,7 @@
                                                             <div class="col-md-9">
                                                                 <el-input placeholder="Renta($)"
                                                                     @keypress="onlyNumber($event)"
-                                                                    v-model.number="fillCrearContrato.cImporteRenta"
+                                                                    v-model.number="fillVisualizarContrato.cImporteRenta"
                                                                     type="number">
                                                                 </el-input>
                                                             </div>
@@ -147,7 +147,7 @@
                                                             <div class="col-md-9">
                                                                 <el-input placeholder="Deposito($)"
                                                                     @keypress="onlyNumber($event)"
-                                                                    v-model.number="fillCrearContrato.cImporteDeposito"
+                                                                    v-model.number="fillVisualizarContrato.cImporteDeposito"
                                                                     type="number" clearable>
                                                                 </el-input>
                                                             </div>
@@ -160,7 +160,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-md-3 col-form-label">Nombre Testigo:</label>
                                                             <div class="col-md-9">
-                                                                <el-input v-model="fillCrearContrato.cNombreTestigo"
+                                                                <el-input v-model="fillVisualizarContrato.cNombreTestigo"
                                                                     @keyup.enter="setRegistraContrato"
                                                                     placeholder="Nombre Testigo"></el-input>
                                                             </div>
@@ -171,7 +171,7 @@
                                                             <label class="col-md-3 col-form-label">Nombre Segundo
                                                                 Testigo:</label>
                                                             <div class="col-md-9">
-                                                                <el-input v-model="fillCrearContrato.cNombreTestigo2"
+                                                                <el-input v-model="fillVisualizarContrato.cNombreTestigo2"
                                                                     @keyup.enter="setRegistraContrato"
                                                                     placeholder="Nombre Testigo"></el-input>
                                                             </div>
@@ -184,10 +184,11 @@
                                             <div class="row">
                                                 <div class="col text-center">
                                                     <button class="btn btn-flat btn-info btnWidth"
-                                                        @click.prevent="setRegistraContratodiario()"
-                                                        v-loading.fullscreen.lock="fullScreenLoading">Registrar</button>
+                                                        @click.prevent="setActualizaContratodiario()"
+                                                        v-loading.fullscreen.lock="fullScreenLoading">Actualizar</button>
                                                     <button class="btn btn-flat btn-default btnWidth"
-                                                        @click.prevent="limpiarCriteriosBsq()">Limpiar</button>
+                                                                @click.prevent="$router.push('/contratodiario')">Cancelar
+                                                            </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -227,7 +228,7 @@ export default {
     props:['id'],
     data() {
         return {
-            fillCrearContrato: {
+            fillVisualizarContrato: {
                 nIdContrato: this.id,
                 nNombreCliente: '',
                 cUnidad: '',
@@ -259,13 +260,9 @@ export default {
     computed: {
     },
     mounted() {
-        this.getListadoClientesByTipo();
+        this.setBuscarDataContratoDiario();
     },
     methods: {
-        validateTime() {
-            const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
-            this.isValidTime = timeRegex.test(this.fillCrearContrato.cHoraInicioContrato);
-        },
         onlyNumber($event) {
             let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
             if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
@@ -276,41 +273,39 @@ export default {
             this.modalShow = !this.modalShow;
         },
         limpiarCriteriosBsq() {
-            this.fillCrearContrato.nIdCliente = '';
-            this.fillCrearContrato.cUnidad = '';
-            this.fillCrearContrato.cDireccion = '';
-            this.fillCrearContrato.cFechaInicioContrato = '';
-            this.fillCrearContrato.cImporteRenta = '';
-            this.fillCrearContrato.cImporteDeposito = '';
-            this.fillCrearContrato.cDescripcionequipo = '';
-            this.fillCrearContrato.cHoraInicioContrato = '';
-            this.fillCrearContrato.cFechaTerminoContrato = '';
-            this.fillCrearContrato.cHoraFinContrato = '';
-            this.fillCrearContrato.cNombreTestigo = '';
-            this.fillCrearContrato.cNombreTestigo2 = '';
+            this.fillVisualizarContrato.cUnidad = '';
+            this.fillVisualizarContrato.cDireccion = '';
+            this.fillVisualizarContrato.cFechaInicioContrato = '';
+            this.fillVisualizarContrato.cImporteRenta = '';
+            this.fillVisualizarContrato.cImporteDeposito = '';
+            this.fillVisualizarContrato.cDescripcionequipo = '';
+            this.fillVisualizarContrato.cHoraInicioContrato = '';
+            this.fillVisualizarContrato.cFechaTerminoContrato = '';
+            this.fillVisualizarContrato.cHoraFinContrato = '';
+            this.fillVisualizarContrato.cNombreTestigo = '';
+            this.fillVisualizarContrato.cNombreTestigo2 = '';
         },
-        setRegistraContratodiario() {
+        setActualizaContratodiario() {
             if (this.validarRegistrarContrato()) {
                 this.modalShow = true;
                 return;
             }
 
             this.fullScreenLoading = true;
-            var url = '/operacion/contratodiario/setRegistraContratodiario';
+            var url = '/operacion/contratodiario/setActualizaContratodiario';
             axios.post(url, {
-
-                'nIdCliente': this.fillCrearContrato.nIdCliente,
-                'cUnidad': this.fillCrearContrato.cUnidad,
-                'cDireccion': this.fillCrearContrato.cDireccion,
-                'cFechaInicioContrato': this.fillCrearContrato.cFechaInicioContrato,
-                'cImporteRenta': this.fillCrearContrato.cImporteRenta,
-                'cImporteDeposito': this.fillCrearContrato.cImporteDeposito,
-                'cDescripcionequipo': this.fillCrearContrato.cDescripcionequipo,
-                'cHoraInicioContrato': this.fillCrearContrato.cHoraInicioContrato,
-                'cFechaFinContrato': this.fillCrearContrato.cFechaTerminoContrato,
-                'cHoraFinContrato': this.fillCrearContrato.cHoraFinContrato,
-                'cNombreTestigo': this.fillCrearContrato.cNombreTestigo,
-                'cNombreTestigoExt': this.fillCrearContrato.cNombreTestigo2
+                'nIdContrato': this.fillVisualizarContrato.nIdContrato,
+                'cUnidad': this.fillVisualizarContrato.cUnidad,
+                'cDireccion': this.fillVisualizarContrato.cDireccion,
+                'cFechaInicioContrato': this.fillVisualizarContrato.cFechaInicioContrato,
+                'cImporteRenta': this.fillVisualizarContrato.cImporteRenta,
+                'cImporteDeposito': this.fillVisualizarContrato.cImporteDeposito,
+                'cDescripcionequipo': this.fillVisualizarContrato.cDescripcionequipo,
+                'cHoraInicioContrato': this.fillVisualizarContrato.cHoraInicioContrato,
+                'cFechaFinContrato': this.fillVisualizarContrato.cFechaTerminoContrato,
+                'cHoraFinContrato': this.fillVisualizarContrato.cHoraFinContrato,
+                'cNombreTestigo': this.fillVisualizarContrato.cNombreTestigo,
+                'cNombreTestigoExt': this.fillVisualizarContrato.cNombreTestigo2
             }).then((response) => {
                 this.fullScreenLoading = false;
                 Swal.fire({
@@ -341,99 +336,69 @@ export default {
                 console.log('finally');
             });
         },
-        getListadoClientesByTipo() {
+        setBuscarDataContratoDiario() {
             this.fullScreenLoading = true;
-            var url = '/administracion/cliente/getListadoClientesByTipo';
+            var url = '/operacion/contratodiario/setBuscarDataContratoDiario';
             axios.get(url, {
                 params: {
-                    'tipoCliente': 'cliente'
+                    'nIdContrato': this.fillVisualizarContrato.nIdContrato
                 }
             }).then((response) => {
-                this.listaClientes = response.data;
-                this.fullScreenLoading = false;
+                if (response.data.length > 0) {
+                    this.fillVisualizarContrato.nNombreCliente = response.data[0].cliente;
+                    this.fillVisualizarContrato.cUnidad = response.data[0].unidad;
+                    this.fillVisualizarContrato.cDireccion = response.data[0].direccionArrendador;
+                    this.fillVisualizarContrato.cDescripcionequipo = response.data[0].descripcionEquipo;
+                    this.fillVisualizarContrato.cFechaInicioContrato = response.data[0].fechaInicioContrato;
+                    this.fillVisualizarContrato.cHoraInicioContrato = response.data[0].horaInicio;
+                    this.fillVisualizarContrato.cFechaTerminoContrato = response.data[0].fechaFinContrato;
+                    this.fillVisualizarContrato.cHoraFinContrato = response.data[0].horaFin;
+                    this.fillVisualizarContrato.cImporteRenta = response.data[0].importeRenta;
+                    this.fillVisualizarContrato.cImporteDeposito = response.data[0].importeDeposito;
+                    this.fillVisualizarContrato.cNombreTestigo = response.data[0].nombreTestigo;
+                    this.fillVisualizarContrato.cNombreTestigo2 = response.data[0].nombreTestigo2;
+                    this.fullScreenLoading = false;
+                } else {
+                    this.fullScreenLoading = false;
+                    Swal.fire({
+                        icon: "info",
+                        text: 'El contrato a editar no contiene ninguna información relacionada, favor de asignar le una.',
+                        type: "information",
+                        showDenyButton: false,
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        }
+                    });
+                }
             }).catch((error) => {
                 console.log(error);
-            }).finally(() => {
-                console.log('finally');
             });
-        },
-        setBuscarDataconductor() {
-            this.fullScreenLoading = true;
-            if (this.fillCrearContrato.nIdCliente) {
-                var url = '/administracion/cliente/getSearchInfoByConductor';
-                axios.get(url, {
-                    params: {
-                        'nIdCliente': this.fillCrearContrato.nIdCliente
-                    }
-                }).then((response) => {
-                    console.log(response.data.length)
-                    if (response.data.length > 0) {
-                        this.fillCrearContrato.cUnidad = response.data[0].unidad;
-                        this.fillCrearContrato.cDireccion = response.data[0].direccion;
-                        this.fullScreenLoading = false;
-                    } else {
-                        this.fullScreenLoading = false;
-                        Swal.fire({
-                            icon: "info",
-                            text: 'El Condcutor no tiene ninguna unidad asignada, favor de asignar le una',
-                            type: "information",
-                            showDenyButton: false,
-                            confirmButtonText: 'Ok'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                            }
-                        });
-                    }
-                }).catch((error) => {
-                    console.log(error);
-                });
-            } else {
-                this.fullScreenLoading = false;
-                Swal.fire({
-                    icon: "error",
-                    text: 'Debe seleccionar un cliente',
-                    type: "warning",
-                    showDenyButton: false,
-                    confirmButtonText: 'Ok'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                    }
-                });
-            }
+
         },
         validarRegistrarContrato() {
             this.error = 0;
             this.mensajeError = [];
 
-            if (!this.fillCrearContrato.nIdCliente)
-                this.mensajeError.push("Debe Seleccionar un Conductor para el contrato");
-
-            if (!this.fillCrearContrato.cUnidad)
-                this.mensajeError.push("Debe Seleccionar una Uindad para el contrato");
-
-            if (!this.fillCrearContrato.cDireccion)
-                this.mensajeError.push("Debe Seleccionar uan Dirección para el contrato");
-
-            if (!this.fillCrearContrato.cFechaInicioContrato)
+            if (!this.fillVisualizarContrato.cFechaInicioContrato)
                 this.mensajeError.push("Debe Seleccionar una Fecha de Inico para el contrato");
 
-            if (!this.fillCrearContrato.cImporteRenta)
+            if (!this.fillVisualizarContrato.cImporteRenta)
                 this.mensajeError.push("Debe ingresar Importe de Renta para el contrato");
 
-            if (!this.fillCrearContrato.cImporteDeposito)
+            if (!this.fillVisualizarContrato.cImporteDeposito)
                 this.mensajeError.push("Debe ingresar un Importe Depósito para el contrato");
 
-            if (!this.fillCrearContrato.cFechaTerminoContrato)
+            if (!this.fillVisualizarContrato.cFechaTerminoContrato)
                 this.mensajeError.push("Debe ingresar una Fecha Fin de Contrato");
 
-            if (!this.fillCrearContrato.cHoraInicioContrato)
+            if (!this.fillVisualizarContrato.cHoraInicioContrato)
                 this.mensajeError.push("Debe ingresar una Hora Inicio de Contrato");
 
-            if (!this.fillCrearContrato.cHoraFinContrato)
+            if (!this.fillVisualizarContrato.cHoraFinContrato)
                 this.mensajeError.push("Debe ingresar una Hora Fin de Contrato");
 
-
-            if (!this.fillCrearContrato.cNombreTestigo)
+            if (!this.fillVisualizarContrato.cNombreTestigo)
                 this.mensajeError.push("Debe Ingresar un Testigo para el contrato");
 
             if (this.mensajeError.length) {

@@ -59,6 +59,8 @@ class ContratoController extends Controller
         if(!$request->ajax()) return redirect('');
         $nIdContrato             = $request->nIdContrato;
 
+        $nIdContrato                = ($nIdContrato == NULL) ? ($nIdContrato = 0) : $nIdContrato;
+
         $rpta = DB::select('call sp_Contrato_setBuscarDataContrato(?)',[$nIdContrato]);
 
         return $rpta;
@@ -99,6 +101,8 @@ class ContratoController extends Controller
     public function setGenerardocumento(Request $request){
         if(!$request->ajax()) return redirect('');
         $nIdContrato            = $request->nIdContrato;
+
+        $nIdContrato            = ($nIdContrato == NULL) ? ($nIdContrato = 0) : $nIdContrato;
 
         $rpta = DB::select('call sp_Contrato_setBuscarDataContrato(?)',[$nIdContrato]);
 
@@ -172,4 +176,79 @@ class ContratoController extends Controller
             $cNombreTestigoExt
         ]);
     }
+
+    public function setBuscarDataContratoDiario(Request $request){
+        if(!$request->ajax()) return redirect('');
+        $nIdContrato             = $request->nIdContrato;
+
+        $nIdContrato             = ($nIdContrato == NULL) ? ($nIdContrato = 0) : $nIdContrato;
+
+        $rpta = DB::select('call sp_Contrato_setBuscarDataContratoDiario(?)',[$nIdContrato]);
+
+        return $rpta;
+    }
+
+    public function setActualizaContratodiario(Request $request){
+        if(!$request->ajax()) return redirect('');
+        $nIdContrato             = $request->nIdContrato;
+        $cUnidad                = $request->cUnidad;
+        $cDireccion             = $request->cDireccion;
+        $cFechaInicioContrato   = $request->cFechaInicioContrato;
+        $cImporteRenta          = $request->cImporteRenta;
+        $cImporteDeposito       = $request->cImporteDeposito;
+        $cDescripcionequipo     = $request->cDescripcionequipo;
+        $cHoraInicioContrato    = $request->cHoraInicioContrato;
+        $cFechaFinContrato      = $request->cFechaFinContrato;
+        $cHoraFinContrato       = $request->cHoraFinContrato;
+        $cNombreTestigo         = $request->cNombreTestigo;
+        $cNombreTestigoExt      = $request->cNombreTestigoExt;
+
+
+        $nIdContrato                = ($nIdContrato == NULL) ? ($nIdContrato = 0) : $nIdContrato;
+        $cUnidad                    = ($cUnidad == NULL) ? ($cUnidad = '') : $cUnidad;
+        $cDireccion                 = ($cDireccion == NULL) ? ($cDireccion = '') : $cDireccion;
+        $cFechaInicioContrato       = ($cFechaInicioContrato == NULL) ? ($cFechaInicioContrato = NULL) : $cFechaInicioContrato;
+        $cImporteRenta              = ($cImporteRenta == NULL) ? ($cImporteRenta = '') : $cImporteRenta;
+        $cImporteDeposito           = ($cImporteDeposito == NULL) ? ($cImporteDeposito = '') : $cImporteDeposito;
+        $cDescripcionequipo         = ($cDescripcionequipo == NULL) ? ($cDescripcionequipo = '') : $cDescripcionequipo;
+        $cHoraInicioContrato        = ($cHoraInicioContrato == NULL) ? ($cHoraInicioContrato = '') : $cHoraInicioContrato;
+        $cFechaFinContrato          = ($cFechaFinContrato == NULL) ? ($cFechaFinContrato = '') : $cFechaFinContrato;
+        $cHoraFinContrato           = ($cHoraFinContrato == NULL) ? ($cHoraFinContrato = '') : $cHoraFinContrato;
+        $cNombreTestigo             = ($cNombreTestigo == NULL) ? ($cNombreTestigo = '') : $cNombreTestigo;
+        $cNombreTestigoExt          = ($cNombreTestigoExt == NULL) ? ($cNombreTestigoExt = '') : $cNombreTestigoExt;
+
+
+        DB::select('call sp_Contrato_setActualizaContratodiario(?,?,?,?,?,?,?,?,?,?,?,?)',[
+            $nIdContrato,
+            $cUnidad,
+            $cDireccion,
+            $cFechaInicioContrato,
+            $cImporteRenta,
+            $cImporteDeposito,
+            $cDescripcionequipo,
+            $cHoraInicioContrato,
+            $cFechaFinContrato,
+            $cHoraFinContrato,
+            $cNombreTestigo,
+            $cNombreTestigoExt
+        ]);
+    }
+
+    public function setGenerardocumentodiario(Request $request){
+        if(!$request->ajax()) return redirect('');
+        $nIdContrato            = $request->nIdContrato;
+
+        $nIdContrato            = ($nIdContrato == NULL) ? ($nIdContrato = 0) : $nIdContrato;
+
+        $rpta = DB::select('call sp_Contrato_setGenerardocumentodiario(?)',[$nIdContrato]);
+
+
+        $pdf = Pdf::loadView('reportes.contratos.pdf.verdiario',[
+            'reporte'=> $rpta
+        ]);
+        return $pdf->download('diario.pdf');
+    }
+
+
+
 }
