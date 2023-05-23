@@ -116,8 +116,9 @@ Route::group(['middleware'=> ['auth']], function(){
     ##Contratos diarios
     Route::get('/operacion/contratodiario/getListContratosdiarios','Operacion\ContratoController@getListContratosdiarios');
     Route::post('/operacion/contratodiario/setRegistraContratodiario','Operacion\ContratoController@setRegistraContratodiario');
-
-
+    Route::get('/operacion/contratodiario/setBuscarDataContratoDiario','Operacion\ContratoController@setBuscarDataContratoDiario');
+    Route::post('/operacion/contratodiario/setActualizaContratodiario','Operacion\ContratoController@setActualizaContratodiario');
+    Route::post('/operacion/contratodiario/setGenerardocumento','Operacion\ContratoController@setGenerardocumentodiario');
     ##Files
     Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');
 

@@ -224,7 +224,7 @@ export default {
             var config = {
                 responseType: 'blob'
             }
-            var url = '/operacion/contrato/setGenerardocumento';
+            var url = '/operacion/contratodiario/setGenerardocumento';
             axios.post(url, {
                 'nIdContrato': nIdContrato
             }, config).then((response) => {

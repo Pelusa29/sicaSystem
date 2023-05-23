@@ -7,7 +7,7 @@
                         <div class="box-header">
                             <div class="col-md-6 row">
                                 <section class="content-header">
-                                    <h1 class="text-dark text-perfil">Editar Contrato</h1>
+                                    <h1 class="text-dark text-perfil">Contrato Taxi</h1>
                                 </section>
                             </div>
                             <div class="col-sm-6 row">
