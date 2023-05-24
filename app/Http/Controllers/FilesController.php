@@ -45,4 +45,7 @@ class FilesController extends Controller
 
         return $rpta;
     }
+
+    //Documentos para Contratos Generados
+
 }
