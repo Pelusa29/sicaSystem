@@ -6,9 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Pdf;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use App\Contratofile;
 
 class ContratoController extends Controller
 {
+
     public function getListContratostaxi(Request $request){
         if(!$request->ajax()) return redirect('');
         $cConductor                 = $request->cConductor;
@@ -236,6 +240,7 @@ class ContratoController extends Controller
 
     public function setGenerardocumentodiario(Request $request){
         if(!$request->ajax()) return redirect('');
+
         $nIdContrato            = $request->nIdContrato;
 
         $nIdContrato            = ($nIdContrato == NULL) ? ($nIdContrato = 0) : $nIdContrato;
@@ -249,6 +254,38 @@ class ContratoController extends Controller
         return $pdf->download('diario.pdf');
     }
 
+    #Funciones de Arhcivos Contratos
+    public function getListDocumentosTaxis(Request $request){
+        if(!$request->ajax()) return redirect('');
+
+        $nIdContrato            = $request->nIdContrato;
+
+        $nIdContrato            = ($nIdContrato == NULL) ? ($nIdContrato = 0) : $nIdContrato;
+
+        $rpta = DB::select('call sp_Contrato_getListDocumentosTaxis(?,?)',[$nIdContrato,Auth::id()]);
+
+        return $rpta;
+    }
+
+    #Delete contrato by Id
+    public function eliminarDocumentoById(Request $request){
+        if(!$request->ajax()) return redirect('');
+        $nIdDocumento            = $request->nIdDocumento;
+
+        $nIdDocumento            = ($nIdDocumento == NULL) ? ($nIdDocumento = 0) : $nIdDocumento;
+
+        #Delete from storage
+        $documentoActivo  = Contratofile::findOrFail($nIdDocumento);
+        $rpta = NULL;
+
+        if (file_exists(storage_path('app/public/contratotaxi/'.$documentoActivo->filename))) {
+            unlink(storage_path('app/public/contratotaxi/'.$documentoActivo->filename));
+        }
+
+        $rpta = DB::select('call sp_Contrato_eliminarDocumentoById(?,?)',[$nIdDocumento,Auth::id()]);
+
+        return $rpta;
+    }
 
 
 }

@@ -112,6 +112,8 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::get('/operacion/contrato/setBuscarDataContrato','Operacion\ContratoController@setBuscarDataContrato');
     Route::post('/operacion/contrato/setEditarContratotaxi','Operacion\ContratoController@setEditarContratotaxi');
     Route::post('/operacion/contrato/setGenerardocumento','Operacion\ContratoController@setGenerardocumento');
+    Route::get('/operacion/contrato/getListDocumentosTaxis','Operacion\ContratoController@getListDocumentosTaxis');
+    Route::post('/operacion/contrato/eliminarDocumentoById','Operacion\ContratoController@eliminarDocumentoById');
 
     ##Contratos diarios
     Route::get('/operacion/contratodiario/getListContratosdiarios','Operacion\ContratoController@getListContratosdiarios');
@@ -123,6 +125,10 @@ Route::group(['middleware'=> ['auth']], function(){
 
     ##Files
     Route::post('/archivo/setRegistrarArchivo','FilesController@setRegistrarArchivo');
+
+    ##Files ContratosTaxi
+    Route::post('/contratofile/setRegistrarcontratoArchivo','FilesController@setRegistrarcontratoArchivo');
+
 
 });
 

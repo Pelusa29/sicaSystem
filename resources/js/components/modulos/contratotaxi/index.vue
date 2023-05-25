@@ -14,7 +14,7 @@
                         <div class="box-header">
                             <div class="col-md-2 row">
                                 <router-link class="btn btn-block btn-info" :to="'/contratotaxi/crear'">
-                                    <i class="fa fa-plus"></i>&nbsp;&nbsp;Geenrar Nuevo Contrato
+                                    <i class="fa fa-plus"></i>&nbsp; Nuevo Contrato
                                 </router-link>
                             </div>
                         </div>
@@ -112,6 +112,10 @@
                                                                 @click.prevent="setGenerardocumento(item.id)"
                                                                 class="btn btn-flat btn-info btn-sm"><i
                                                                 class="fa fa-file-pdf-o"></i> Imprimir</button>
+                                                            <button
+                                                                    @click="$router.push({ name: 'contratotaxi.doclist', params: { id: item.id } })"
+                                                                    class="btn btn-flat btn-warning btn-sm"><i
+                                                                        class="fa fa-list-ol"></i> Documentos</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
