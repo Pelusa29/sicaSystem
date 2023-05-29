@@ -9,6 +9,8 @@ use Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Contratofile;
+use File;
+use Illuminate\Support\Facades\Response;
 
 class ContratoController extends Controller
 {
@@ -267,7 +269,7 @@ class ContratoController extends Controller
         return $rpta;
     }
 
-    #Delete contrato by Id
+    #Delete contrato by Id contratotaxi
     public function eliminarDocumentoById(Request $request){
         if(!$request->ajax()) return redirect('');
         $nIdDocumento            = $request->nIdDocumento;
@@ -285,6 +287,53 @@ class ContratoController extends Controller
         $rpta = DB::select('call sp_Contrato_eliminarDocumentoById(?,?)',[$nIdDocumento,Auth::id()]);
 
         return $rpta;
+    }
+
+    #Descarga anexo-ContratoFirmado PDF
+    public function downloadFileById(Request $request){
+        if(!$request->ajax()) return redirect('');
+        $nIdDocumento            = $request->nIdDocumento;
+
+        $nIdDocumento            = ($nIdDocumento == NULL) ? ($nIdDocumento = 0) : $nIdDocumento;
+
+        $documentoActivo  = Contratofile::findOrFail($nIdDocumento);
+        /* if(Storage::disk('public')->exists($documentoActivo->filename)){
+            return response()->download(public_path($documentoActivo->filename));
+        } */
+        /* return response()->download(public_path('app/public/contratotaxi/'.$documentoActivo->filename)); */
+
+        /* $file = $documentoActivo->path;
+        $headers = array('Content-Type: application/pdf');
+        return response()->download($file, 'info.pdf',$headers); */
+        /* return response('',404); */
+
+        /* $file = Storage::disk('public')->get($documentoActivo->filename); */
+        //$filePath = storage_path('app/public/contratotaxi/'.$documentoActivo->filename);
+        /* if(!file_exists($documentoActivo->path)){
+            abort(404);
+        } */
+        /* $myFile = public_path($documentoActivo->filename);
+    	$headers = ['Content-Type: application/pdf'];
+    	$newName = 'itsolutionstuff-pdf-file-'.time().'.pdf';
+
+
+    	return response()->download($myFile, $documentoActivo->filename, $headers); */
+
+        //return $myFile;
+        //torage_path('app/public/contratotaxi/'.$documentoActivo->filename);
+        $file =  file_get_contents(public_path( $documentoActivo->filename));
+        $miArchivo ="Mio";
+
+        return Response($file, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => "inline; filename=\"$miArchivo\""
+        ]);
+
+        /* return response()->download($documentoActivo->path, basename($documentoActivo->path), [
+            'Content-Type' => 'application/pdf',
+        ]); */
+
+
     }
 
 

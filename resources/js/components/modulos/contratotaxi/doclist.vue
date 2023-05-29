@@ -103,7 +103,7 @@
                                                                         </td>
                                                                         <td>
                                                                             <template v-if="item.tipoDocumento == 'Contrato'">
-                                                                                <el-button type="success" icon="el-icon-download" circle style="display: block; text-align: center; margin: 10% auto;" @click.prevent="descargaArchivo(item.id)"></el-button>
+                                                                                <el-button type="success" icon="el-icon-download" circle style="display: block; text-align: center; margin: 10% auto;" @click.prevent="downloadFileById(item.id)"></el-button>
                                                                             </template>
                                                                             <el-button type="danger" icon="el-icon-delete" circle style="display: block; text-align: center; margin: 10% auto;" @click.prevent="eliminarDocumentoById(item.id)"></el-button>
                                                                         </td>
@@ -214,9 +214,6 @@ export default {
             this.modalShow = !this.modalShow;
         },
         getFile(e) {
-            /*console.log(e.target.files[0]);
-              console.log(e.target.files[0].name);
-              console.log(e.target.files[0].type);*/
             let allowedTypes = ['image/jpeg', 'image/png'];
 
             //Rules for documents
@@ -303,8 +300,49 @@ export default {
             this.fillEditarDocumento.oDocumento = '';
             this.$refs.file.value = null;
         },
-        descargaArchivo(id) {
-            console.log(`descargando ${id}`);
+        downloadFileById(id) {
+            /*  console.log(`descargando ${id}`); */
+            this.fullScreenLoading = true;
+            var config = {
+                responseType: 'arraybuffer'
+            }
+
+            var url = '/operacion/contrato/downloadFileById';
+            axios.get(url, {
+                params: {
+                    'nIdDocumento': id
+                }
+            }, config)
+               /*  .then((response) => response.blob()) */
+                .then((blob) => {
+                    // Create a temporary URL for the downloaded file
+                    this.fullScreenLoading = false;
+                    var oMyBlob = new Blob([blob.data], { type: 'application/pdf' });
+                    var url = URL.createObjectURL(oMyBlob);
+                    window.open(url);
+                    /* console.log (blob);
+                    var proxy = window.URL.createObjectURL(
+                        new Blob([blob.data], { type: "application/pdf" })
+                    );
+
+                    // Download from proxy.
+                    var link = document.createElement('a');
+                    document.body.appendChild(link); // Maybe required by Fire-fox browsers.
+                    link.href = proxy;
+                    link.download = "my-file.pdf";
+                    link.click();
+
+                    // Cleanup.
+                    window.URL.revokeObjectURL(proxy);
+                    link.remove(); */
+                })
+                .catch((error) => {
+                    console.error('Error downloading PDF:', error);
+                });
+        },
+        downloadFile(data) {
+            console.log(data);
+
         },
         eliminarDocumentoById(id) {
             console.log(`Eliminando ${id}`);
@@ -313,7 +351,6 @@ export default {
             axios.post(url, {
                 'nIdDocumento': id
             }).then((response) => {
-                console.log(response);
                 this.getListDocumentosTaxis();
             }).catch((error) => {
                 console.log(error);

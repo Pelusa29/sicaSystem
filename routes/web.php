@@ -114,6 +114,7 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::post('/operacion/contrato/setGenerardocumento','Operacion\ContratoController@setGenerardocumento');
     Route::get('/operacion/contrato/getListDocumentosTaxis','Operacion\ContratoController@getListDocumentosTaxis');
     Route::post('/operacion/contrato/eliminarDocumentoById','Operacion\ContratoController@eliminarDocumentoById');
+    Route::get('/operacion/contrato/downloadFileById','Operacion\ContratoController@downloadFileById');
 
     ##Contratos diarios
     Route::get('/operacion/contratodiario/getListContratosdiarios','Operacion\ContratoController@getListContratosdiarios');
