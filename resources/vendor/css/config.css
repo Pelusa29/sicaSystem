@@ -74,3 +74,8 @@ a:hover {
         font-size: 16px;
 }
 
+.rowCenter{
+    display: block;
+    text-align: center;
+    margin: 10% auto;
+}
