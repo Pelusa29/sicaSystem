@@ -28,8 +28,12 @@ class TipoProvisionesTableSeeder extends Seeder
             'descripcion'=> 'Por tipo de placa'
         ]);
         Tipoprovision::create([
+            'tipoProvision' =>'L',
+            'descripcion'=> 'Por Local'
+        ]);
+        Tipoprovision::create([
             'tipoProvision' =>'N',
-            'descripcion'=> 'Orto Gasto'
+            'descripcion'=> 'Otro Gasto'
         ]);
     }
 }

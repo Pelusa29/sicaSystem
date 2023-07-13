@@ -117,6 +117,47 @@ const router =  new Router({
             component: require('./components/modulos/cliente/edit.vue').default,
             props:true
         },
+        //Bancos
+        {
+            path: '/banco',
+            name: 'banco.index',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/banco/index.vue').default
+        },
+        {
+            path: '/banco/crear',
+            name: 'banco.crear',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/banco/create.vue').default
+        },
+        {
+            path: '/banco/:id/editar',
+            name: 'banco.editar',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/banco/edit.vue').default,
+            props:true
+        },
         //
         {
             path: '/categoria',
@@ -131,9 +172,10 @@ const router =  new Router({
             },
             component: require('./components/modulos/categoria/index.vue').default
         },
+        //Proviciones Generales
         {
-            path: '/producto',
-            name: 'producto.index',
+            path: '/provicion',
+            name: 'provicion.index',
             beforeEnter: (to, form, next) => {
                 axios.get('/getUsuarioAutenticado').then(() => {
                     next();
@@ -142,7 +184,48 @@ const router =  new Router({
                         return next({name:'login'});
                 })
             },
-            component: require('./components/modulos/producto/index.vue').default
+            component: require('./components/modulos/provicion/index.vue').default
+        },
+        {
+            path: '/provicion/crear',
+            name: 'provicion.crear',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/provicion/create.vue').default
+        },
+        {
+            path: '/provicion/:id/editar',
+            name: 'provicion.editar',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/provicion/edit.vue').default,
+            props:true
+        },
+        {
+            path: '/provicion/:id/ver',
+            name: 'provicion.ver',
+            beforeEnter: (to, form, next) => {
+                axios.get('/getUsuarioAutenticado').then(() => {
+                    next();
+                })
+                    .catch(() => {
+                        return next({name:'login'});
+                })
+            },
+            component: require('./components/modulos/provicion/view.vue').default,
+            props:true
         },
 
         //catalagos generales
