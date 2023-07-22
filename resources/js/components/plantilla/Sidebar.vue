@@ -57,7 +57,13 @@
                         <span>Contrato Renta Diaria</span>
                     </router-link>
                 </li>
-                <li class="header">CATALAGOS GERNERALES</li>
+                <li>
+                    <router-link class="nav-link" :to="'/provisiongral'">
+                        <i class="fa fa-file-text-o"></i>
+                        <span>Aprovisionamiento</span>
+                    </router-link>
+                </li>
+                <li class="header">CATÁLAGOS GERNERALES</li>
                 <li>
                     <router-link class="nav-link" :to="'/tipounidades'">
                         <i class="fa fa-car"></i>
@@ -71,15 +77,15 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link class="nav-link" :to="'/tiposervicio'">
-                        <i class="fa fa-sitemap"></i>
-                        <span>Herramientas</span>
+                    <router-link class="nav-link" :to="'/provicion'">
+                        <i class="fa fa-money"></i>
+                        <span>Proviciones</span>
                     </router-link>
                 </li>
                 <li>
-                    <router-link class="nav-link" :to="'/producto'">
-                        <i class="fa fa-money"></i>
-                        <span>Proviciones</span>
+                    <router-link class="nav-link" :to="'/banco'">
+                        <i class="fa  fa-bank"></i>
+                        <span>Bancos</span>
                     </router-link>
                 </li>
                 <li class="header">INVENTARIOS</li>
@@ -106,6 +112,12 @@
                     <router-link class="nav-link" :to="'/cliente'">
                         <i class="fa fa-users"></i>
                         <span>Clientes</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link class="nav-link" :to="'/nomina'">
+                        <i class="fa fa-calendar-check-o"></i>
+                        <span>Nóminas</span>
                     </router-link>
                 </li>
                 <li class="header">CONFIGURACIÓN</li>

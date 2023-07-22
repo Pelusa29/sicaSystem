@@ -54,7 +54,7 @@ a:hover {
     text-decoration: none !important;
 }
 .scrollTable {
-    max-height: 350px !important;
+    max-height: 150px !important;
     overflow: auto !important;
 }
 
