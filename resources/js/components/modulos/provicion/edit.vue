@@ -266,7 +266,22 @@ export default {
 
         },
         setAddUnidad(e) {
-            this.fillEditarProvision.unidadesAceptadas.push(e);
+            let existvalue = this.chkArrayunidades(e.id);
+            if (existvalue == 0) {
+                this.fillEditarProvision.unidadesAceptadas.push(e);
+                this.$message.success(`Unidad Agregada`);
+            } else {
+                this.$message.warning(`Unidad actualmente agregada`);
+            }
+        },
+        chkArrayunidades(id) {
+            let max = 0;
+            this.fillEditarProvision.unidadesAceptadas.forEach(item => {
+                if (item.id == id) {
+                    max = 1;
+                }
+            })
+            return max;
         },
         getInfoProvisionDataById() {
              this.fullScreenLoading = true;
@@ -422,4 +437,5 @@ export default {
 
 .listauindades {
     height: 200px !important;
-}</style>
+}
+</style>

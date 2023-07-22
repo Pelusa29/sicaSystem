@@ -265,7 +265,23 @@ export default {
 
         },
         setAddUnidad(e) {
-            this.fillCrearProvision.unidadesAceptadas.push(e);
+
+            let existvalue = this.chkArrayunidades(e.id);
+            if (existvalue == 0) {
+                this.fillCrearProvision.unidadesAceptadas.push(e);
+                this.$message.success(`Unidad Agregada`);
+            } else {
+                this.$message.warning(`Error actualmente agregada`);
+            }
+        },
+        chkArrayunidades(id) {
+            let max = 0;
+            this.fillCrearProvision.unidadesAceptadas.forEach(item => {
+                if (item.id == id) {
+                    max = 1;
+                }
+            })
+            return max;
         },
         setRegistraOperacion() {
             if (this.validarRegistrarOperacion()) {
