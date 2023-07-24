@@ -297,7 +297,7 @@ export default {
                 this.fillEditarProvision.cTipoProvision = response.data[0].provision_id;
                 this.fillEditarProvision.cUnidadesTotales = response.data[0].boolUnidadTotales == 1 ? true : false;
                 this.fillEditarProvision.cEstimacionOperacion = response.data[0].estimacionOperacion;
-                this.fillEditarProvision.cDescripcion = response.data[0].descrpcionOperacion;
+                this.fillEditarProvision.cDescripcion = response.data[0].descripcionOperacion;
 
                 this.fullScreenLoading = false;
             }).catch((error) => {
@@ -320,7 +320,7 @@ export default {
                 'cAnioOperacion': this.fillEditarProvision.cAnioOperacion,
                 'cTipoProvision': this.fillEditarProvision.cTipoProvision,
                 'cUnidadesTotales': this.fillEditarProvision.cUnidadesTotales,
-                'unidadSeleccionadas': this.fillEditarProvision.unidadesAceptadas,
+                'unidadesAceptadas': this.fillEditarProvision.unidadesAceptadas,
                 'cEstimacionOperacion': this.fillEditarProvision.cEstimacionOperacion,
                 'cDescripcion': this.fillEditarProvision.cDescripcion
             }).then((response) => {
