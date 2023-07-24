@@ -139,11 +139,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/operacion/provision_config/setRegistraOperacion', 'Operacion\ProvisionController@setRegistraOperacion');
     Route::post('/operacion/provision_config/setCambiarEstadoOperacion', 'Operacion\ProvisionController@setCambiarEstadoOperacion');
     Route::get('/operacion/provision_config/getObtenerOperacionById', 'Operacion\ProvisionController@getObtenerOperacionById');
+    Route::post('/operacion/provision_config/setEditarOperacion', 'Operacion\ProvisionController@setEditarOperacion');
 
     ##Catalaog de tipos Provision
     Route::get('/operacion/catalago_provisiones/getListCatProvisiones', 'Operacion\ProvisionController@getListCatProvisiones');
     Route::get('/operacion/provision_config/getInfoProvisionDataById', 'Operacion\ProvisionController@getInfoProvisionDataById');
-    Route::post('/operacion/provision_config/setEditarOperacion', 'Operacion\ProvisionController@setEditarOperacion');
 
     ##Files
     Route::post('/archivo/setRegistrarArchivo', 'FilesController@setRegistrarArchivo');

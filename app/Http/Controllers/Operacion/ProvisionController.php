@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
+use App\ProvisionDetalle;
 
 class ProvisionController extends Controller
 {
@@ -131,14 +132,57 @@ class ProvisionController extends Controller
 
     public function setEditarOperacion(Request $request)
     {
-        /*  if (!$request->ajax()) return redirect('');
-        nIdProvision': this.fillEditarProvision.nIdProvision,
-                'cNombreProv': this.fillEditarProvision.cNombreProv,
-                'cAnioOperacion': this.fillEditarProvision.cAnioOperacion,
-                'cTipoProvision': this.fillEditarProvision.cTipoProvision,
-                'cUnidadesTotales': this.fillEditarProvision.cUnidadesTotales,
-                'unidadSeleccionadas': this.fillEditarProvision.unidadesAceptadas,
-                'cEstimacionOperacion': this.fillEditarProvision.cEstimacionOperacion,
-                'cDescripcion': this.fillEditarProvision.cDescripcion */
+        if (!$request->ajax()) return redirect('');
+        $nIdProvision           = $request->nIdProvision;
+        $cNombreProv            = $request->cNombreProv;
+        $cAnioOperacion         = $request->cAnioOperacion;
+        $cTipoProvision         = $request->cTipoProvision;
+        $cUnidadesTotales       = $request->cUnidadesTotales;
+        $unidadSeleccionadas    = $request->unidadesAceptadas;
+        $cEstimacionOperacion   = $request->cEstimacionOperacion;
+        $cDescripcion           = $request->cDescripcion;
+
+        $cNombreProv            = ($cNombreProv == NULL) ? ($cNombreProv = '') : $cNombreProv;
+        $cAnioOperacion         = ($cAnioOperacion == NULL) ? ($cAnioOperacion = '') : $cAnioOperacion;
+        $cTipoProvision         = ($cTipoProvision == NULL) ? ($cTipoProvision = 0) : $cTipoProvision;
+        $cUnidadesTotales       = ($cUnidadesTotales == false) ? ($cUnidadesTotales = 0) : $cUnidadesTotales;
+        $cEstimacionOperacion   = ($cEstimacionOperacion == NULL) ? ($cEstimacionOperacion = 0) : $cEstimacionOperacion;
+        $cDescripcion           = ($cDescripcion == NULL) ? ($cDescripcion = '') : $cDescripcion;
+
+        /* Transacctions */
+        //transaction
+        try {
+            DB::beginTransaction();
+            $operacion = DB::select('call sp_Provision_setEditarOperacion(?,?,?,?,?,?,?)', [$nIdProvision, $cNombreProv, $cAnioOperacion, $cTipoProvision, $cUnidadesTotales, $cEstimacionOperacion, $cDescripcion]);
+
+            $unidadSeleccionadas    = ($unidadSeleccionadas == NULL) ? ($unidadSeleccionadas = []) : $unidadSeleccionadas;
+            $listaUnidades          = sizeof($unidadSeleccionadas);
+
+            if ($listaUnidades > 0) {
+
+                ProvisionDetalle::where('catprovicion_id', $nIdProvision)->delete();
+
+                foreach ($unidadSeleccionadas as $key => $value) {
+                    if ($value) {
+                        DB::select(
+                            'call sp_Provision_setEditaProvisionDetalle(?,?)',
+                            [
+                                $request->nIdProvision,
+                                $value["id"]
+                            ]
+                        );
+                    } else {
+                        DB::rollBack();
+                        return false;
+                    }
+                }
+            }
+
+            //Commit
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $e->getMessage();
+        }
     }
 }
