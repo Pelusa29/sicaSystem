@@ -338,6 +338,7 @@ export default {
                 });
 
             }).catch((error) => {
+
                 this.fullScreenLoading = false;
                 Swal.fire({
                     icon: "error",
