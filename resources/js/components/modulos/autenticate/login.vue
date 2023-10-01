@@ -7,7 +7,7 @@
             <p class="login-box-msg"><b>Ingresa tus creedenciales</b></p>
             <form method="post">
                 <div class="form-group has-feedback">
-                    <input type="email" v-model="fillLogin.cEmail" @keyup.enter="login" class="form-control" placeholder="Email">
+                    <input type="text" v-model="fillLogin.cUsername" @keyup.enter="login" class="form-control" placeholder="Usuario">
                     <span class="fa fa-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
@@ -33,7 +33,7 @@ export default {
     data() {
         return {
             fillLogin: {
-                cEmail: '',
+                cUsername: '',
                 cContrasena:''
             },
             fullScreenLoading: false,
@@ -49,7 +49,7 @@ export default {
             this.fullScreenLoading = true;
             var url = '/authenticate/login';
             axios.post(url, {
-                    'cEmail': this.fillLogin.cEmail,
+                    'cUsername': this.fillLogin.cUsername,
                     'cContrasena': this.fillLogin.cContrasena
             }).then((response) => {
                 if (response.data.code == 401) {
@@ -76,11 +76,11 @@ export default {
             this.error = 0;
             this.mensajeError = [];
 
-            if (!this.fillLogin.cEmail) {
-                this.mensajeError.push('El correo electronico es un campo obligatorio');
+            if (!this.fillLogin.cUsername) {
+                this.mensajeError.push('El Usuario es un campo obligatorio');
             }
             if (!this.fillLogin.cContrasena) {
-                this.mensajeError.push('La contraseña es un campo obligatorio');
+                this.mensajeError.push('La Contraseña es un campo obligatorio');
             }
 
             if (this.mensajeError.length) {
