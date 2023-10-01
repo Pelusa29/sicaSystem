@@ -8,24 +8,26 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function login(Request $request){
-        $cEmail = $request->cEmail;
+    public function login(Request $request)
+    {
+        $cUsername = $request->cUsername;
         $cContrasena = $request->cContrasena;
 
-        $rpta = Auth::attempt(['email'=>$cEmail, 'password'=>$cContrasena , 'state' => 'A' ]);
-        if($rpta){
+        $rpta = Auth::attempt(['username' => $cUsername, 'password' => $cContrasena, 'state' => 'A']);
+        if ($rpta) {
             return response()->json([
                 'authUser'  => Auth::user(),
                 'code'      => 200
             ]);
-        }else{
+        } else {
             return response()->json([
                 'code'      => 401
             ]);
         }
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
 
         Auth::logout();
 
