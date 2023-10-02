@@ -16,13 +16,13 @@ class CreateCatprovicionesTable extends Migration
         Schema::create('catproviciones', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('provision_id')->unsigned()->nullable();
-            $table->string('nombreOperacion',100)->nullable();
-            $table->string('anioOperacion',50)->nullable();
+            $table->string('nombreOperacion', 100)->nullable();
+            $table->string('anioOperacion', 50)->nullable();
             $table->boolean('boolUnidadTotales')->default(false);
-            $table->decimal('estimacionOperacion',15,2)->nullable();
-            $table->string('descripcionOperacion',150)->nullable();
-            $table->integer('semanasCalculadas',11)->unsigned();
-            $table->enum('state',['A','I'])->nullable()->default('A');
+            $table->decimal('estimacionOperacion', 15, 2)->nullable();
+            $table->string('descripcionOperacion', 150)->nullable();
+            $table->bigInteger('semanasCalculadas', 11)->unsigned()->nullable();
+            $table->enum('state', ['A', 'I'])->nullable()->default('A');
             $table->timestamps();
 
 
