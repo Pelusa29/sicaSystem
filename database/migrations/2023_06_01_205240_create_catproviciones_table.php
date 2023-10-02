@@ -21,7 +21,7 @@ class CreateCatprovicionesTable extends Migration
             $table->boolean('boolUnidadTotales')->default(false);
             $table->decimal('estimacionOperacion', 15, 2)->nullable();
             $table->string('descripcionOperacion', 150)->nullable();
-            $table->bigInteger('semanasCalculadas', 11)->unsigned()->nullable();
+            $table->bigInteger('semanasCalculadas')->unsigned()->nullable();
             $table->enum('state', ['A', 'I'])->nullable()->default('A');
             $table->timestamps();
 
